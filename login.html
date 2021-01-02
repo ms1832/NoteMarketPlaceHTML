@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+    <!-- Fav icon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="css/login.css">
+
+
+</head>
+
+<body>
+
+    <div id="login">
+
+        <div class="main-content">
+
+            <div class="logo">
+                <img src="img/top-logo.png" alt="Logo" class="img-fluid">
+            </div>
+
+            <div class="content">
+
+                <form>
+
+                    <h2>Login</h2>
+                    <p>Enter your Email Address & Password to Login</p>
+
+                    <div class="form-group">
+                        <div class="elements">
+                            <span>Email</span>
+                            <input type="email" class="form-control" placeholder="Enter your Email" id="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="elements">
+                            <span>Password</span><span id="forgot-pwd">Forgot Password?</span>
+                            <input type="password" class="form-control" placeholder="Enter your Password" id="password">
+                            <img src="img/icons/eye.png" class="toggle-password" toggle="#password">
+                        </div>
+                        <div id="msg">
+                            <p>The password you have entered is incorrect</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="elements">
+                            <input type="checkbox" id="check">
+                            <span>Remember Me</span>
+                        </div>
+                    </div>
+
+                    <div id="submit-btn">
+                        <button class="btn btn-login">LOGIN</button>
+                    </div>
+
+                    <div class="text-signup">
+                        <p>Don't have an account? <a href="#">Sign Up</a> </p>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JQuery -->
+    <script src="js/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="js/scripts.js"></script>
+
+
+</body>
+
+</html>

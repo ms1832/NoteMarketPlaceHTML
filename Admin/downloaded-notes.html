@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Downloaded Notes</title>
+
+    <!-- Fav icon -->
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="../css/admin.css">
+
+
+</head>
+
+<body>
+
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="site-nav-wrapper">
+
+                    <div class="navbar-header">
+
+                        <!-- Mobile Menu Open Button -->
+                        <span id="mobile-nav-open-btn">&#9776;</span>
+                        <span id="mobile-nav-close-btn">&times;</span>
+
+                        <a href="dashboard.html" class="navbar-brand">
+                            <img src="../img/logo.png" alt="logo">
+                        </a>
+                    </div>
+
+                    <div class="container">
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav pull-right">
+                                <li><a href="#">Dashboard</a></li>
+                                <li>
+                                    <div class="dropdown">
+                                        <a id="notes-dropdown">Notes</a>
+                                        <div class="notes-dropdown-menu">
+                                            <a class="dropdown-item" href="#">Notes Under Review</a>
+                                            <a class="dropdown-item" href="#">Published Notes</a>
+                                            <a class="dropdown-item" href="#">Downloaded Notes</a>
+                                            <a class="dropdown-item" href="#">Rejected Notes</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="active"><a href="#">Members</a></li>
+                                <li>
+                                    <div class="dropdown">
+                                        <a id="reports-dropdown">Reports</a>
+                                        <div class="reports-dropdown-menu">
+                                            <a class="dropdown-item" href="#">Spam Reports</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="dropdown">
+                                        <a id="settings-dropdown">Settings</a>
+                                        <div class="settings-dropdown-menu">
+                                            <a class="dropdown-item" href="#">Manage System Configuration</a>
+                                            <a class="dropdown-item" href="#">Manage Administrator</a>
+                                            <a class="dropdown-item" href="#">Manage Category</a>
+                                            <a class="dropdown-item" href="#">Manage Type</a>
+                                            <a class="dropdown-item" href="#">Manage Countries</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="dropdown">
+                                        <img id="profile-dropeddown" src="../img/Home/user-img.png" alt="profile-img"
+                                            class="img-circle">
+                                        <div class="profile-dropdown-menu">
+                                            <a class="dropdown-item" href="#">Update Profile</a>
+                                            <a class="dropdown-item" href="#">Change Password</a>
+                                            <a class="dropdown-item" href="#">LOGOUT</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <button class="btn nav-login-btn">Logout</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <!-- Mobile Menu -->
+                    <div id="mobile-nav">
+                        <div id="mobile-nav-content">
+                            <ul class="nav">
+                                <li><a href="#">Dashboard</a></li>
+                                <li><a class="collapsed" data-toggle="collapse" data-target="#notes">Notes
+                                        <img src="../img/icons/arrow-down.png" alt="down" class="down-arw">
+                                        <img src="../img/icons/close.png" alt="down" class="down-up">
+                                    </a>
+                                    <div class="profile-dropeddown">
+                                        <ul class="collapse" id="notes">
+                                            <li><a href="#">Notes Under Review</a></li>
+                                            <li><a href="#">Published Notes</a></li>
+                                            <li><a href="#">Downloaded Notes</a></li>
+                                            <li><a href="#">Rejected Notes</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li><a href="#">Members</a></li>
+                                <li><a class="collapsed" data-toggle="collapse" data-target="#reports">Reports
+                                        <img src="../img/icons/arrow-down.png" alt="down" class="down-arw">
+                                        <img src="../img/icons/close.png" alt="down" class="down-up">
+                                    </a>
+                                    <div class="profile-dropeddown">
+                                        <ul class="collapse" id="reports">
+                                            <li><a href="#">Spam Reports</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li><a class="collapsed" data-toggle="collapse" data-target="#settings">Settings
+                                        <img src="../img/icons/arrow-down.png" alt="down" class="down-arw">
+                                        <img src="../img/icons/close.png" alt="down" class="down-up">
+                                    </a>
+                                    <div class="profile-dropeddown">
+                                        <ul class="collapse" id="settings">
+                                            <li><a href="#">Manage System Configuration</a></li>
+                                            <li><a href="#">Manage Administrator</a></li>
+                                            <li><a href="#">Manage Category</a></li>
+                                            <li><a href="#">Manage Type</a></li>
+                                            <li><a href="#">Manage Countries</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="profile-dropeddown">
+                                        <img src="../img/Home/user-img.png" alt="profile-img"
+                                            class="collapsed img-circle profile-img" data-toggle="collapse"
+                                            data-target="#profile">
+                                        <ul class="collapse" id="profile">
+                                            <li><a href="#">Update Profile</a></li>
+                                            <li><a href="#">Change Password</a></li>
+                                            <li><a href="#">Logout</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <button class="btn nav-login-btn">Logout</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Header Ends -->
+
+
+    <div id="downloaded-notes">
+        <div class="content-box-lg">
+
+            <div class="contact-text">
+                <h4>Published Notes</h4>
+            </div>
+
+            <div class="table-heading">
+                <div class="row">
+
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4">
+                                <div class="details-choose">
+                                    <h5>Note</h5>
+                                    <select>
+                                        <option>Select Note</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="details-choose">
+                                    <h5>Seller</h5>
+                                    <select>
+                                        <option>Select Seller</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="details-choose">
+                                    <h5>Buyer</h5>
+                                    <select>
+                                        <option>Rahul Shah</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-9 col-xs-8">
+                                <div class="search">
+                                    <img src="../img/icons/search-icon.png">
+                                    <input type="search" placeholder="search" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                <button class="btn">SEARCH</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive dashboard-table">
+
+                <table class="table">
+
+                    <thead>
+                        <tr>
+                            <th scope="col">SR NO.</th>
+                            <th scope="col">NOTE TITLE</th>
+                            <th scope="col">CATEGORY</th>
+                            <th scope="col">BUYER</th>
+                            <th scope="col">SELLER</th>
+                            <th scope="col">SELL TYPE</th>
+                            <th scope="col">PRICE</th>
+                            <th scope="col">DOWNLOADED DATE/TIME</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td scope="row">1</td>
+                            <td>Data Science</td>
+                            <td>Science</td>
+                            <td>Rahul Shah
+                                <div class="table-actions-view">
+                                    <img src="../img/icons/eye.png" alt="delete">
+                                </div>
+                            </td>
+                            <td>Khyati Patel
+                                <div class="table-actions-view">
+                                    <img src="../img/icons/eye.png" alt="delete">
+                                </div>
+                            </td>
+                            <td>Free</td>
+                            <td>$0</td>
+                            <td>09-10-2020, 10:10</td>
+                            <td>
+                                <div class="table-actions-view">
+                                    <div class="dropdown">
+                                        <img id="more-dropeddown" src="../img/icons/dots.png" alt="more"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                            <a class="dropdown-item" href="#">Download Notes</a>
+                                            <a class="dropdown-item" href="#">View More Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row">1</td>
+                            <td>Data Science</td>
+                            <td>Science</td>
+                            <td>Rahul Shah
+                                <div class="table-actions-view">
+                                    <img src="../img/icons/eye.png" alt="delete">
+                                </div>
+                            </td>
+                            <td>Khyati Patel
+                                <div class="table-actions-view">
+                                    <img src="../img/icons/eye.png" alt="delete">
+                                </div>
+                            </td>
+                            <td>Free</td>
+                            <td>$0</td>
+                            <td>09-10-2020, 10:10</td>
+                            <td>
+                                <div class="table-actions-view">
+                                    <div class="dropdown">
+                                        <img id="more-dropeddown" src="../img/icons/dots.png" alt="more"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                            <a class="dropdown-item" href="#">Download Notes</a>
+                                            <a class="dropdown-item" href="#">View More Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row">1</td>
+                            <td>Data Science</td>
+                            <td>Science</td>
+                            <td>Rahul Shah
+                                <div class="table-actions-view">
+                                    <img src="../img/icons/eye.png" alt="delete">
+                                </div>
+                            </td>
+                            <td>Khyati Patel
+                                <div class="table-actions-view">
+                                    <img src="../img/icons/eye.png" alt="delete">
+                                </div>
+                            </td>
+                            <td>Free</td>
+                            <td>$0</td>
+                            <td>09-10-2020, 10:10</td>
+                            <td>
+                                <div class="table-actions-view">
+                                    <div class="dropdown">
+                                        <img id="more-dropeddown" src="../img/icons/dots.png" alt="more"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                            <a class="dropdown-item" href="#">Download Notes</a>
+                                            <a class="dropdown-item" href="#">View More Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row">1</td>
+                            <td>Data Science</td>
+                            <td>Science</td>
+                            <td>Rahul Shah
+                                <div class="table-actions-view">
+                                    <img src="../img/icons/eye.png" alt="delete">
+                                </div>
+                            </td>
+                            <td>Khyati Patel
+                                <div class="table-actions-view">
+                                    <img src="../img/icons/eye.png" alt="delete">
+                                </div>
+                            </td>
+                            <td>Free</td>
+                            <td>$0</td>
+                            <td>09-10-2020, 10:10</td>
+                            <td>
+                                <div class="table-actions-view">
+                                    <div class="dropdown">
+                                        <img id="more-dropeddown" src="../img/icons/dots.png" alt="more"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                            <a class="dropdown-item" href="#">Download Notes</a>
+                                            <a class="dropdown-item" href="#">View More Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row">1</td>
+                            <td>Data Science</td>
+                            <td>Science</td>
+                            <td>Rahul Shah
+                                <div class="table-actions-view">
+                                    <img src="../img/icons/eye.png" alt="delete">
+                                </div>
+                            </td>
+                            <td>Khyati Patel
+                                <div class="table-actions-view">
+                                    <img src="../img/icons/eye.png" alt="delete">
+                                </div>
+                            </td>
+                            <td>Free</td>
+                            <td>$0</td>
+                            <td>09-10-2020, 10:10</td>
+                            <td>
+                                <div class="table-actions-view">
+                                    <div class="dropdown">
+                                        <img id="more-dropeddown" src="../img/icons/dots.png" alt="more"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                            <a class="dropdown-item" href="#">Download Notes</a>
+                                            <a class="dropdown-item" href="#">View More Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- Pagination -->
+            <div class="paging">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true"><img src="../img/icons/left-arrow.png"></span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true"><img src="../img/icons/right-arrow.png"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <footer>
+        <hr>
+        <div class="footer">
+            <div class="row">
+                <div class="col-md-4 col-sm-3 col-xs-4">
+                    <p class="version"> Version 1.1.24 </p>
+                </div>
+                <div class="col-md-8 col-sm-9 col-xs-8">
+                    <p class="copy-right"> Copyright &copy; TatvaSoft All Rights Reserved. </p>
+                </div>
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- JQuery -->
+    <script src="../js/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="../js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom JQuery -->
+    <script src="../js/admin.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Downloads</title>
+
+    <!-- Fav icon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="css/index.css">
+
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="site-nav-wrapper">
+
+                    <div class="navbar-header">
+
+                        <!-- Mobile Menu Open Button -->
+                        <span id="mobile-nav-open-btn">&#9776;</span>
+                        <span id="mobile-nav-close-btn">&times;</span>
+
+                        <a href="dashboard.html" class="navbar-brand">
+                            <img src="img/logo.png" alt="logo" class="img-responsive">
+                        </a>
+                    </div>
+
+                    <div class="container">
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav pull-right">
+                                <li><a href="search_notes.html">Search Notes</a></li>
+                                <li><a href="#">Sell Your Notes</a></li>
+                                <li><a href="#">Buyer Requests</a></li>
+                                <li><a href="faq.html">FAQ</a></li>
+                                <li><a href="contact-us.html">Contact Us</a></li>
+                                <li>
+                                    <div class="dropdown">
+                                        <img id="profile-dropeddown" src="img/Home/user-img.png" alt="profile-img"
+                                            class="img-circle">
+                                        <div class="profile-dropdown-menu">
+                                            <a class="dropdown-item" href="#">My Profile</a>
+                                            <a class="dropdown-item" href="#">My Downloads</a>
+                                            <a class="dropdown-item" href="#">My Sold Notes</a>
+                                            <a class="dropdown-item" href="#">My Rejected Notes</a>
+                                            <a class="dropdown-item" href="#">Change Password</a>
+                                            <a class="dropdown-item" href="#">LOGOUT</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <button class="btn nav-login-btn">Logout</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                     <!-- Mobile Menu -->
+                     <div id="mobile-nav">
+                        <div id="mobile-nav-content">
+                            <ul class="nav">
+                                <li><a href="#">Search Notes</a></li>
+                                <li><a href="#">Sell Your Notes</a></li>
+                                <li><a href="#">Buyer Requests</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li>
+                                    <div class="profile-dropeddown">
+                                        <img src="img/Home/user-img.png" alt="profile-img"
+                                            class="collapsed img-circle profile-img" data-toggle="collapse"
+                                            data-target="#profile">
+                                        <ul class="collapse" id="profile">
+                                            <li><a href="#">My Downloads</a></li>
+                                            <li><a href="#">My Sold Notes</a></li>
+                                            <li><a href="#">My Rejected Notes</a></li>
+                                            <li><a href="#">Change Password</a></li>
+                                            <li><a href="#">Logout</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Header Ends -->
+
+    <!-- My Downloads -->
+
+    <div id="my-downloads">
+
+        <div class="dashboard-progress-notes">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <h4>In Progress Notes</h4>
+                </div>
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <div class="proress-note-search">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <div class="search">
+                                    <img src="img/icons/search-icon.png" alt="search">
+                                    <input type="search" class="form-control" placeholder="Search">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <button class="btn btn-search">SEARCH</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive dashboard-table">
+
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th scope="col">SR NO.</th>
+                        <th scope="col">NOTE TITLE</th>
+                        <th scope="col">CATEGORY</th>
+                        <th scope="col">BUYER</th>
+                        <th scope="col">SELL TYPE</th>
+                        <th scope="col">PRICE</th>
+                        <th scope="col">DOWNLOADED DATE/TIME</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">1</td>
+                        <td>Data Science</td>
+                        <td>Science</td>
+                        <td>testing@gmail.com</td>
+                        <td>Paid</td>
+                        <td>$250</td>
+                        <td>27 Nov 2020, 11:24:34</td>
+                        <td>
+                            <div class="table-actions-view">
+                                <img src="img/icons/eye.png" alt="view">
+                                <div class="dropdown">
+                                    <img id="more-dropeddown" src="img/icons/dots.png" alt="more"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                        <a class="dropdown-item" href="#">Download Note</a>
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#reviewModal">Add
+                                            Reviews/Feedback</a>
+                                        <a class="dropdown-item" href="#">Report as Inappropriate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">2</td>
+                        <td>Data Science</td>
+                        <td>Science</td>
+                        <td>testing@gmail.com</td>
+                        <td>Free</td>
+                        <td>$0</td>
+                        <td>27 Nov 2020, 11:24:34</td>
+                        <td>
+                            <div class="table-actions-view">
+                                <img src="img/icons/eye.png" alt="view">
+                                <div class="dropdown">
+                                    <img id="more-dropeddown" src="img/icons/dots.png" alt="more"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                        <a class="dropdown-item" href="#">Download Note</a>
+                                        <a class="dropdown-item" href="#">Add Reviews/Feedback</a>
+                                        <a class="dropdown-item" href="#">Report as Inappropriate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">1</td>
+                        <td>Data Science</td>
+                        <td>Science</td>
+                        <td>testing@gmail.com</td>
+                        <td>Paid</td>
+                        <td>$250</td>
+                        <td>27 Nov 2020, 11:24:34</td>
+                        <td>
+                            <div class="table-actions-view">
+                                <img src="img/icons/eye.png" alt="view">
+                                <div class="dropdown">
+                                    <img id="more-dropeddown" src="img/icons/dots.png" alt="more"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                        <a class="dropdown-item" href="#">Download Note</a>
+                                        <a class="dropdown-item" href="#">Add Reviews/Feedback</a>
+                                        <a class="dropdown-item" href="#">Report as Inappropriate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">2</td>
+                        <td>Data Science</td>
+                        <td>Science</td>
+                        <td>testing@gmail.com</td>
+                        <td>Free</td>
+                        <td>$0</td>
+                        <td>27 Nov 2020, 11:24:34</td>
+                        <td>
+                            <div class="table-actions-view">
+                                <img src="img/icons/eye.png" alt="view">
+                                <div class="dropdown">
+                                    <img id="more-dropeddown" src="img/icons/dots.png" alt="more"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                        <a class="dropdown-item" href="#">Download Note</a>
+                                        <a class="dropdown-item" href="#">Add Reviews/Feedback</a>
+                                        <a class="dropdown-item" href="#">Report as Inappropriate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">1</td>
+                        <td>Data Science</td>
+                        <td>Science</td>
+                        <td>testing@gmail.com</td>
+                        <td>Paid</td>
+                        <td>$250</td>
+                        <td>27 Nov 2020, 11:24:34</td>
+                        <td>
+                            <div class="table-actions-view">
+                                <img src="img/icons/eye.png" alt="view">
+                                <div class="dropdown">
+                                    <img id="more-dropeddown" src="img/icons/dots.png" alt="more"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                        <a class="dropdown-item" href="#">Download Note</a>
+                                        <a class="dropdown-item" href="#">Add Reviews/Feedback</a>
+                                        <a class="dropdown-item" href="#">Report as Inappropriate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">2</td>
+                        <td>Data Science</td>
+                        <td>Science</td>
+                        <td>testing@gmail.com</td>
+                        <td>Free</td>
+                        <td>$0</td>
+                        <td>27 Nov 2020, 11:24:34</td>
+                        <td>
+                            <div class="table-actions-view">
+                                <img src="img/icons/eye.png" alt="view">
+                                <div class="dropdown">
+                                    <img id="more-dropeddown" src="img/icons/dots.png" alt="more"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                        <a class="dropdown-item" href="#">Download Note</a>
+                                        <a class="dropdown-item" href="#">Add Reviews/Feedback</a>
+                                        <a class="dropdown-item" href="#">Report as Inappropriate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">1</td>
+                        <td>Data Science</td>
+                        <td>Science</td>
+                        <td>testing@gmail.com</td>
+                        <td>Paid</td>
+                        <td>$250</td>
+                        <td>27 Nov 2020, 11:24:34</td>
+                        <td>
+                            <div class="table-actions-view">
+                                <img src="img/icons/eye.png" alt="view">
+                                <div class="dropdown">
+                                    <img id="more-dropeddown" src="img/icons/dots.png" alt="more"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                        <a class="dropdown-item" href="#">Download Note</a>
+                                        <a class="dropdown-item" href="#">Add Reviews/Feedback</a>
+                                        <a class="dropdown-item" href="#">Report as Inappropriate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">2</td>
+                        <td>Data Science</td>
+                        <td>Science</td>
+                        <td>testing@gmail.com</td>
+                        <td>Free</td>
+                        <td>$0</td>
+                        <td>27 Nov 2020, 11:24:34</td>
+                        <td>
+                            <div class="table-actions-view">
+                                <img src="img/icons/eye.png" alt="view">
+                                <div class="dropdown">
+                                    <img id="more-dropeddown" src="img/icons/dots.png" alt="more"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                        <a class="dropdown-item" href="#">Download Note</a>
+                                        <a class="dropdown-item" href="#">Add Reviews/Feedback</a>
+                                        <a class="dropdown-item" href="#">Report as Inappropriate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">1</td>
+                        <td>Data Science</td>
+                        <td>Science</td>
+                        <td>testing@gmail.com</td>
+                        <td>Paid</td>
+                        <td>$250</td>
+                        <td>27 Nov 2020, 11:24:34</td>
+                        <td>
+                            <div class="table-actions-view">
+                                <img src="img/icons/eye.png" alt="view">
+                                <div class="dropdown">
+                                    <img id="more-dropeddown" src="img/icons/dots.png" alt="more"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                        <a class="dropdown-item" href="#">Download Note</a>
+                                        <a class="dropdown-item" href="#">Add Reviews/Feedback</a>
+                                        <a class="dropdown-item" href="#">Report as Inappropriate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">2</td>
+                        <td>Data Science</td>
+                        <td>Science</td>
+                        <td>testing@gmail.com</td>
+                        <td>Free</td>
+                        <td>$0</td>
+                        <td>27 Nov 2020, 11:24:34</td>
+                        <td>
+                            <div class="table-actions-view">
+                                <img src="img/icons/eye.png" alt="view">
+                                <div class="dropdown">
+                                    <img id="more-dropeddown" src="img/icons/dots.png" alt="more"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                        <a class="dropdown-item" href="#">Download Note</a>
+                                        <a class="dropdown-item" href="#">Add Reviews/Feedback</a>
+                                        <a class="dropdown-item" href="#">Report as Inappropriate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="paging">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true"> <img src="img/icons/left-arrow.png"> </span>
+                    </a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true"> <img src="img/icons/right-arrow.png"> </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="vertical-alignment-helper">
+                <div class="modal-dialog vertical-align-center">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <img src="img/Dashboard/close.png" alt="close" class="close" data-dismiss="modal">
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="review-popup">
+
+                                <h4>Add Review</h4>
+
+                                <div class="popup-rating">
+                                    <fieldset class="rating">
+                                        <input type="radio" id="note-info-star5" name="rating" value="5" /><label
+                                            class="full" for="note-info-star5" title="Awesome - 5 stars"></label>
+                                        <input type="radio" id="note-info-star4" name="rating" value="4" /><label
+                                            class="full" for="note-info-star4" title="Pretty good - 4 stars"></label>
+                                        <input type="radio" id="note-info-star3" name="rating" value="3" /><label
+                                            class="full" for="note-info-star3" title="Meh - 3 stars"></label>
+                                        <input type="radio" id="note-info-star2" name="rating" value="2" /><label
+                                            class="full" for="note-info-star2" title="Kinda bad - 2 stars"></label>
+                                        <input type="radio" id="note-info-star1" name="rating" value="1" /><label
+                                            class="full" for="note-info-star1" title="Sucks big time - 1 star"></label>
+                                    </fieldset>
+                                </div>
+
+                                <div class="review">
+                                    <p>Comments <span>*</span></p>
+                                    <textarea placeholder="Comments..."></textarea>
+                                </div>
+
+                                <button class="btn">SUBMIT</button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+    <!-- My Downloads Ends -->
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <hr>
+        <div class="content-box-footer">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p>
+                        Copyright &copy; TatvaSoft All Rights Reserved.
+                    </p>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <ul class="social-list">
+                        <li><a href="#"> <img src="img/icons/facebook.png" alt="facebook"> </a></li>
+                        <li><a href="#"> <img src="img/icons/twitter.png" alt="twitter"> </a></li>
+                        <li><a href="#"> <img src="img/icons/linkedin.png" alt="linkedin"> </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- Footer Ends -->
+
+
+
+
+
+    <!-- JQuery -->
+    <script src="js/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="js/scripts.js"></script>
+
+
+</body>
+
+</html>

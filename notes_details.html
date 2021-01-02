@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Notes Details</title>
+
+    <!-- Fav icon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="css/index.css">
+
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="site-nav-wrapper">
+
+                    <div class="navbar-header">
+
+                        <!-- Mobile Menu Open Button -->
+                        <span id="mobile-nav-open-btn">&#9776;</span>
+                        <span id="mobile-nav-close-btn">&times;</span>
+
+                        <a href="#" class="navbar-brand">
+                            <img src="img/logo.png" alt="logo" class="img-fluid">
+                        </a>
+                    </div>
+
+                    <div class="container">
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav pull-right">
+                                <li class="active"><a href="#">Search Notes</a></li>
+                                <li><a href="#">Sell Your Notes</a></li>
+                                <li><a href="#">Buyer Requests</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li>
+                                    <div class="dropdown">
+                                        <img id="profile-dropeddown" src="img/Home/user-img.png" alt="profile-img"
+                                            class="img-circle">
+                                        <div class="profile-dropdown-menu">
+                                            <a class="dropdown-item" href="#">My Profile</a>
+                                            <a class="dropdown-item" href="#">My Downloads</a>
+                                            <a class="dropdown-item" href="#">My Sold Notes</a>
+                                            <a class="dropdown-item" href="#">My Rejected Notes</a>
+                                            <a class="dropdown-item" href="#">Change Password</a>
+                                            <a class="dropdown-item" href="#">LOGOUT</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <button class="btn nav-login-btn">Logout</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <!-- Mobile Menu -->
+                    <div id="mobile-nav">
+                        <div id="mobile-nav-content">
+                            <ul class="nav">
+                                <li><a href="#">Search Notes</a></li>
+                                <li><a href="#">Sell Your Notes</a></li>
+                                <li><a href="#">Buyer Requests</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li>
+                                    <div class="profile-dropeddown">
+                                        <img src="img/Home/user-img.png" alt="profile-img" class="collapsed img-circle profile-img" data-toggle="collapse"  data-target="#profile">
+                                            <ul class="collapse" id="profile">
+                                                <li><a href="#">My Downloads</a></li>
+                                                <li><a href="#">My Sold Notes</a></li>
+                                                <li><a href="#">My Rejected Notes</a></li>
+                                                <li><a href="#">Change Password</a></li>
+                                                <li><a href="#">Logout</a></li>
+                                            </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Header Ends -->
+
+
+    <!-- Note Details -->
+    <div id="note-details">
+
+        <div class="content-box-lg">
+
+            <h4>Notes Details</h4>
+
+            <div class="row">
+
+                <div class="col-md-7 col-sm-7">
+
+                    <div class="note-details-left">
+
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4">
+                                <img src="img/search-notes/note.jpg" alt="book img">
+                            </div>
+                            <div class="col-md-8 col-sm-8">
+                                <h2>Computer Science</h2>
+                                <h5>Science</h5>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt tenetur
+                                    necessitatibus possimus quos vitae architecto perspiciatis, quibusdam quas
+                                    voluptatem sapiente eum error harum autem, fugiat incidunt a alias, provident sint.
+                                </p>
+                                <Button class="btn" data-toggle="modal" data-target="#purchasemodel">DOWNLOAD /
+                                    $15</Button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-5 col-sm-5">
+
+                    <div class="note-details-right">
+
+                        <div class="row">
+
+                            <div class="col-md-6 col-sm-6 col-xs-4">
+                                <div class="more-info-left">
+                                    <h5>Institution:</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-8">
+                                <div class="more-info-right">
+                                    <h5>University of California</h5>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-4">
+                                <div class="more-info-left">
+                                    <h5>Country:</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-8">
+                                <div class="more-info-right">
+                                    <h5>United State</h5>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="more-info-left">
+                                    <h5>Course Name:</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="more-info-right">
+                                    <h5>Computer Engineering</h5>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-4">
+                                <div class="more-info-left">
+                                    <h5>Course Code:</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-8">
+                                <div class="more-info-right">
+                                    <h5>248705</h5>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-4">
+                                <div class="more-info-left">
+                                    <h5>Professor:</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-8">
+                                <div class="more-info-right">
+                                    <h5>Mr. Richard Brown</h5>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-8">
+                                <div class="more-info-left">
+                                    <h5>Number of Pages:</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-4">
+                                <div class="more-info-right">
+                                    <h5>277</h5>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-5">
+                                <div class="more-info-left">
+                                    <h5>Approved Date:</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-7">
+                                <div class="more-info-right">
+                                    <h5>November 25 2020</h5>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-4">
+                                <div class="more-info-left">
+                                    <h5>Rating:</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-8">
+                                <div class="more-info-right">
+                                    <fieldset class="rating">
+                                        <input type="radio" id="note-info-star5" name="rating" value="5" /><label
+                                            class="full" for="note-info-star5" title="Awesome - 5 stars"></label>
+                                        <input type="radio" id="note-info-star4" name="rating" value="4" /><label
+                                            class="full" for="note-info-star4" title="Pretty good - 4 stars"></label>
+                                        <input type="radio" id="note-info-star3" name="rating" value="3" /><label
+                                            class="full" for="note-info-star3" title="Meh - 3 stars"></label>
+                                        <input type="radio" id="note-info-star2" name="rating" value="2" /><label
+                                            class="full" for="note-info-star2" title="Kinda bad - 2 stars"></label>
+                                        <input type="radio" id="note-info-star1" name="rating" value="1" /><label
+                                            class="full" for="note-info-star1" title="Sucks big time - 1 star"></label>
+                                    </fieldset>
+                                    <h5>100 Ratings</h5>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <p>5 User Marks this note as inappropriate</p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <!--########## Bottom Part ################-->
+
+            <hr>
+            <div class="note-details-bottom">
+
+                <div class="row">
+
+                    <div class="col-md-5 col-sm-5">
+                        <h4>Notes Preview</h4>
+                        <div class="note-preview">
+
+                            <div id="Iframe-Cicis-Menu-To-Go" class="set-margin-cicis-menu-to-go">
+                                <div class="responsive-wrapper responsive-wrapper-padding-bottom-90pct">
+                                    <iframe src="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">
+                                        <p style="font-size: 110%;"><em><strong>ERROR: </strong>
+                                                An &#105;frame should be displayed here but your browser version does
+                                                not support &#105;frames.</em> Please update your browser to its most
+                                            recent version and try again, or access the file <a
+                                                href="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">with
+                                                this link.</a></p>
+                                    </iframe>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-7 col-sm-7">
+                        <h4>Customer Reviews</h4>
+                        <div class="note-review">
+
+                            <!-- Customer 1 -->
+                            <div class="customer-review">
+                                <div class="row">
+                                    <div class="col-md-1 col-sm-2 col-xs-2">
+                                        <img src="img/Home/reviewer-1.png" alt="customer" class="img-circle">
+                                    </div>
+                                    <div class="col-md-11 col-sm-10 col-xs-10">
+                                        <h5>Richard Brown</h5>
+                                        <fieldset class="rating">
+                                            <input type="radio" id="note-info-cust-star5" name="rating"
+                                                value="5" /><label class="full" for="note-info-cust-star5"
+                                                title="Awesome - 5 stars"></label>
+                                            <input type="radio" id="note-info-cust-star4" name="rating"
+                                                value="4" /><label class="full" for="note-info-cust-star4"
+                                                title="Pretty good - 4 stars"></label>
+                                            <input type="radio" id="note-info-cust-star3" name="rating"
+                                                value="3" /><label class="full" for="note-info-cust-star3"
+                                                title="Meh - 3 stars"></label>
+                                            <input type="radio" id="note-info-cust-star2" name="rating"
+                                                value="2" /><label class="full" for="note-info-cust-star2"
+                                                title="Kinda bad - 2 stars"></label>
+                                            <input type="radio" id="note-info-cust-star1" name="rating"
+                                                value="1" /><label class="full" for="note-info-cust-star1"
+                                                title="Sucks big time - 1 star"></label>
+                                        </fieldset>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum iusto
+                                            laboriosam odit sapiente eum,</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <hr>
+
+                            <!-- Customer 2 -->
+                            <div class="customer-review">
+                                <div class="row">
+                                    <div class="col-md-1 col-sm-2 col-xs-2">
+                                        <img src="img/Home/reviewer-2.png" alt="customer" class="img-circle">
+                                    </div>
+                                    <div class="col-md-11 col-sm-10 col-xs-10">
+                                        <h5>Richard Brown</h5>
+                                        <fieldset class="rating">
+                                            <input type="radio" id="star5" name="rating" value="5" /><label class="full"
+                                                for="star5" title="Awesome - 5 stars"></label>
+                                            <input type="radio" id="star4" name="rating" value="4" /><label class="full"
+                                                for="star4" title="Pretty good - 4 stars"></label>
+                                            <input type="radio" id="star3" name="rating" value="3" /><label class="full"
+                                                for="star3" title="Meh - 3 stars"></label>
+                                            <input type="radio" id="star2" name="rating" value="2" /><label class="full"
+                                                for="star2" title="Kinda bad - 2 stars"></label>
+                                            <input type="radio" id="star1" name="rating" value="1" /><label class="full"
+                                                for="star1" title="Sucks big time - 1 star"></label>
+                                        </fieldset>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum iusto
+                                            laboriosam odit sapiente eum,</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <hr>
+
+                            <!-- Customer 3 -->
+                            <div class="customer-review">
+                                <div class="row">
+                                    <div class="col-md-1 col-sm-2 col-xs-2">
+                                        <img src="img/Home/reviewer-3.png" alt="customer" class="img-circle">
+                                    </div>
+                                    <div class="col-md-11 col-sm-10 col-xs-10">
+                                        <h5>Richard Brown</h5>
+                                        <fieldset class="rating">
+                                            <input type="radio" id="star5" name="rating" value="5" /><label class="full"
+                                                for="star5" title="Awesome - 5 stars"></label>
+                                            <input type="radio" id="star4" name="rating" value="4" /><label class="full"
+                                                for="star4" title="Pretty good - 4 stars"></label>
+                                            <input type="radio" id="star3" name="rating" value="3" /><label class="full"
+                                                for="star3" title="Meh - 3 stars"></label>
+                                            <input type="radio" id="star2" name="rating" value="2" /><label class="full"
+                                                for="star2" title="Kinda bad - 2 stars"></label>
+                                            <input type="radio" id="star1" name="rating" value="1" /><label class="full"
+                                                for="star1" title="Sucks big time - 1 star"></label>
+                                        </fieldset>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum iusto
+                                            laboriosam odit sapiente eum,</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Note Details Ends -->
+
+
+
+    <!-- Model -->
+    <div class="modal fade" id="purchasemodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span
+                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="purchase-popup">
+                            <!-- <i class="fa fa-check-circle"></i> -->
+                            <img src="img/Dashboard/SUCCESS.png" alt="img">
+                            <h3>Thank you for purchasing!</h3>
+                            <div class="popup-msg">
+                                <h5>Dear Smith,</h5>
+                                <p>As this is paid notes - you need to pay to seller <span>Rahil Shah</span> offline. We
+                                    will send hil an email that you want to download this note. He may contact you
+                                    further for payment process completion.</p>
+                                <p>In case you have urgency,<br>
+                                    Please contact us on +919864536787 </p>
+                                <p>Once he receives the payment and acknowledge us - selected notes you can see over my
+                                    downloads tab for download.</p>
+                                <p>Have a good day.</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Model Ends -->
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <hr>
+        <div class="content-box-footer">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p>
+                        Copyright &copy; TatvaSoft All Rights Reserved.
+                    </p>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <ul class="social-list">
+                        <li><a href="#"> <img src="img/icons/facebook.png" alt="facebook"> </a></li>
+                        <li><a href="#"> <img src="img/icons/twitter.png" alt="twitter"> </a></li>
+                        <li><a href="#"> <img src="img/icons/linkedin.png" alt="linkedin"> </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- Footer Ends -->
+
+
+
+
+
+    <!-- JQuery -->
+    <script src="js/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="js/scripts.js"></script>
+
+</body>
+
+</html>

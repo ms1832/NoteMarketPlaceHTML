@@ -1,0 +1,276 @@
+html,
+body {
+    background: url('../img/banner/banner-with-overlay-2.jpg') fixed no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+h2 {
+    font-family: "Open Sans", sans-serif;
+}
+
+p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.logo {
+    margin-top: 45px;
+    margin-bottom: 25px;
+}
+
+.logo img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-content {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.content {
+    background-color: #fff;
+    padding: 40px;
+    -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.content h2 {
+    color: #6255a5;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 38px;
+    text-align: center;
+    margin: 0;
+}
+
+.content p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    color: #333333;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.success {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.success p {
+    margin: 0;
+    color: green;
+}
+
+.success i {
+    margin-right: 10px;
+}
+
+.elements {
+    position: relative;
+}
+
+.elements span {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+}
+
+.elements input {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #000;
+    border: 1px solid #6255a5;
+    width: 400px;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.elements img {
+    position: absolute;
+    right: 14px;
+    bottom: 12px;
+}
+
+.btn-signup {
+    width: 400px;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #6255a5;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    padding: 8px 0 0 0;
+    text-transform: uppercase;
+}
+
+.text-login {
+    margin-top: 20px;
+}
+
+.text-login p {
+    margin: 0;
+}
+
+.text-login a {
+    color: #6255a5;
+    text-decoration: none;
+}
+
+
+/* Small Devices  */
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .logo img {
+        width: 200px;
+    }
+
+    .content {
+        padding: 35px;
+    }
+
+    .content h2 {
+        font-size: 26px;
+    }
+    .content p {
+        font-size: 13px;
+        margin-top: 15px;
+        margin-bottom: 30px;
+    }
+
+    .elements span {
+        font-size: 14px;
+    }
+    .elements input {
+        width: 320px;
+        height: 35px;
+        font-size: 14px;
+        margin-top: 8px;
+        margin-bottom: 20px;
+    }
+    .elements img {
+        width: 22px;
+        right: 12px;
+        bottom: 10px;
+    }
+
+    .btn-signup {
+        height: 30px;
+        width: 320px;
+        font-size: 16px;
+        line-height: 20px;
+        padding: 6px 0 0 0;
+    }
+}
+
+/* Extra Small Devices  */
+
+@media (max-width: 767px) {
+
+    .logo img {
+        width: 180px;
+    }
+
+    .content {
+        padding: 30px;
+    }
+
+    .content h2 {
+        font-size: 22px;
+    }
+    .content p {
+        font-size: 13px;
+        margin-top: 10px;
+        margin-bottom: 25px;
+    }
+
+    .success p {
+        font-size: 12px;
+    }
+
+    .elements span {
+        font-size: 12px;
+    }
+    .elements input {
+        width: 260px;
+        height: 30px;
+        font-size: 12px;
+        margin-top: 8px;
+        margin-bottom: 15px;
+    }
+    .elements img {
+        width: 18px;
+        right: 20px;
+        bottom: 10px;
+    }
+
+    .btn-signup {
+        height: 25px;
+        width: 260px;
+        font-size: 14px;
+        line-height: 20px;
+        padding: 2px 0 0 0;
+    }
+}
+
+/* Extra Small Devices  */
+
+@media (max-width: 400px) {
+
+    .logo img {
+        width: 150px;
+    }
+
+    .content {
+        padding: 25px;
+    }
+
+    .content h2 {
+        font-size: 18px;
+    }
+    .content p {
+        font-size: 12px;
+        margin-top: 10px;
+        margin-bottom: 25px;
+    }
+
+    .elements span {
+        font-size: 11px;
+    }
+    .elements input {
+        width: 220px;
+        height: 30px;
+        font-size: 11px;
+        margin-top: 8px;
+        margin-bottom: 15px;
+    }
+    .elements img {
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .btn-signup {
+        height: 25px;
+        width: 220px;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 2px 0 0 0;
+    }
+}
