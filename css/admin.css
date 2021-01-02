@@ -567,6 +567,7 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
     height: 426px;
     border-radius: 3px;
     border: 1px solid #d1d1d1;
+    overflow-y: inherit;
 }
 
 .dashboard-table tr {
@@ -850,6 +851,85 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
 #notes-under-review .table>tbody>tr>td:nth-child(7) {
     text-align: center;
 }
+
+
+/*  Modal   */
+
+.vertical-alignment-helper {
+    display: table;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width: inherit;
+    max-width: inherit;
+    /* For Bootstrap 4 - to avoid the modal window stretching full width */
+    height: inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events: all;
+}   
+
+.modal-header {
+    border-bottom: none;
+    padding: 10px 10px 0 0;
+}
+
+.modal-body {
+    padding: 20px 20px 70px 30px;
+}
+
+.reject-popup h4 {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #6255a5;
+}
+
+.reject-popup label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+    margin-top: 20px;
+}
+
+.reject-popup textarea {
+    resize: none;
+    width: 100%;
+    height: 100px;
+    border: 1px solid #d1d1d1;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.reject-popup .btn-reject {
+    background-color: #f43636;
+    color: #fff;
+    width: 100px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.reject-popup .btn-cancel {
+    background-color: #cccccc;
+    color: #fff;
+    width: 100px;
+    height: 40px;
+}
+
+
 
 
 /*###################################
@@ -1380,6 +1460,14 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
         margin-bottom: 20px;
     }
 
+    .modal-content {
+        width: 400px;
+    }
+
+    .reject-popup h4 {
+        font-size: 24px;
+    }
+
 
     /*  downloaded Notes    */
     .details-choose {
@@ -1599,6 +1687,13 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
         width: 80px;
     }
 
+    .modal-content {
+        width: 380px;
+    }
+    .reject-popup h4 {
+        font-size: 22px;
+    }
+
 
     /*      Manage System Confg      */
 
@@ -1694,6 +1789,13 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
      }
  
 
+     .modal-content {
+         width: 280px;
+     }
+     .reject-popup h4 {
+        font-size: 20px;
+    }
+
 
 }
 
@@ -1745,6 +1847,18 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
     .btn-add {
         font-size: 12px;
         width: 100%;
+    }
+
+
+    .modal-content {
+        width: 260px;
+    }
+    .reject-popup h4 {
+       font-size: 18px;
+    }
+    .reject-popup .btn-reject,
+    .reject-popup .btn-cancel {
+        width: 70px;
     }
 
 

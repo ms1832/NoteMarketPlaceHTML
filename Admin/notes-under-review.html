@@ -236,7 +236,7 @@
                             <td>
                                 <div class="table-actions-status">
                                     <button class="btn btn-success">Approve</button>
-                                    <button class="btn">Reject</button>
+                                    <button class="btn" data-toggle="modal" data-target="#rejectModal">Reject</button>
                                     <button class="btn">InReview</button>
                                 </div>
                             </td>
@@ -405,6 +405,35 @@
             </div>
 
 
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="../img/icons/close.png" alt="close" class="close" data-dismiss="modal">
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="reject-popup">
+
+                            <h4>Human Body - Science</h4>
+
+                            <label>Remarks</label>
+                            <textarea placeholder="Write remarks"></textarea>
+
+                            <button class="btn btn-cancel pull-right" data-dismiss="modal">Cancel</button>
+                            <button class="btn btn-reject pull-right">Reject</button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
