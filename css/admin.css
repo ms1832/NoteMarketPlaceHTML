@@ -1410,10 +1410,6 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
         display: block;
     }
 
-    .mobile-menu-profile {
-        display: block;
-    }
-
 
     /*  Dashboard   */
 
@@ -1515,16 +1511,6 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
 
     .navbar-brand img {
         width: 160px;
-    }
-
-    .mobile-menu-profile {
-        top: 35px;
-        right: 75px;
-    }
-
-    .mobile-menu-profile img {
-        width: 30px;
-        height: 30px;
     }
 
     #mobile-nav-open-btn {
@@ -1814,9 +1800,6 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
     }
     #mobile-nav a {
         font-size: 14px;
-    }
-    #mobile-nav {
-        width: 100%;
     }
 
     .dashboard-table {
