@@ -110,6 +110,7 @@ ul.navbar-nav>li.active>a:after {
 .transparant-nav {
     background: transparent;
     box-shadow: none;
+    transition: all 300ms linear;
 }
 .transparant-nav ul.navbar-nav>li a {
     color: #fff;
@@ -150,6 +151,7 @@ ul.navbar-nav>li img {
     color: #333333;
     margin: 0;
     padding: 7px 20px;
+    transition: all 400ms ease-in-out;
 }
 
 .dropdown .profile-dropdown-menu .dropdown-item:hover,
@@ -157,6 +159,7 @@ ul.navbar-nav>li img {
     background-color: #6255a5;
     color: #fff;
     text-decoration: none;
+    
 }
 
 .dropdown .profile-dropdown-menu a:first-child {
@@ -192,6 +195,11 @@ ul.navbar-nav>li .dropdown:focus .profile-dropdown-menu {
     top: 6px;
     /*  hide btn */
     display: none;
+    transition: all 400ms ease;
+}
+
+.transparant-nav #mobile-nav-open-btn {
+    color: #fff;
 }
 
 #mobile-nav-close-btn {
@@ -204,16 +212,19 @@ ul.navbar-nav>li .dropdown:focus .profile-dropdown-menu {
     top: -8px;
     /*  hide btn */
     display: none;
+    transition: all 400ms ease;
 }
 
 #mobile-nav {
-    width: 50%;
-    height: 0%;
+    width: 0%;
+    height: 100%;
     position: fixed;
     left: 0;
     top: 100px;
     background: rgba(255, 255, 255, 1);
     overflow: hidden;
+    z-index: 3;
+    transition: all 400ms linear;
 }
 
 
@@ -3604,9 +3615,7 @@ label {
     .navbar {
         padding: 25px 15px 20px 10px;
     }
-    #mobile-nav {
-        width: 100%;
-    }
+    
     #mobile-nav-open-btn {
         top: 5px;
     }

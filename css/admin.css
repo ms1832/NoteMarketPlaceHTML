@@ -174,6 +174,7 @@ ul.navbar-nav>li img {
     margin: 0;
     padding: 7px 25px;
     text-decoration: none;
+    transition: all 400ms linear;
 }
 
 .dropdown .profile-dropdown-menu .dropdown-item:hover,
@@ -260,13 +261,14 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
 }
 
 #mobile-nav {
-    width: 50%;
-    height: 0%;
+    width: 0%;
+    height: 100%;
     position: fixed;
     left: 0;
     top: 100px;
     background: rgba(255, 255, 255, 1);
     overflow: hidden;
+    transition: all 400ms linear;
 }
 
 
@@ -1531,9 +1533,6 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
     }
     #mobile-nav a {
         font-size: 16px;
-    }
-    #mobile-nav {
-        width: 100%;
     }
 
 
