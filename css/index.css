@@ -35,6 +35,10 @@ button:focus {
     border: none;
 }
 
+select {
+    background-color: #fff;
+}
+
 
 
 /*###################################
@@ -1370,7 +1374,8 @@ label {
 /*      Tables      */
 
 .dashboard-table {
-    height: 412px;
+    /*height: 412px;*/
+    height: 100%;
     border-radius: 3px;
     border: 1px solid #d1d1d1;
 }
@@ -3014,41 +3019,6 @@ label {
     }
 
 
-    /*      Email Verify    */
-
-    #email-verify img {
-        margin-bottom: 50px;
-        width: 180px;
-    }
-    #email-verify .email-body h4 {
-        font-size: 24px;
-        font-weight: 600;
-        line-height: 30px;
-        color: #6255a5;
-        margin-bottom: 30px;
-    }
-    #email-verify .email-body h6 {
-        font-size: 18px;
-        font-weight: 600;
-        line-height: 22px;
-        color: #333333;
-        margin-bottom: 20px;
-    }
-    #email-verify .email-body p {
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 20px;
-        color: #333333;
-        margin-bottom: 50px;
-    }
-    #email-verify .email-body button {
-        width: 400px;
-        height: 45px;
-        font-size: 16px;
-        line-height: 22px;
-    }
-
-
     /*      user profile    */
 
     .title img {
@@ -3637,40 +3607,7 @@ label {
     }
 
 
-    /*      Email Verify    */
-
-    #email-verify img {
-        margin-bottom: 30px;
-    }
-    #email-verify .email-body h4 {
-        font-size: 22px;
-        font-weight: 600;
-        line-height: 30px;
-        color: #6255a5;
-        margin-bottom: 30px;
-    }
-    #email-verify .email-body h6 {
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 22px;
-        color: #333333;
-        margin-bottom: 20px;
-    }
-    #email-verify .email-body p {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        color: #333333;
-        margin-bottom: 50px;
-    }
-    #email-verify .email-body button {
-        width: 280px;
-        height: 45px;
-        font-size: 16px;
-        line-height: 22px;
-    }
-
-
+    
     /*      home       */
 
     #home-img {
@@ -4215,37 +4152,6 @@ label {
         padding: 20px;
     }  
 
-
-    /*      Email Verify    */
-
-
-    #email-verify .email-body h4 {
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 30px;
-        color: #6255a5;
-        margin-bottom: 30px;
-    }
-    #email-verify .email-body h6 {
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 22px;
-        color: #333333;
-        margin-bottom: 10px;
-    }
-    #email-verify .email-body p {
-        font-size: 13px;
-        font-weight: 400;
-        line-height: 20px;
-        color: #333333;
-        margin-bottom: 50px;
-    }
-    #email-verify .email-body button {
-        width: 220px;
-        height: 40px;
-        font-size: 14px;
-        line-height: 22px;
-    }
 
 
     /*      user profile    */

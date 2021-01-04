@@ -6,49 +6,85 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Email Verification</title>
 
-     <!-- Fav icon -->
-     <link rel="shortcut icon" href="img/favicon.ico">
-
     <!-- BOOTSTRAP CSS -->
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-
-    <!-- Font-Awesome CSS -->
-    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="css/index.css">
+    <style>
+    
+        table {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        thead img {
+            margin-bottom: 30px;
+        }
+    
+    </style>
+
 
 </head>
 <body>
+
     
+    <table>
 
-    <div id="email-verify">
+        <thead>
+            <th>
+                <img src="img/logo.png" alt="logo">
+            </th>
+        </thead>
 
-        <div class="content-box-md">
+        <tbody>
+            
+            <tr style="height: 60px;">
+                <td style="font-family: 'Open Sans';
+                font-size: 26px;
+                font-weight: 600;
+                line-height: 30px;
+                color: #6255a5;">Email Verification</td>
+            </tr>
+            <tr style="height: 40px;">
+                <td style="font-family: 'Open Sans';
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 22px;
+                color: #333333;
+                margin-bottom: 20px;">Dear Smith,</td>
+            </tr>
+            <tr style="height: 60px;">
+                <td style="font-family: 'Open Sans';
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 22px;
+                color: #333333;
+                margin-bottom: 50px;">
+                    Thanks for Signing up! <br>
+                    Simply click below for email verification.
+                </td>
+            </tr>
+            <tr style="height: 120px;">
+                <td>
+                    <button class="btn"
+                    style=" width: 540px;
+                    height: 50px;
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 18px;
+                    font-weight: 600;
+                    line-height: 22px;
+                    color: #fff;
+                    background-color: #6255a5;
+                    border-radius: 3px;">VERIFY EMAIL ADDRESS</button>
+                </td>
+            </tr>
 
-            <img src="img/logo.png" alt="logo" class="img-fluid">
+        </tbody>
 
-            <div class="email-body">
-
-                <h4>Email Verification</h4>
-                <h6>Dear Smith,</h6>
-                <p>Thanks for Signing up! <br>
-                Simply click below for email verification.</p>
-
-                <button class="btn">VERIFY EMAIL ADDRESS</button>
-
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-
+    </table>
 
 
 </body>
