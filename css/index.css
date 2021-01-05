@@ -1373,6 +1373,10 @@ label {
 
 /*      Tables      */
 
+.table-responsive {
+    overflow: scroll;
+}
+
 .dashboard-table {
     /*height: 412px;*/
     height: 100%;
