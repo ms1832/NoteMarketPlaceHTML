@@ -21,7 +21,17 @@ $(function () {
     $(this).datepicker('show');
 
   });
+
 });
+
+
+$(".upload-img").click(function(){
+
+  $("#image").click();
+
+});
+
+
 
 
 
