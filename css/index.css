@@ -1401,7 +1401,7 @@ label {
 }
 
 #my-downloads .dashboard-table {
-    height: 737px;
+    height: 100%;
 }
 
 #my-downloads .table-actions-view {
@@ -1562,7 +1562,7 @@ label {
 }
 
 #sold-notes .dashboard-table {
-    height: 737px;
+    height: 100%;
 }
 
 #sold-notes .table-actions-view {
@@ -1611,7 +1611,7 @@ label {
 }
 
 #rejected-notes .dashboard-table {
-    height: 737px;
+    height: 100%;
 }
 
 #rejected-notes .table-actions-view {
@@ -1656,7 +1656,7 @@ label {
 }
 
 #buyer-request .dashboard-table {
-    height: 737px;
+    height: 100%;
 }
 
 #buyer-request .table-actions-view {
