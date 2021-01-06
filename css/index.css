@@ -796,7 +796,7 @@ ul.navbar-nav>li .dropdown:focus .profile-dropdown-menu {
     color: #333333;
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
-    line-height: 20px;
+    line-height: 22px;
     font-weight: 400;
     margin: 0 15px;
     padding-left: 0;
@@ -823,7 +823,6 @@ ul.navbar-nav>li .dropdown:focus .profile-dropdown-menu {
     width: 8px;
     height: 15px;
 }
-
 
 
 /*###################################
@@ -1323,10 +1322,6 @@ label {
 
 /*      Tables      */
 
-.table-responsive {
-    overflow: auto;
-}
-
 .dashboard-table {
     /*height: 412px;*/
     height: 100%;
@@ -1373,11 +1368,16 @@ label {
 .table-actions-view {
     padding-left: 15px;
 }
+.table-actions-view:hover {
+    cursor: pointer;
+}
 
 .table-actions-edit img {
     padding-right: 10px;
 }
-
+.table-actions-edit img:hover {
+    cursor: pointer;
+}
 
 
 /*###################################
@@ -1433,6 +1433,7 @@ label {
     left: -720%;
     width: 180px;
     border: none;
+    z-index: 1;
 }
 
 .more-dropdown-menu .dropdown-item {
@@ -2478,6 +2479,7 @@ label {
 }
 
 
+
 @media (min-width: 768px) and (max-width: 991px) {
 
     .content-box-lg {
@@ -2942,7 +2944,6 @@ label {
 
 
 @media (max-width: 767px) {
-
 
     .content-box-lg {
         padding: 40px;

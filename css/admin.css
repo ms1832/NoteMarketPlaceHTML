@@ -617,10 +617,17 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
 .table-actions-edit {
     padding-left: 5px;
 }
+.table-actions-view:hover {
+    cursor: pointer;
+}
 
 .table-actions-edit img {
     padding-right: 10px;
 }
+.table-actions-edit img:hover {
+    cursor: pointer;
+}
+
 
 
 /*  more Drop-down  */
@@ -698,7 +705,6 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
     width: 8px;
     height: 15px;
 }
-
 
 
 
