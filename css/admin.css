@@ -1264,6 +1264,13 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
 
 }
 
+@media (max-width: 991px){
+
+    .dashboard-table {
+        overflow: scroll;
+    }
+
+}
 
 @media (min-width: 992px) and (max-width: 1199px) {
 
@@ -1867,7 +1874,7 @@ ul.navbar-nav>li .dropdown:focus .settings-dropdown-menu
     }
 
     .dashboard-table {
-        height: 400px;
+        height: 100%;
     }
 
     .dashboard-table th,
