@@ -1437,12 +1437,6 @@ label {
     z-index: 1;
 }
 
-.table>tbody>tr:last-child>td .more-dropdown-menu {
-  top: -50px;
-}
-
-
-
 .more-dropdown-menu .dropdown-item {
     display: block;
     font-family: "Open Sans", sans-serif;
