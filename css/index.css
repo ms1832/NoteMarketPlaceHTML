@@ -1436,6 +1436,10 @@ label {
     z-index: 1;
 }
 
+.dropdown-backdrop {
+    display:none;
+}
+
 .more-dropdown-menu .dropdown-item {
     display: block;
     font-family: "Open Sans", sans-serif;
