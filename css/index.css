@@ -163,7 +163,6 @@ ul.navbar-nav>li img {
     background-color: #6255a5;
     color: #fff;
     text-decoration: none;
-    
 }
 
 .dropdown .profile-dropdown-menu a:first-child {
@@ -1369,7 +1368,7 @@ label {
 .table-actions-view {
     padding-left: 15px;
 }
-.table-actions-view:hover {
+.table-actions-view img:hover {
     cursor: pointer;
 }
 
