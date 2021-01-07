@@ -1433,11 +1433,7 @@ label {
     left: -720%;
     width: 180px;
     border: none;
-    z-index: 1;
-}
-
-.dropdown-backdrop {
-    display:none;
+    z-index: 9999;
 }
 
 .more-dropdown-menu .dropdown-item {
