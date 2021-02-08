@@ -1321,11 +1321,14 @@ label {
 
 /*      Tables      */
 
+table {
+    border: 1px solid #d1d1d1;
+}
+
 .dashboard-table {
     /*height: 412px;*/
     height: 100%;
     border-radius: 3px;
-    border: 1px solid #d1d1d1;
     overflow-y: inherit;
 }
 
@@ -2111,6 +2114,41 @@ label {
     top: 50%;
     transform: translate(-50%,-50%);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dataTables_length,
+.dataTables_filter,
+.dataTables_info {
+    display: none;
+}
+
+table.dataTable>thead .sorting:before, table.dataTable>thead .sorting_asc:before, table.dataTable>thead .sorting_desc:before, table.dataTable>thead .sorting_asc_disabled:before, table.dataTable>thead .sorting_desc_disabled:before,
+table.dataTable>thead .sorting:after, table.dataTable>thead .sorting_asc:after, table.dataTable>thead .sorting_desc:after, table.dataTable>thead .sorting_asc_disabled:after, table.dataTable>thead .sorting_desc_disabled:after {
+    display: none;
+}
+
+.dataTables_paginate {
+    display: block;
+}
+
+
+div.dataTables_wrapper div.dataTables_paginate {
+    margin: 0;
+    text-align: center;
+}
+
+
 
 
 

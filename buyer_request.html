@@ -13,6 +13,8 @@
     <!-- BOOTSTRAP CSS -->
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
 
+    <link rel="stylesheet" href="css/datatables.min.css">
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -121,7 +123,7 @@
                             <div class="col-md-8 col-sm-8 col-xs-8">
                                 <div class="search">
                                     <img src="img/icons/search-icon.png" alt="search">
-                                    <input type="search" class="form-control" placeholder="Search">
+                                    <input type="search" class="form-control" id="search-box" placeholder="Search">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4">
@@ -450,9 +452,23 @@
     <!-- BOOTSTRAP JS -->
     <script src="js/bootstrap/bootstrap.min.js"></script>
 
+    <script src="js/datatables.min.js"></script>
+
     <!-- CUSTOM JS -->
     <script src="js/scripts.js"></script>
 
+    <script>
+    
+    var table = $('.table').DataTable({
+        'pageLength':5
+    });
+
+    $('.btn-search').click(function(){
+        alert($('#search-box').value);
+        //table.search( $('#search-box').value ).draw();
+    });
+
+    </script>
 
 
 </body>
