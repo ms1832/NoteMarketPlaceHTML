@@ -1330,6 +1330,8 @@ table {
     height: 100%;
     border-radius: 3px;
     overflow-y: inherit;
+
+    overflow: visible;
 }
 
 .dashboard-table tr {

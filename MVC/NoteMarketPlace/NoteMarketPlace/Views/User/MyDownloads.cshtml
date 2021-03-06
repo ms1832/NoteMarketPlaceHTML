@@ -1,0 +1,220 @@
+﻿
+@model List<NoteMarketPlace.Models.MyDownloads>
+
+@{
+    ViewBag.Title = "MyDownloads";
+    Layout = "~/Views/Shared/_UserNav.cshtml";
+}
+
+
+<!-- My Downloads -->
+
+<div id="my-downloads">
+
+    <div class="dashboard-progress-notes">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <h4>My Downloads</h4>
+            </div>
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <div class="proress-note-search">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                            <div class="search">
+                                <img src="~/img/icons/search-icon.png" alt="search">
+                                <input type="search" class="form-control" id="mydownload_search_input" placeholder="Search">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <button class="btn btn-search" id="mydownload_search">SEARCH</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive dashboard-table">
+
+        <table class="table" id="my_downloads_table">
+
+            <thead>
+                <tr>
+                    <th scope="col">SR NO.</th>
+                    <th scope="col">NOTE TITLE</th>
+                    <th scope="col">CATEGORY</th>
+                    <th scope="col">BUYER</th>
+                    <th scope="col">SELL TYPE</th>
+                    <th scope="col">PRICE</th>
+                    <th scope="col">DOWNLOADED DATE/TIME</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @{
+
+                    if (Model.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="8" style="text-align:center">No Data Available</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        int count = 0;
+                        foreach (var data in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td scope="row">@count</td>
+                                <td onclick="myFunc(@data.NoteId)">@data.Title</td>
+                                <td>@data.Category</td>
+                                <td>@data.Buyer</td>
+                                <td>@data.SellType</td>
+                                <td>$@data.Price</td>
+                                <td>@(data.DownloadDate == null ? "N/A" : data.DownloadDate.GetValueOrDefault().ToString("dd MMMM, yyyy HH:mm:ss") )</td>
+                                <td>
+                                    <div class="table-actions-view">
+                                        <img src="~/img/icons/eye.png" alt="view" onclick="myFunc(@data.NoteId)">
+                                        <div class="dropdown">
+                                            <img id="more-dropeddown" src="~/img/icons/dots.png" alt="more"
+                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                                <a class="dropdown-item" onclick="Download(@data.PurchaseId)">Download Note</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#reviewModal" onclick="setReviewId(@data.PurchaseId)">
+                                                    Add
+                                                    Reviews/Feedback
+                                                </a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#rejectModal" onclick="setSpamId(@data.PurchaseId)">Report as Inappropriate</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        }
+
+
+                    }
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="~/img/icons/close.png" alt="close" class="close" data-dismiss="modal">
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="review-popup">
+
+                            <h4>Add Review</h4>
+
+                            @using (Html.BeginForm(FormMethod.Post))
+                            {
+
+                                @Html.Hidden("purchaseId")
+
+                                <div class="popup-rating">
+                                    <fieldset class="rating">
+                                        <input type="radio" id="note-info-star5" name="review_rating" value="5" /><label class="full" for="note-info-star5" title="Awesome - 5 stars"></label>
+                                        <input type="radio" id="note-info-star4" name="review_rating" value="4" /><label class="full" for="note-info-star4" title="Pretty good - 4 stars"></label>
+                                        <input type="radio" id="note-info-star3" name="review_rating" value="3" /><label class="full" for="note-info-star3" title="Meh - 3 stars"></label>
+                                        <input type="radio" id="note-info-star2" name="review_rating" value="2" /><label class="full" for="note-info-star2" title="Kinda bad - 2 stars"></label>
+                                        <input type="radio" id="note-info-star1" name="review_rating" value="1" /><label class="full" for="note-info-star1" title="Sucks big time - 1 star"></label>
+                                    </fieldset>
+                                </div>
+
+                                <div class="review">
+                                    <p>Comments <span>*</span></p>
+                                    @*<textarea placeholder="Comments..."></textarea>*@
+                                    @Html.TextArea("review_comment", new { @placeholder = "Comments...", required="required" })
+                                </div>
+
+                                <button class="btn" type="submit" formaction="UserReview">SUBMIT</button>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="../img/icons/close.png" alt="close" class="close" data-dismiss="modal">
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="reject-popup">
+
+                            <h4>Note Title</h4>
+
+                            @using (Html.BeginForm(FormMethod.Post))
+                            {
+                                @Html.Hidden("Id")
+
+                                <label>Remarks*</label>
+                                @*<textarea placeholder="Write remarks"></textarea>*@
+                                @Html.TextArea("UserRemarks", new { @placeholder = "Write remarks", required = "required" })
+
+                                <button class="btn btn-cancel pull-right" data-dismiss="modal">Cancel</button>
+                                <button class="btn btn-reject pull-right" type="submit" formaction="UserReport">Report</button>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+<!-- My Downloads Ends -->
+
+<script src="~/Scripts/jquery.min.js"></script>
+<script>
+
+    function myFunc(id) {
+        location.href = "../Note_Details/" + id;
+    }
+
+    function Download(id) {
+        location.href = "DownloadNote?purchaseId=" + id;
+    }
+
+    function setReviewId(id) {
+        $("#reviewModal input[type='hidden']").attr('value', id);
+    }
+
+    function setSpamId(id) {
+        $("#rejectModal input[type='hidden']").attr('value', id);
+    }
+
+    $('#rejectModal form').on('submit', function () {
+        return confirm('Are you sure you want to mark this report as spam, you can not update it later?');
+    });
+
+</script>

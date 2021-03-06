@@ -1,0 +1,218 @@
+﻿
+@model NoteMarketPlace.Models.UserProfileModel
+
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "~/Views/Shared/_UserNav.cshtml";
+}
+
+
+<!-- User Profile -->
+<div id="user-profile">
+
+    <div class="title">
+        <img src="~/img/banner/banner-with-overlay.jpg" alt="Search Notes" class="img-fluid">
+        <h2>User Profile</h2>
+    </div>
+
+    <div class="content-box-lg">
+
+        @using (Html.BeginForm("MyProfile", "User", FormMethod.Post))
+        {
+
+            <div class="text-1">
+                <h4>Basic Profile Details</h4>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">First Name <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter your first name">*@
+                            @Html.TextBoxFor(model=> model.FirstName, new { @class = "form-control", placeholder = "Enter your first name", required="required" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="email">Email <span>*</span> </label>
+                            @*<input type="email" class="form-control" id="email" placeholder="Enter your email address">*@
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "email", placeholder = "Enter your email address", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="Gender">Gender</label>
+                            @Html.DropDownListFor(model=> model.Gender, new SelectList(Model.genderModel, "Gender_Id", "Gender_Val"), "Select your Gender" , new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="subject">Profile Picture </label>
+                            <div class="input-upload">
+                                @*<input type="file" class="form-control" id="image" accept="image/*">*@
+                                @Html.TextBoxFor(model=> model.ProfilePicture,new { @class = "form-control", type = "file", accept = "image/*" })
+                                <div class="upload-img" id="upload_profile_img_click">
+                                    <img src="~/img/icons/upload-file.png" alt="upload">
+                                    <p>Upload a picture</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="subject">Last Name <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="subject" placeholder="Enter your last name">*@
+                            @Html.TextBoxFor(model=> model.LastName, new { @class = "form-control", placeholder = "Enter your last name", required = "reduired" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="subject">Date of Birth</label>
+                            <div class="input-date">
+                                @*<input type="text" class="form-control" id="dob" placeholder="Enter your date of birth">*@
+                                @Html.TextBoxFor(model=> model.DOB, new { @class = "form-control", placeholder = "Enter your date of birth" })
+                                <img src="~/img/icons/date.png" alt="calendar" id="cal">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="subject">Phone Number</label>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-4 col-xs-4">
+                                    @Html.DropDownListFor(model=> model.CountryCode, new SelectList(Model.CountryCodeModel, "Country_Code", "Country_Code"), new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-9 col-sm-8 col-xs-8">
+                                    @*<input class="form-control" id="subject" placeholder="Enter your phone number">*@
+                                    @Html.TextBoxFor(model=> model.Phone, new { @class = "form-control", placeholder = "Enter your phone number" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="text-01">
+                <h4>Address Details</h4>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">Address Line 1 <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter your address">*@
+                            @Html.TextBoxFor(model=> model.Address1, new { @class = "form-control", placeholder = "Enter your address", required="required" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">City <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter your city">*@
+                            @Html.TextBoxFor(model=> model.City, new { @class = "form-control", placeholder = "Enter your city", required="required" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">ZipCode <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter your ZipCode">*@
+                            @Html.TextBoxFor(model=> model.Zipcode, new { @class = "form-control" , placeholder = "Enter your ZipCode", required = "required" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">Address Line 2 <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter your address">*@
+                            @Html.TextBoxFor(model=> model.Address2, new { @class = "form-control", placeholder = "Enter your address", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">State <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter your state">*@
+                            @Html.TextBoxFor(model => model.State, new { @class = "form-control", placeholder = "Enter your state", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label>Country <span>*</span> </label>
+                            @Html.DropDownListFor(model=> model.Country, new SelectList(Model.countryModel, "Country_Id","Country_Val"), new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="text-01">
+                <h4>University and Collage Information</h4>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">University <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter your university">*@
+                            @Html.TextBoxFor(model=> model.University, new { @class = "form-control", placeholder = "Enter your university", required="required" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">College <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter your college">*@
+                            @Html.TextBoxFor(model => model.College, new { @class = "form-control", placeholder = "Enter your college", required = "required" })
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-submit-btn">
+                <button class="btn" type="submit">SUBMIT</button>
+            </div>
+
+        }
+
+    </div>
+
+
+</div>
+<!-- Contact Us Ends -->

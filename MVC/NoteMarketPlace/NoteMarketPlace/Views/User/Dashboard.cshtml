@@ -1,0 +1,305 @@
+﻿
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_UserNav.cshtml";
+}
+
+<!-- Dashboard -->
+<div id="dashboard">
+
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <h2>Dashboard</h2>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <button class="btn dashboard-btn" id="dashboard_add_note">ADD NOTE</button>
+        </div>
+    </div>
+
+
+    <!-- Statics Data -->
+    <div class="dashboard-statics">
+
+        <div class="row">
+
+            <div class="col-md-6 col-sm-12">
+                <div class="statics-01">
+
+                    <div class="earning">
+                        <img src="~/img/icons/my-earning.png" alt="earning" class="img-fluid">
+                        <h4>My Earnings</h4>
+                    </div>
+                    <div class="static-num">
+                        <h4>@ViewBag.SoldNotes</h4>
+                        <p>Number of Notes Sold</p>
+                    </div>
+                    <div class="static-num">
+                        <h4>$ @ViewBag.Earning</h4>
+                        <p>Money Earned</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+
+                <div class="statics-02">
+                    <div class="row">
+
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="static-num-02">
+                                <div class="data">
+                                    <h4>@ViewBag.DownloadNotes</h4>
+                                    <p>My Downloads</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="static-num-02">
+                                <div class="data">
+                                    <h4>@ViewBag.RejectedNotes</h4>
+                                    <p>My Rejected Notes</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="static-num-02">
+                                <div class="data">
+                                    <h4>@ViewBag.BuyerRequest</h4>
+                                    <p>Buyer Requests</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- In Progress Notes -->
+    <div class="dashboard-progress-notes">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <h4>In Progress Notes</h4>
+            </div>
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <div class="proress-note-search">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                            <div class="search">
+                                <img src="~/img/icons/search-icon.png" alt="search">
+                                <input type="search" class="form-control" placeholder="Search" id="progress-notes-input">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <button class="btn btn-search" id="progress-notes-search">SEARCH</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive dashboard-table">
+
+        <table class="table" id="progress-notes-table">
+
+            <thead>
+                <tr>
+                    <th scope="col">ADDED DATE</th>
+                    <th scope="col">TITLE</th>
+                    <th scope="col">CATEGORY</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @{
+                    if (ViewBag.ProgressNotes.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="5" style="text-align:center">No Data Available</td>
+                        </tr>
+                    }
+                    else
+                    {
+
+                        foreach (var data in ViewBag.ProgressNotes)
+                        {
+                            if (data.Status == "Draft")
+                            {
+                                <tr>
+                                    <td scope="row">@data.AddedDate</td>
+                                    <td>@data.Title</td>
+                                    <td>@data.Category</td>
+                                    <td>@data.Status</td>
+                                    <td>
+                                        <div class="table-actions-edit">
+                                            <img src="~/img/icons/edit.png" alt="edit" onclick="Edit(@data.Id)" >
+                                            <img src="~/img/icons/delete.png" alt="delete" onclick="Delete(@data.Id)" >
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td scope="row">@data.AddedDate</td>
+                                    <td>@data.Title</td>
+                                    <td>@data.Category</td>
+                                    <td>@data.Status</td>
+                                    <td>
+                                        <div class="table-actions-view">
+                                            <img src="~/img/icons/eye.png" alt="view" onclick="View(@data.Id)">
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+
+                    }
+
+                }
+              
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- In Progress Notes Ends -->
+    <!--###########################################################################################-->
+    <!-- Published Notes -->
+
+    <div class="dashboard-progress-notes">
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <h4>Published Notes</h4>
+            </div>
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <div class="proress-note-search">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                            <div class="search">
+                                <img src="~/img/icons/search-icon.png" alt="search">
+                                <input type="search" class="form-control" placeholder="Search" id="published-notes-input">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <button class="btn btn-search" id="published-notes-search">SEARCH</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive dashboard-table">
+
+        <table class="table" id="published-notes-table">
+
+            <thead>
+                <tr>
+                    <th scope="col">ADDED DATE</th>
+                    <th scope="col">TITLE</th>
+                    <th scope="col">CATEGORY</th>
+                    <th scope="col">SELL TYPE</th>
+                    <th scope="col">PRICE</th>
+                    <th scope="col">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @{
+
+                    if (ViewBag.PublishedNotes.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="6" style="text-align:center">No Data Available</td>
+                        </tr>
+                    }
+                    else
+                    {
+
+                        foreach (var data in ViewBag.PublishedNotes)
+                        {
+                            <tr>
+                                <td scope="row">@data.AddedDate</td>
+                                <td>@data.Title</td>
+                                <td>@data.Category</td>
+                                <td>@data.SellType</td>
+                                <td>$@data.Price</td>
+                                <td>
+                                    <div class="table-actions-view">
+                                        <img src="~/img/icons/eye.png" alt="view" onclick="View(@data.Id)">
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+
+                    }
+
+                }
+                
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <!-- Published Notes Ends -->
+
+
+</div>
+<!-- Dashboard Ends -->
+
+<script src="~/Scripts/jquery.min.js"></script>
+
+<script>
+
+    $('#dashboard_add_note').click(function () {
+        location.href = "../User/Sell_Note";
+    });
+
+    function View(id) {
+        location.href = "../Note_Details/" + id + "?ReadOnly=true";
+    }
+
+    function Edit(id) {
+        location.href = "../User/Sell_Note?edit=" + id;
+    }
+
+    function Delete(id) {
+        if (confirm("Are you sure, you want to delete this note?")) {
+            $.ajax({
+                method: 'POST',
+                url: 'Note/delete',
+                data: { id : id },
+                success: function (data) {
+                    location.href = data;
+                },
+                error: function () {
+                    alert('Note Not Deleted');
+                }
+            })
+        }
+    }
+
+
+</script>
+

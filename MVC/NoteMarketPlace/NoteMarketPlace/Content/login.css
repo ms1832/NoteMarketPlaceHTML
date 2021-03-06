@@ -1,0 +1,415 @@
+/*******    Login Page      *******/
+
+html,
+body {
+    background: url('../img/banner/banner-with-overlay-2.jpg') fixed no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+h2 {
+    font-family: "Open Sans", sans-serif;
+}
+
+p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.logo {
+    margin-top: 45px;
+    margin-bottom: 25px;
+}
+
+.logo img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-content {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.content {
+    background-color: #fff;
+    padding: 40px;
+    -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.content h2 {
+    color: #6255a5;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 34px;
+    text-align: center;
+    margin: 0;
+}
+
+.content p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    color: #333333;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 45px;
+}
+
+.elements {
+    position: relative;
+}
+
+.elements span {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+}
+
+.elements span.text-danger {
+    color: #a94442;
+}
+
+.elements input {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #000;
+    border: 1px solid #6255a5;
+    width: 400px;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#email {
+    margin-bottom: 20px;
+}
+
+
+#forgot-pwd {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #6255a5;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+.elements img {
+    width: 26px;
+    position: absolute;
+    right: 10px;
+    bottom: 12px;
+}
+
+/* wrong password  */
+
+.wrong_password {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    border: 1px solid #ff5e5e !important;
+    width: 480px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+#msg p {
+    text-align: start;
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 20px;
+    color: #ff3636;
+    margin: 10px 0 20px 0;
+    display: none;
+}
+
+
+#check {
+    border: 1px solid #d1d1d1;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    margin: 0;
+}
+
+#check+span {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+    position: relative;
+    bottom: 4px;
+    left: 5px;
+}
+
+.btn-login {
+    width: 400px;
+    height: 35px;
+    border-radius: 3px;
+    background-color: #6255a5;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    padding: 3px 0 0 0;
+    text-transform: uppercase;
+}
+
+.btn-login:hover {
+    color: #fff;
+}
+
+.text-signup>p {
+    margin: 20px 0 0 0;
+}
+
+.text-signup>p a {
+    color: #6255a5;
+    text-decoration: none;
+}
+
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .logo img {
+        width: 180px;
+    }
+
+    .elements input {
+        width: 300px;
+    }
+
+    .content {
+        padding: 30px;
+    }
+
+    .content p {
+        margin-bottom: 20px;
+    }
+
+    /* wrong password  */
+    #password {
+        width: 300px;
+    }
+
+    .btn-login {
+        width: 300px;
+    }
+
+    #check {
+        width: 22px;
+        height: 22px;
+    }
+
+    #check+span {
+        bottom: 5px;
+    }
+
+}
+
+
+
+@media (max-width: 767px) {
+
+    .logo img {
+        width: 180px;
+    }
+
+    .content {
+        padding: 30px;
+    }
+
+    .content h2 {
+        font-size: 30px;
+    }
+
+    .content p {
+        font-size: 13px;
+    }
+
+    .elements input {
+        width: 320px;
+    }
+
+    /* wrong password  */
+    #password {
+        width: 320px;
+    }
+
+    .btn-login {
+        width: 320px;
+    }
+
+    #check {
+        width: 20px;
+        height: 20px;
+    }
+
+    #check+span {
+        bottom: 5px;
+    }
+
+}
+
+
+
+@media (max-width: 480px) {
+    
+    .logo img {
+        width: 180px;
+    }
+
+    .content {
+        margin-bottom: 30px;
+        padding: 18px;
+    }
+
+    .content h2 {
+        font-size: 25px;
+        line-height: 30px;
+    }
+
+    .content p {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    .elements span {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 15px;
+    }
+
+    .elements input {
+        font-size: 12px;
+        width: 250px;
+        height: 35px;
+    }
+
+    .elements img {
+        width: 24px;
+        bottom: 10px;
+    }
+
+    /* wrong password  */
+    #password {
+        font-size: 12px;
+        width: 250px;
+        height: 35px;
+    }
+    #forgot-pwd {
+        font-size: 14px;
+    }
+
+
+    #msg p {
+        font-size: 11px;
+    }
+
+    #check {
+        width: 15px;
+        height: 15px;
+    }
+
+    #check+span {
+        font-size: 14px;
+        bottom: 2px;
+    }
+
+    .btn-login {
+        width: 250px;
+    }
+
+}
+
+
+@media (max-width: 320px) {
+
+    .logo img {
+        width: 180px;
+    }
+
+    .content {
+        margin-bottom: 20px;
+        padding: 18px;
+    }
+
+    .content h2 {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .content p {
+        margin-top: 10px;
+        font-size: 10px;
+        margin-bottom: 20px;
+    }
+
+    .elements span {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 15px;
+    }
+
+    .elements input {
+        font-size: 12px;
+        width: 220px;
+        height: 35px;
+    }
+
+    .elements i {
+        right: 15px;
+        bottom: 10px;
+        font-size: 14px;
+    }
+
+    /* wrong password  */
+    #password {
+        font-size: 12px;
+        width: 220px;
+        height: 35px;
+    }
+    #forgot-pwd {
+        font-size: 12px;
+        right: 8px;
+    }
+
+    #msg p {
+        font-size: 10px;
+    }
+
+    #check {
+        width: 15px;
+        height: 15px;
+    }
+
+    #check+span {
+        font-size: 12px;
+        bottom: 3px;
+    }
+
+    .btn-login {
+        font-size: 15px;
+        width: 220px;
+    }
+
+}

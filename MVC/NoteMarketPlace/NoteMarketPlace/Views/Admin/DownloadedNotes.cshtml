@@ -1,0 +1,186 @@
+﻿
+@{
+    ViewBag.Title = "DownloadedNotes";
+    Layout = "~/Views/Shared/_AdminNav.cshtml";
+}
+
+@model List<NoteMarketPlace.Models.AdminModel.DownloadedNotes>
+
+
+<div id="downloaded-notes">
+    <div class="content-box-lg">
+
+        <div class="contact-text">
+            <h4>Downloaded Notes</h4>
+        </div>
+
+        <div class="table-heading">
+            <div class="row">
+
+                <div class="col-md-6 col-sm-12 col-xs-12">
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <div class="details-choose">
+                                <h5>Note</h5>
+                                @Html.DropDownList("NoteId", new SelectList(ViewBag.NoteList, "NoteId", "NoteTitle"),"Select Note", new {@onchange="Filter(this)" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="details-choose">
+                                <h5>Seller</h5>
+                                @Html.DropDownList("SellerId", new SelectList(ViewBag.SellerList, "SellerId", "SellerName" ), "Select Seller", new { @onchange = "Filter(this)" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="details-choose">
+                                <h5>Buyer</h5>
+                                @Html.DropDownList("BuyerId", new SelectList(ViewBag.BuyerList, "BuyerId", "BuyerName"), "Select Buyer", new { @onchange = "Filter(this)" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-9 col-sm-9 col-xs-8">
+                            <div class="search">
+                                <img src="../img/icons/search-icon.png">
+                                <input type="search" placeholder="search" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-4">
+                            <button class="btn btn-search">SEARCH</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive dashboard-table">
+
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th scope="col">SR NO.</th>
+                        <th scope="col">NOTE TITLE</th>
+                        <th scope="col">CATEGORY</th>
+                        <th scope="col">BUYER</th>
+                        <th scope="col">SELLER</th>
+                        <th scope="col">SELL TYPE</th>
+                        <th scope="col">PRICE</th>
+                        <th scope="col">DOWNLOADED DATE/TIME</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        if (Model.Count == 0)
+                        {
+                            <tr>
+                                <td colspan="9" style="text-align:center;">No Records found</td>
+                            </tr>
+                        }
+                        else
+                        {
+
+                            int count = 0;
+                            foreach (var data in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <td scope="row">@count</td>
+                                    <td>@data.Title</td>
+                                    <td>@data.Category</td>
+                                    <td>
+                                        @data.BuyerName
+                                        <div class="table-actions-view">
+                                            <img src="~/img/icons/eye.png" alt="delete">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @data.SellerName
+                                        <div class="table-actions-view">
+                                            <img src="~/img/icons/eye.png" alt="view">
+                                        </div>
+                                    </td>
+                                    <td>@(data.Price == 0 ? "Free" : "Paid")</td>
+                                    <td>$@data.Price</td>
+                                    <td>@data.DownloadedDate.ToString("dd-MM-yyyy, HH:mm")</td>
+                                    <td>
+                                        <div class="table-actions-view">
+                                            <div class="dropdown">
+                                                <img id="more-dropeddown" src="~/img/icons/dots.png" alt="more"
+                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                                    <a class="dropdown-item" href="#">Download Notes</a>
+                                                    <a class="dropdown-item" href="#">View More Details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            }
+
+                        }
+
+                    }
+                   
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+
+    var sellerId, noteId, buyerId;
+    
+    function Filter(obj) {
+
+        var data = {};
+
+        if (obj.id == "NoteId") {
+            noteId = obj.value;
+        }
+        if (obj.id == "SellerId") {
+            sellerId = obj.value;
+        }
+        if (obj.id == "BuyerId") {
+            buyerId = obj.value;
+        }
+
+
+        if (sellerId != null) {
+            data.sellerId = sellerId;
+        }
+        if (noteId != null) {
+            data.noteId = noteId;
+        }
+        if (buyerId != null) {
+            data.buyerId = buyerId;
+        }
+
+        console.log(data);
+
+        $.ajax({
+            method: 'GET',
+            url: 'DownloadedNotes',
+            data: data,
+            success: function (data) {
+                document.write(data);
+            },
+            error: function () {
+                alert("Try Again");
+            }
+        });
+    }
+
+</script>
+

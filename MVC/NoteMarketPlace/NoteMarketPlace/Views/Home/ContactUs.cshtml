@@ -1,0 +1,97 @@
+﻿
+@model NoteMarketPlace.Models.ContactUsModal
+
+@{
+    ViewBag.Title = "ContactUs";
+    if (!User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_Nav.cshtml";
+    }
+    else
+    {
+        if (User.IsInRole("Member"))
+        {
+            Layout = "~/Views/Shared/_UserNav.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Shared/_Nav.cshtml";
+        }
+    }
+}
+
+
+<!-- Contact Us -->
+<div id="contact-us">
+
+    <div class="title">
+        <img src="~/img/banner/banner-with-overlay.jpg" alt="Search Notes" class="img-responsive">
+        <h2>Contact Us</h2>
+    </div>
+
+    <div class="content-box-lg">
+
+        <div class="contact-text">
+            <h4>Get in Touch</h4>
+            <p>Let us know how to get back to you</p>
+        </div>
+
+        @using (Html.BeginForm("ContactUs","Home",FormMethod.Post))
+        {
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">Full Name <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter your full name">*@
+                            @Html.TextBoxFor(model=> model.FullName, new {@class= "form-control", placeholder = "Enter your full name", required="required" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="email">Email Address <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="email" placeholder="Enter your email address">*@
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "email", placeholder = "Enter your email address", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="subject">Subject <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="subject" placeholder="Enter your subject">*@
+                            @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", placeholder = "Enter your subject", required = "required" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs-right">
+                            <label for="comment">Comments / Questions <span>*</span> </label>
+                            <div>
+                                @*<textarea id="comment" class="form-control" placeholder="Comments..."></textarea>*@
+                                @Html.TextAreaFor(model=> model.Comment, new { @class = "form-control", placeholder = "Comments...", required = "required" })
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="contact-submit-btn">
+                <button class="btn" type="submit">SUBMIT</button>
+            </div>
+
+
+        }
+
+    </div>
+
+
+</div>
+<!-- Contact Us Ends -->

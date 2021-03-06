@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.Title</title>
+
+    <!-- Fav icon -->
+    <link rel="shortcut icon" href="~/favicon.ico">
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="~/Content/bootstrap/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="~/Content/index.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="@(ViewBag.Title == "Home"? "home-header":"" )">
+
+        <nav class="navbar navbar-fixed-top @(ViewBag.Title == "Home"? "transparant-nav":"" ) ">
+            <div class="container-fluid">
+                <div class="site-navbar-header">
+
+                    <div class="navbar-header">
+
+                        <!-- Mobile Menu Open Button -->
+                        <span id="mobile-nav-open-btn">&#9776;</span>
+                        <span id="mobile-nav-close-btn">&times;</span>
+
+                        <a href="../Index" class="navbar-brand">
+                            <img src="~/img/logo.png" alt="logo">
+                        </a>
+                    </div>
+
+                    <div class="container">
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav pull-right">
+                                <li class="@(ViewBag.Title == "Search_Notes"? "active" : "" )"><a href="../Search_Notes">Search Notes</a></li>
+                                <li class=""><a href="../User/Sell_Note">Sell Your Notes</a></li>
+                                <li class="@(ViewBag.Title == "FAQ"? "active" : "" )"><a href="../FAQ">FAQ</a></li>
+                                <li class="@(ViewBag.Title == "ContactUs"? "active" : "" )"><a href="../ContactUs">Contact Us</a></li>
+                                <li><button class="btn nav-login-btn">Login</button></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div id="mobile-nav">
+                        <div id="mobile-nav-content">
+                            <ul class="nav">
+                                <li><a href="../Search_Notes">Search Notes</a></li>
+                                <li><a href="../User/Sell_Note">Sell Your Notes</a></li>
+                                <li><a href="../FAQ">FAQ</a></li>
+                                <li><a href="../ContactUs">Contact Us</a></li>
+                                <li><a href="../LogIn">LogIn</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <!-- Header Ends -->
+
+    @RenderBody();
+
+    <!-- Footer -->
+    <footer class="footer">
+        <hr>
+        <div class="content-box-footer">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p>Copyright &copy; TatvaSoft All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <ul class="social-list">
+                        <li><a href="@ViewBag.URLs[0].Value"> <img src="~/img/icons/facebook.png" alt="facebook"> </a></li>
+                        <li><a href="@ViewBag.URLs[1].Value"> <img src="~/img/icons/twitter.png" alt="twitter"> </a></li>
+                        <li><a href="@ViewBag.URLs[2].Value"> <img src="~/img/icons/linkedin.png" alt="linkedin"> </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- Footer Ends -->
+    <!-- JQuery -->
+    <script src="~/Scripts/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="~/Scripts/bootstrap/bootstrap.min.js"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="~/Scripts/scripts.js"></script>
+
+    <script>
+
+        $('.nav-login-btn').click(function () {
+            location.href = "../Login";
+        });
+
+    </script>
+
+</body>
+
+</html>

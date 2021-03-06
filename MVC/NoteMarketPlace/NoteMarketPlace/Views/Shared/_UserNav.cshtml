@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.Title</title>
+
+    <!-- Fav icon -->
+    <link rel="shortcut icon" href="~/favicon.ico">
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="~/Content/bootstrap/bootstrap.min.css">
+
+    <!-- DataTable CSS -->
+    <link rel="stylesheet" href="~/Content/datatables.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="~/Content/index.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="site-nav-wrapper">
+
+                    <div class="navbar-header">
+
+                        <!-- Mobile Menu Open Button -->
+                        <span id="mobile-nav-open-btn">&#9776;</span>
+                        <span id="mobile-nav-close-btn">&times;</span>
+
+                        <a href="../User/Dashboard" class="navbar-brand">
+                            <img src="~/img/logo.png" alt="logo" class="img-fluid">
+                        </a>
+                    </div>
+
+                    <div class="container">
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav pull-right">
+                                <li class="@(ViewBag.Title == "Search_Notes"? "active" : "" )"><a href="../Search_Notes">Search Notes</a></li>
+                                <li class="@(ViewBag.Title == "Sell_Note"? "active" : "" )"><a href="../User/Dashboard">Sell Your Notes</a></li>
+                                <li class="@(ViewBag.Title == "Buyer_Requests"? "active" : "" )"><a href="../User/Buyer_Requests">Buyer Requests</a></li>
+                                <li class="@(ViewBag.Title == "FAQ"? "active" : "" )"><a href="../FAQ">FAQ</a></li>
+                                <li class="@(ViewBag.Title == "ContactUs"? "active" : "" )"><a href="../ContactUs">Contact Us</a></li>
+                                <li>
+                                    <div class="dropdown">
+                                        <img id="profile-dropeddown" src="@ViewBag.UserProfile" alt="profile-img"
+                                             class="img-circle">
+                                        <div class="profile-dropdown-menu">
+                                            <a class="dropdown-item" href="../User/MyProfile">My Profile</a>
+                                            <a class="dropdown-item" href="../User/MyDownloads">My Downloads</a>
+                                            <a class="dropdown-item" href="../User/MySoldNotes">My Sold Notes</a>
+                                            <a class="dropdown-item" href="../User/MyRejectedNotes">My Rejected Notes</a>
+                                            <a class="dropdown-item" href="../User/ChangePassword">Change Password</a>
+                                            <a class="dropdown-item" href="../User/LogOut">LOGOUT</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <button class="btn nav-login-btn" onclick="LogOut()">Logout</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div id="mobile-nav">
+                        <div id="mobile-nav-content">
+                            <ul class="nav">
+                                <li><a href="../Search_Notes">Search Notes</a></li>
+                                <li><a href="../User/Dashboard">Sell Your Notes</a></li>
+                                <li><a href="../User/Buyer_Requests">Buyer Requests</a></li>
+                                <li><a href="../ContactUs">Contact Us</a></li>
+                                <li>
+                                    <div class="profile-dropeddown">
+                                        <img src="@ViewBag.UserProfile" alt="profile-img" class="collapsed img-circle profile-img" data-toggle="collapse" data-target="#profile">
+                                        <ul class="collapse" id="profile">
+                                            <li><a href="../User/MyProfile">My Profile</a></li>
+                                            <li><a href="../User/MyDownloads">My Downloads</a></li>
+                                            <li><a href="../User/MySoldNotes">My Sold Notes</a></li>
+                                            <li><a href="../User/MyRejectedNotes">My Rejected Notes</a></li>
+                                            <li><a href="../User/ChangePassword">Change Password</a></li>
+                                            <li><a href="../User/LogOut">Logout</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Header Ends -->
+
+    @RenderBody();
+
+    <!-- Footer -->
+    <footer class="footer">
+        <hr>
+        <div class="content-box-footer">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p>Copyright &copy; TatvaSoft All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <ul class="social-list">
+                        <li><a href="@ViewBag.URLs[0].Value"> <img src="~/img/icons/facebook.png" alt="facebook"> </a></li>
+                        <li><a href="@ViewBag.URLs[1].Value"> <img src="~/img/icons/twitter.png" alt="twitter"> </a></li>
+                        <li><a href="@ViewBag.URLs[2].Value"> <img src="~/img/icons/linkedin.png" alt="linkedin"> </a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- Footer Ends -->
+
+
+
+    <!-- JQuery -->
+    <script src="~/Scripts/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="~/Scripts/bootstrap/bootstrap.min.js"></script>
+
+    <!-- DataTable Js -->
+    <script src="~/Scripts/datatables.min.js"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="~/Scripts/scripts.js"></script>
+
+    <script>
+
+        function LogOut() {
+            location.href = "../User/LogOut";
+        }
+
+    </script>
+
+</body>
+
+</html>

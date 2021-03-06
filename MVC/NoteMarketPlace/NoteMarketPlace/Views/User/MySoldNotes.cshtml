@@ -1,0 +1,118 @@
+﻿
+
+@model List<NoteMarketPlace.Models.MySoldNotesModel>
+
+@{
+    ViewBag.Title = "MySoldNotes";
+    Layout = "~/Views/Shared/_UserNav.cshtml";
+}
+
+
+ <!-- Sold Notes -->
+    <div id="sold-notes">
+
+        <div class="dashboard-progress-notes">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <h4>Sold Notes</h4>
+                </div>
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <div class="proress-note-search">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <div class="search">
+                                    <img src="~/img/icons/search-icon.png" alt="search">
+                                    <input type="search" class="form-control" id="mysoldnote_search_input" placeholder="Search">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <button class="btn btn-search" id="mysoldnote_search">SEARCH</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive dashboard-table">
+
+            <table class="table" id="mysoldnote_table">
+
+                <thead>
+                    <tr>
+                        <th scope="col">SR NO.</th>
+                        <th scope="col">NOTE TITLE</th>
+                        <th scope="col">CATEGORY</th>
+                        <th scope="col">BUYER</th>
+                        <th scope="col">SELL TYPE</th>
+                        <th scope="col">PRICE</th>
+                        <th scope="col">DOWNLOADED DATE/TIME</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+
+                        if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="8" style="text-align:center">No Data Available</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            int count = 0;
+                            foreach (var data in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <td scope="row">@count</td>
+                                    <td onclick="myFunc(@data.NoteId)">@data.Title</td>
+                                    <td>@data.Category</td>
+                                    <td>@data.Buyer</td>
+                                    <td>@data.SellType</td>
+                                    <td>$@data.Price</td>
+                                    <td>@data.DownloadDate.ToString("dd MMMM, yyyy HH:mm:ss")</td>
+                                    <td>
+                                        <div class="table-actions-view">
+                                            <img src="~/img/icons/eye.png" alt="view" id="view" onclick="myFunc(@data.NoteId)">
+                                            <div class="dropdown">
+                                                <img id="more-dropeddown" src="~/img/icons/dots.png" alt="more"
+                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                                    <a class="dropdown-item" onclick="Download(@data.Id)">Download Note</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            }
+
+                        }
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+    <!-- Sold Notes Ends -->
+
+
+<script>
+
+    function myFunc(id) {
+        location.href = "../Note_Details/" + id; 
+    }
+
+    function Download(id) {
+        location.href = "DownloadNote?purchaseId=" + id;
+    }
+
+</script>

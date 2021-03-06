@@ -1,0 +1,263 @@
+﻿
+@{
+    ViewBag.Title = "Sell_Note";
+    Layout = "~/Views/Shared/_UserNav.cshtml";
+}
+
+@model NoteMarketPlace.Models.AddNoteModel
+
+
+<!-- Add Notes -->
+<div id="add-notes">
+
+
+    <div class="title">
+        <img src="~/img/banner/banner-with-overlay.jpg" alt="Search Notes" class="img-responsive">
+        <h2>Add Notes</h2>
+    </div>
+
+
+    <div class="content-box-lg">
+
+        @using (Html.BeginForm(FormMethod.Post))
+        {
+
+            @Html.AntiForgeryToken()
+
+            <div class="text-1">
+                <h4>Basic Note Details</h4>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="Title" class="label-1">Title <span>*</span> </label>
+                            <!--<input type="text" class="form-control">-->
+                            @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "Enter your notes title", required = "required" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label class="label-1">Display Picture</label>
+                            <div class="input-upload">
+                                <!--<input type="file" class="form-control image-opacity-0" id="image">-->
+                                @Html.TextBoxFor(model => model.DisplayPicture, new { @class = "form-control image-opacity-0", type = "file", accept = "image/jpeg, image/jpg, image/png" })
+                                <div class="upload-img" id="upload_dp_click">
+                                    <img src="~/img/icons/upload-file.png" alt="upload">
+                                    <p>Upload a picture</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label class="label-1">Type*</label>
+                            <!--<select class="form-control">
+                                    <option>Select your Note Type</option>
+                                </select>-->
+                            @Html.DropDownListFor(model => model.Type, new SelectList(ViewBag.TypeList, dataValueField: "Type_Id", dataTextField: "Type_Name"), "Select your Note Type", new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label class="label-1">Category <span>*</span> </label>
+                            <!--<select class="form-control">
+                                    <option>Select Your Categoty</option>
+                                </select>-->
+                            @Html.DropDownListFor(model => model.Category, new SelectList(ViewBag.CategotyList, "Category_Id", "Category_Name"), "Select Your Categoty", new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label class="label-1">Upload Notes <span>*</span> </label>
+                            <div class="input-upload">
+                                <!--<input type="file" class="form-control image-opacity-0" id="image">-->
+                                @Html.TextBoxFor(model => model.UploadNotes, new { @class = "form-control image-opacity-0", type = "file", accept = "application/pdf", required = "required" })
+                                <div class="upload-img" id="upload_note_click">
+                                    <img src="~/img/icons/upload-note.png" alt="upload">
+                                    <p>Upload your notes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label class="label-1">Number of Pages</label>
+                            <!--<input type="text" class="form-control" placeholder="Enter number of pages">-->
+                            @Html.TextBoxFor(model => model.Pages, new { @class = "form-control", placeholder = "Enter number of pages" })
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+
+                    <div class="form-group">
+                        <div class="contact-inputs-right">
+                            <label class="label-1">Description <span>*</span> </label>
+                            <div>
+                                <!--<textarea id="comment" class="form-control" placeholder="Comments..."></textarea>-->
+                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Enter your description", required = "required" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="text-01">
+                <h4>Institution Information</h4>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label class="label-1">Country</label>
+                            <!--<select class="form-control">
+                                    <option>Select your country</option>
+                                </select>-->
+                            @Html.DropDownListFor(model => model.Country, new SelectList(ViewBag.CountryList, "Country_Id", "Country_Name"), "Select your country", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label class="label-1">Institution Name</label>
+                            <!--<input type="text" class="form-control" placeholder="Enter your institution name">-->
+                            @Html.TextBoxFor(model => model.Institute, new { @class = "form-control", placeholder = "Enter your institution name" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="text-01">
+                <h4>Course Details</h4>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label class="label-1">Course Name</label>
+                            <!--<input type="text" class="form-control" placeholder="Enter your course name">-->
+                            @Html.TextBoxFor(model => model.Course, new { @class = "form-control", placeholder = "Enter your course name" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label class="label-1">Course Code</label>
+                            <!--<input type="text" class="form-control" placeholder="Enter your course code">-->
+                            @Html.TextBoxFor(model => model.CourseCode, new { @class = "form-control", placeholder = "Enter your course code" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label class="label-1">Professor / Lecturer</label>
+                            <!--<input type="text" class="form-control" placeholder="Enter your professor name">-->
+                            @Html.TextBoxFor(model => model.Professor, new { @class = "form-control", placeholder = "Enter your professor name" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-01">
+                <h4>Selling Information</h4>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label class="radio1">
+                                <!--<input type="radio" checked="checked" name="radio" value="free">-->
+                                @Html.RadioButtonFor(model => model.SellType, "Free", new { @checked = "checked" })
+                                <span class="checkmark"></span>
+                                <label class="label-2">Free</label>
+                            </label>
+                            <label class="radio1">
+                                <!--<input type="radio" name="radio" value="paid">-->
+                                @Html.RadioButtonFor(model => model.SellType, "Paid")
+                                <span class="checkmark"></span>
+                                <label class="label-2">Paid</label>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="contact-inputs paid-price">
+                            <label class="label-1">Sell Price <span>*</span> </label>
+                            <!--<input type="text" class="form-control" placeholder="Enter your price">-->
+                            @Html.TextBoxFor(model => model.Price, new { @class = "form-control", placeholder = "Enter your price", required = "required" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="subject" class="label-1">Note Preview</label>
+                            <div class="input-upload">
+                                <!--<input type="file" class="form-control image-opacity-0" id="image">-->
+                                @Html.TextBoxFor(model => model.NotePreview, new { @class = "form-control image-opacity-0", type = "file", accept = "application/pdf" })
+                                <div class="upload-img" id="upload_preview_click">
+                                    <img src="~/img/icons/upload-file.png" alt="upload">
+                                    <p>Upload a file</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="contact-submit-btn">
+                <button class="btn" formaction="@(ViewBag.Edit == true ? "Save?id=" + Model.ID : "Save")">SAVE</button>
+                <button class="btn" formaction="@(ViewBag.Edit == true ? "Publish?id=" + Model.ID : "Publish")" >PUBLISH</button>
+            </div>
+
+        }
+
+    </div>
+
+</div>

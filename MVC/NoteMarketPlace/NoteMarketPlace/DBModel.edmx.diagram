@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="820bbef555fc4e6a99acd7780b61ecdc" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Category_Details" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Country_Details" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Note_Details" Width="1.5" PointX="7.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.NotesAttachment" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Purchase_Details" Width="1.5" PointX="12.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Review_Details" Width="1.5" PointX="15" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Spam_Notes" Width="1.5" PointX="18" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Status" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.System_Config" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Type_Details" Width="1.5" PointX="5.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User_Details" Width="1.5" PointX="10.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User_Roles" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Category_Details_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Category_Details_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Note_Details_Category_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Country_Details_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Country_Details_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Note_Details_Country_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Note_Details_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Note_Details_Type_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Note_Details_User_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_NotesAttachments_Note_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Purchase_Details_Note_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Review_Details_Note_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Spam_Notes_Note_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_NotesAttachments_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Purchase_Details_User_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Purchase_Details_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Purchase_Details_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Review_Details_Purchase_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Spam_Notes_Purchase_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Review_Details_User_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Spam_Notes_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Spam_Notes_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_User_Details_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Type_Details_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Type_Details_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_User_Details_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Users_User_Roles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

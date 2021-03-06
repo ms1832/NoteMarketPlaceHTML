@@ -1,0 +1,148 @@
+﻿
+@model NoteMarketPlace.Models.SignUpModel
+
+@{ 
+    var display = "none";
+    if (TempData["HasEmail"] != null )
+    {
+        display = "block";
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
+
+    <!-- Fav icon -->
+    <link rel="shortcut icon" href="~/favicon.ico">
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="~/Content/bootstrap/bootstrap.min.css">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="~/Content/signup.css">
+
+</head>
+
+<body>
+
+    <div id="signup">
+
+        <div class="overlay"></div>
+
+        <div class="main-content">
+
+            <div class="logo">
+                <div class="logo">
+                    <img src="img/top-logo.png" alt="Logo" class="img-fluid">
+                </div>
+            </div>
+
+
+            <div class="content">
+
+                @using (Html.BeginForm("SignUp", "SignUp", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+
+                    <h2>Create an Account</h2>
+                    <p>Enter your details to signup</p>
+
+                    <div class="success">
+                        <p> @TempData["Message"] </p>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="elements">
+                            <span>First Name*</span>
+                            <!--<input type="text" class="form-control" placeholder="Enter your First Name" id="firstname" name="Firstname" required>-->
+                            @Html.TextBoxFor(model => model.Firstname, new { @class = "form-control", placeholder = "Enter your First Name", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="elements">
+                            <span>Last Name*</span>
+                            <!--<input type="text" class="form-control" placeholder="Enter your Last Name" id="lastname" name="Lastname" required>-->
+                            @Html.TextBoxFor(model => model.Lastname, new { @class = "form-control", placeholder = "Enter your Last Name", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="elements">
+                            <span>Email*</span>
+                            <!--<input type="email" class="form-control" placeholder="Enter your Email address" id="email" name="Email" required>-->
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "email", placeholder = "Enter your Email Address", required = "required" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Email, "*Email Already Registered", new { @class = "text-danger", style = "display: "+ display })
+                    </div>
+
+                    <div class="form-group">
+                        <div class="elements">
+                            <span>Password*</span>
+                            <!--<input type="password" class="form-control" placeholder="Enter your Password" id="password" name="Password" required>-->
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type = "password", placeholder = "Enter your Password", required = "required" })
+                            <img src="~/img/icons/eye.png" class="toggle-password" toggle="#Password">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="elements">
+                            <span>Confirm Password*</span>
+                            <!--<input type="password" class="form-control" placeholder="Enter your Confirm Password"
+                            id="conf-password" name="ConfPassword" required="required">-->
+                            @Html.TextBoxFor(model => model.ConfPassword, new { @class = "form-control", type = "password", placeholder = "Enter your Confirm Password", required = "required" })
+                            <img src="~/img/icons/eye.png" class="toggle-password" toggle="#ConfPassword">
+
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ConfPassword, "*Does not match with Password", new { @class = "text-danger", id = "validation-msg-pass", style = "display: none;" })
+                    </div>
+
+                    <div id="submit-btn">
+                        <button type="submit" class="btn btn-signup">SIGN UP</button>
+                    </div>
+
+                    <div class="text-login">
+                        <p>Already have an account? <a href="LogIn">Login</a> </p>
+                    </div>
+
+                }
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JQuery -->
+    <script src="~/Scripts/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="~/Scripts/bootstrap/bootstrap.min.js"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="~/Scripts/scripts.js"></script>
+
+    <script>
+
+        $('#ConfPassword').keyup(function () {
+            if ($(this).val() != $('#Password').val()) {
+                $('#validation-msg-pass').css('display', 'block');
+                $('.btn-signup').prop('disabled', true);
+            } else {
+                $('#validation-msg-pass').css('display', 'none');
+                $('.btn-signup').prop('disabled', false);
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

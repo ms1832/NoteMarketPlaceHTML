@@ -1,0 +1,303 @@
+﻿
+@{
+    ViewBag.Title = "Search_Notes";
+    if (!User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_Nav.cshtml";
+    }
+    else
+    {
+        if (User.IsInRole("Member"))
+        {
+            Layout = "~/Views/Shared/_UserNav.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Shared/_Nav.cshtml";
+        }
+    }
+
+}
+
+@model  List<NoteMarketPlace.Models.Search_Notes_Model>
+
+<style type="text/css">
+
+    .search-result {
+        padding: 0 60px 100px 60px;
+    }
+
+    .paging {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .pagination {
+        display: flex;
+    }
+
+    .page_num {
+        margin-top: 6px;
+    }
+
+        .page_num a {
+            color: #000000;
+            font-size: 16px;
+            margin: 0 15px;
+            padding-left: 0;
+            padding-right: 0;
+            text-decoration: none;
+        }
+
+            .page_num a.active {
+                color: #fff;
+                background-color: #6255a5;
+                padding: 5px 10px;
+                border-radius: 50%;
+            }
+
+    @@media (max-width: 480px) {
+
+        .page_num a {
+            font-size: 14px;
+            margin: 0 10px;
+        }
+
+        .search-result {
+            padding: 0 20px 100px 20px;
+        }
+
+    }
+</style>
+
+
+<div id="search-note">
+
+    <div class="title">
+        <img src="~/img/banner/banner-with-overlay.jpg" alt="Search Notes" class="img-fluid">
+        <h2>Search Notes</h2>
+    </div>
+
+    <!-- Filters -->
+    <div class="content-box-lg">
+
+        <div class="search-filters">
+            <h2>Search and Filter Notes</h2>
+            <div class="filter-inputs">
+                <div class="filter-search">
+                    <img src="~/img/icons/search-icon.png" alt="search">
+                    <input type="search" id="Search" class="form-control filters" placeholder="Search notes here...">
+                </div>
+                <div class="filters-other">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2 col-xs-6">
+                            @Html.DropDownList("Type", new SelectList(ViewBag.TypeList, "Type_Id", "Type_Name"), "Select Type", new { @class = "filters-02", onchange = "myFunc(this)" })
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6">
+                            @Html.DropDownList("Category", new SelectList(ViewBag.CategoryList, "Category_Id", "Category_Name"), "Select Category", new { @class = "filters-02", onchange = "myFunc(this)" })
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6">
+                            @Html.DropDownList("University", new SelectList(ViewBag.University), "Select University", new { @class = "filters-02", onchange = "myFunc(this)" })
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6">
+                            @Html.DropDownList("Course", new SelectList(ViewBag.Course), "Select Course", new { @class = "filters-02", onchange = "myFunc(this)" })
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6">
+                            @Html.DropDownList("Country", new SelectList(ViewBag.Country, "Country_Id", "Country_Name"), "Select Country", new { @class = "filters-02", onchange = "myFunc(this)" })
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6">
+                            <select class="filters-02" id="Rating" onchange="myFunc(this)">
+                                <option value="">Select rating</option>
+                                <option value="1">1 +</option>
+                                <option value="2">2 +</option>
+                                <option value="3">3 +</option>
+                                <option value="4">4 +</option>
+                                <option value="5">5 +</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Filters Ends -->
+
+
+    <!-- Notes -->
+    <div class="search-result">
+
+        <h2>Total <span>@Model.Count</span> notes </h2>
+
+        <div class="row">
+
+            @{
+                foreach (var Note in Model)
+                {
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+
+                        <div class="notes">
+                            @*<img src="~/img/search-notes/1.jpg" alt="note image" class="note-img">*@
+                            <img src="@Note.Image" alt="note image" class="note-img">
+
+                            <div class="details">
+                                <h4 id="noteTitle" style="cursor:pointer;" noteId="@Note.Id">@Note.Title</h4>
+                                <p><img src="~/img/icons/university.png">@Note.University</p>
+                                <p><img src="~/img/icons/pages.png">@Note.Pages Pages</p>
+                                <p><img src="~/img/icons/date.png">@Note.PublishDate.GetValueOrDefault().ToString("ddd, MMM dd yyyy")</p>
+                                <p><img src="~/img/icons/flag.png">@(Note.TotalSpams) Users marked this note as inappropriate</p>
+
+                                <div class="ratings">
+                                    <div class="rate">
+
+                                        @{
+
+                                            for (int j = 5; j > 0; j--)
+                                            {
+                                                if (j == Note.Rating)
+                                                {
+                                                    <input type="radio" name="bookrate @Note.Id" value="@j" checked /><label></label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="bookrate @Note.Id" value="@j" /><label></label>
+                                                }
+
+                                            }
+
+                                        }
+
+                                    </div>
+
+                                    <p>@(Note.TotalRating) reviews</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                }
+            }
+
+        </div>
+
+
+        <!-- Pagination -->
+        <div class="paging">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link previousPage" href="#" aria-label="Previous">
+                        <span aria-hidden="true"> <img src="~/img/icons/left-arrow.png" alt="previous"> </span>
+                    </a>
+                </li>
+                <div class="page_num"></div>
+                <li class="page-item">
+                    <a class="page-link nextPage" href="#" aria-label="Next">
+                        <span aria-hidden="true"> <img src="~/img/icons/right-arrow.png" alt="next"> </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+    <!-- Notes Ends -->
+</div>
+
+
+<script src="~/Scripts/jquery.min.js"></script>
+
+<script src="~/Scripts/paginga.jquery.min.js"></script>
+
+<script>
+
+    var type, category, university, course, country, rating;
+
+    function myFunc(obj) {
+
+        var data = {};
+
+        if (obj.id == "Type") {
+            type = obj.value;
+        }
+        if (obj.id == "Category") {
+            category = obj.value;
+        }
+        if (obj.id == "University") {
+            university = obj.value;
+        }
+        if (obj.id == "Course") {
+            course = obj.value;
+        }
+        if (obj.id == "Country") {
+            country = obj.value;
+        }
+        if (obj.id == "Rating") {
+            rating = obj.value;
+        }
+
+
+        if (type != null) {
+            data.Type = type;
+        }
+        if (category != null) {
+            data.Category = category;
+        }
+        if (university != null) {
+            data.University = university;
+        }
+        if (course != null) {
+            data.Course = course;
+        }
+        if (country != null) {
+            data.Country = country;
+        }
+        if (rating != null) {
+            data.Rating = rating;
+        }
+
+        console.log(data);
+
+        $.ajax({
+            method: 'GET',
+            url: 'Search_Notes',
+            data: data,
+            success: function (data) {
+                //document.body.innerHTML = data;
+                document.write(data);
+            },
+            error: function () {
+                alert("Try Again");
+            }
+        });
+    }
+
+    $('#Search').on('keypress', function (e) {
+        if (e.which == 13) {
+            location.href = "Search_Notes?search=" + $(this).val();
+        }
+    });
+
+
+    // pagination (6 items per page)
+    $('.search-result').paginga({
+        itemsPerPage: 6,
+        itemsContainer: ".row",
+        item: "> div",
+        pager: ".paging",
+        nextPage: ".nextPage",
+        previousPage: ".previousPage",
+        pageNumbers: ".page_num"
+    });
+
+
+    $('.details>h4').click(function () {
+        location.href = "Note_Details/" + $(this).attr('noteId');
+    });
+
+</script>
