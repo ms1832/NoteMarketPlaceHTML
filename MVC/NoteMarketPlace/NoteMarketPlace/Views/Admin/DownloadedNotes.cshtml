@@ -174,7 +174,7 @@
             url: 'DownloadedNotes',
             data: data,
             success: function (data) {
-                document.write(data);
+                document.body.innerHTML = data;
             },
             error: function () {
                 alert("Try Again");

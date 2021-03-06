@@ -124,7 +124,7 @@
             url: 'PublishedNotes',
             data: { sellerId: obj.value },
             success: function (data) {
-                document.write(data);
+                document.body.innerHTML = data;
             },
             error: function () {
                 alert("Try Again");
