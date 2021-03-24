@@ -1334,6 +1334,7 @@ label {
 
 table {
     border: 1px solid #d1d1d1;
+    border-radius: 3px;
 }
 
 .dashboard-table {
@@ -2068,10 +2069,10 @@ table {
     border: 1px solid #d1d1d1;
 }
 
-    #add-notes .contact-inputs .image-opacity-0 {
-        height: 100px;
-        opacity: 0;
-    }
+#add-notes .contact-inputs .image-opacity-0 {
+    height: 100px;
+    opacity: 0;
+}
 
 #add-notes .contact-inputs .input-upload {
     position: relative;

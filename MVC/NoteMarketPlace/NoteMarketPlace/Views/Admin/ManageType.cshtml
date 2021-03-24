@@ -1,34 +1,34 @@
 ﻿
 @{
+    ViewBag.Title = "ManageType";
     Layout = "~/Views/Shared/_AdminNav.cshtml";
 }
 
-@model List<NoteMarketPlace.Models.AdminModel.ManageAdminModel>
+@model List<NoteMarketPlace.Models.AdminModel.ManageType>
 
 
-
-<div id="manage-admin">
+<div id="manage-type">
     <div class="content-box-lg">
 
         <div class="contact-text">
-            <h4>Manage Administrator</h4>
+            <h4>Manage Type</h4>
         </div>
 
         <div class="table-heading">
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <button class="btn btn-add" onclick="location.href='AddAdmin'">ADD ADMINISTRATOR</button>
+                    <button class="btn btn-add" onclick="location.href='AddType'">ADD Type</button>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="row">
                         <div class="col-md-9 col-sm-8 col-xs-8">
                             <div class="search">
                                 <img src="~/img/icons/search-icon.png">
-                                <input type="search" placeholder="search" class="form-control" id="manageadmin-search-input">
+                                <input type="search" placeholder="search" class="form-control" id="managetype-search-input">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-4 col-xs-4">
-                            <button class="btn btn-search" id="manageadmin-search-click">SEARCH</button>
+                            <button class="btn btn-search" id="managetype-search-click">SEARCH</button>
                         </div>
                     </div>
                 </div>
@@ -37,16 +37,15 @@
 
         <div class="table-responsive dashboard-table">
 
-            <table class="table" id="manageadmin-table">
+            <table class="table" id="managetype-table">
 
                 <thead>
                     <tr>
                         <th scope="col">SR NO.</th>
-                        <th scope="col">FIRST NAME</th>
-                        <th scope="col">LAST NAME</th>
-                        <th scope="col">EMAIL</th>
-                        <th scope="col">PHONE NO.</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">DESCRIPTION</th>
                         <th scope="col">DATE ADDED</th>
+                        <th scope="col">ADDED BY</th>
                         <th scope="col">ACTIVE</th>
                         <th scope="col">ACTION</th>
                     </tr>
@@ -57,7 +56,7 @@
                         if (Model.Count == 0)
                         {
                             <tr>
-                                <td colspan="8" style="text-align:center;">No record found</td>
+                                <td colspan="7" style="text-align:center;">No record found</td>
                             </tr>
                         }
                         else
@@ -68,16 +67,15 @@
                                 count++;
                                 <tr>
                                     <td scope="row">@count</td>
-                                    <td>@data.FirstName</td>
-                                    <td>@data.LastName</td>
-                                    <td>@data.Email</td>
-                                    <td>@data.Phone</td>
-                                    <td>@data.DateAdded.ToString("dd-MM-yyyy, HH:mm")</td>
-                                    <td>yes</td>
+                                    <td>@data.Name</td>
+                                    <td>@data.Desctiption</td>
+                                    <td>@data.AddedDate.ToString("dd-MM-yyyy, HH:mm")</td>
+                                    <td>@data.AddedBy</td>
+                                    <td>@data.Active</td>
                                     <td>
                                         <div class="table-actions-edit">
-                                            <img src="~/img/icons/edit.png" alt="edit" onclick="Edit('@data.Id')">
-                                            <img src="~/img/icons/delete.png" alt="delete" onclick="Delete('@data.Id')">
+                                            <img src="~/img/icons/edit.png" alt="edit" onclick="Edit(@data.Id)">
+                                            <img src="~/img/icons/delete.png" alt="delete" onclick="Delete(@data.Id)">
                                         </div>
                                     </td>
                                 </tr>
@@ -88,10 +86,10 @@
 
                     }
 
-
                 </tbody>
             </table>
         </div>
+
 
     </div>
 </div>
@@ -99,14 +97,15 @@
 <script>
 
     function Edit(id) {
-        location.href = "AddAdmin?edit=" + id;
+        location.href = "AddType?edit=" + id;
     }
 
     function Delete(id) {
+        //location.href = "DeleteSystemConfigItem?id=" + id + "&item=Type";
         $.ajax({
             method: 'POST',
-            url: 'DeleteAdmin',
-            data: { id : id },
+            url: 'DeleteSystemConfigItem',
+            data: { id: id, item: 'Type' },
             success: function () {
                 location.reload();
             },
@@ -115,5 +114,6 @@
             }
         });
     }
+
 
 </script>

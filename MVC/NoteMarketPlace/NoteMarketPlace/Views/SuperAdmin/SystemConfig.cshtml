@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "SystemConfig";
+    Layout = "~/Views/Shared/_AdminNav.cshtml";
+}
+
+@model NoteMarketPlace.Models.AdminModel.SystemConfig
+
+
+<div id="manage-system-config">
+    <div class="content-box-lg">
+
+        <div class="contact-text">
+            <h4>Manage System Configuration</h4>
+        </div>
+
+        @using (Html.BeginForm("SystemConfig","SuperAdmin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken();
+
+            <div class="row">
+
+                <div class="col-md-7">
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">Support Email Address <span>*</span> </label>
+                            @*<input type="email" class="form-control" id="fullname" placeholder="Enter email address">*@
+                            @Html.TextBoxFor(model => model.SupportEmail, new { @class = "form-control", placeholder = "Enter email address", type = "email" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.SupportEmail, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">Support phone number <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter phone number">*@
+                            @Html.TextBoxFor(model => model.Contact, new { @class = "form-control", placeholder = "Enter phone number", type = "number" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">Email address(es) (for various events system will send notification to these users)</label>
+                            @*<input type="email" class="form-control" id="fullname" placeholder="Enter email address">*@
+                            @Html.TextBoxFor(model => model.Emails, new { @class = "form-control", placeholder = "Enter email address", type = "email" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">Facebook URL</label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter facebook url">*@
+                            @Html.TextBoxFor(model => model.FacebookUrl, new { @class = "form-control", placeholder = "Enter facebook url" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">Twitter URL</label>
+                            @*<input type="email" class="form-control" id="fullname" placeholder="Enter twitter url">*@
+                            @Html.TextBoxFor(model => model.TwitterUrl, new { @class = "form-control", placeholder = "Enter twitter url" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="fullname">Linkedin URL</label>
+                            @*<input type="email" class="form-control" id="fullname" placeholder="Enter linkedin url">*@
+                            @Html.TextBoxFor(model => model.LinkedinUrl, new { @class = "form-control", placeholder = "Enter linkedin url" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="subject">Default image for notes (if seller do not upload) <span>*</span> </label>
+                            <div class="input-upload">
+                                @*<input type="file" class="form-control" id="image">*@
+                                @Html.TextBoxFor(model => model.DefaultNoteImg, new { @class = "form-control", type = "file", accept = "image/*" })
+                                <div class="upload-img" id="upload_def_note_click">
+                                    <img src="~/img/icons/upload-file.png" alt="upload">
+                                    <p>Upload a picture</p>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.DefaultNoteImg, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs">
+                            <label for="subject">Default profile picture (if seller do not upload) <span>*</span> </label>
+                            <div class="input-upload">
+                                @*<input type="file" class="form-control" id="image">*@
+                                @Html.TextBoxFor(model => model.DefaulDpImg, new { @class = "form-control", type = "file", accept = "image/*" })
+                                <div class="upload-img" id="upload_def_profile_click">
+                                    <img src="~/img/icons/upload-file.png" alt="upload">
+                                    <p>Upload a picture</p>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.DefaulDpImg, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="contact-submit-btn">
+                        <button class="btn" type="submit">SUBMIT</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+
+
+    </div>
+</div>
+
+
+

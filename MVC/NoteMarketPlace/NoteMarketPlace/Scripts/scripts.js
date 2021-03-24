@@ -18,14 +18,6 @@ $('.elements #forgot-pwd').click(function () {
 });
 
 
-// show date picker in profile
-$(function () {
-    $("#DOB").click(function () {
-        $(this).datepicker();
-        $(this).datepicker('show');
-  });
-});
-
 
 
 // header

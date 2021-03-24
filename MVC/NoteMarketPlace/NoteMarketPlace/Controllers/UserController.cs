@@ -76,7 +76,7 @@ namespace NoteMarketPlace.Controllers
 
                 // total notes sold
                 var SoldNotes = (from Purchase in _Context.Purchase_Details
-                                where Purchase.Seller == currentUser.UserId
+                                where Purchase.Seller == currentUser.UserId && Purchase.Allow_Download == true
                                 group Purchase by Purchase.Seller into grp
                                 select grp.Count()).ToList();
                 ViewBag.SoldNotes = SoldNotes.Count() == 0 ? 0 : SoldNotes[0];
@@ -84,7 +84,7 @@ namespace NoteMarketPlace.Controllers
 
                 // My download notes
                 var DownloadedNotes = (from Purchase in _Context.Purchase_Details
-                                       where Purchase.Downloader == currentUser.UserId
+                                       where Purchase.Downloader == currentUser.UserId && Purchase.Allow_Download == true
                                        group Purchase by Purchase.Downloader into grp
                                        select grp.Count()).ToList();
                 ViewBag.DownloadNotes = DownloadedNotes.Count() == 0 ? 0 : DownloadedNotes[0];
@@ -159,9 +159,9 @@ namespace NoteMarketPlace.Controllers
             using (var _Context = new ApplicationContext())
             {
                 // get all types
-                var type = _Context.Type_Details.Where(m => m.IsActive == true).ToList();
+                var type = _Context.Type_Details.ToList();
                 // get all category
-                var category = _Context.Category_Details.Where(m => m.IsActive == true).ToList();
+                var category = _Context.Category_Details.ToList();
                 // get distinct university
                 var university = _Context.Note_Details.Where(m => m.University != null).Select(x => x.University).Distinct().ToList();
                 // get distinct courses
@@ -268,7 +268,7 @@ namespace NoteMarketPlace.Controllers
                              join Category in _Context.Category_Details on Notes.Category_Id equals Category.Category_Id
                              let Country = _Context.Country_Details.FirstOrDefault(m => m.Country_Id == Notes.Country_Id)
                              join Users in _Context.Users on Notes.User_Id equals Users.UserId
-                             where Notes.Id == id && (Notes.Status == 4 || Notes.Status == 6)
+                             where Notes.Id == id && (Notes.Status == 4 || Notes.Status == 5 || Notes.Status == 6 || Notes.Status == 7)
                              select new NoteDetailsModel
                              {
                                  Id = Notes.Id,
@@ -288,6 +288,11 @@ namespace NoteMarketPlace.Controllers
                                  Seller = Users.First_Name + " " + Users.Last_Name,
                                  Status = Notes.Status
                              }).ToList();
+
+                for(int i=0; i<notes.Count; i++)
+                {
+                    notes[i].ApproveDate = notes[i].ApprovedDate.HasValue ? notes[i].ApprovedDate.GetValueOrDefault().ToString("MMMM dd yyyy") : "N/A";
+                }
 
 
                 // average ratings
@@ -345,6 +350,7 @@ namespace NoteMarketPlace.Controllers
         }
 
 
+
         // make purchase to note
         [Route("Note_Details/Purchase")]
         public ActionResult Purchase_Note(string noteId)
@@ -360,65 +366,66 @@ namespace NoteMarketPlace.Controllers
 
                 if (note != null && !user.Equals(null))
                 {
-                    var create = _Context.Purchase_Details;
+                        var create = _Context.Purchase_Details;
 
-                    if(note.Price == 0)
-                    {
-                        create.Add(new Purchase_Details
+                        if (note.Price == 0)
                         {
-                            Downloader = user.UserId,
-                            Note_Id = noteid,
-                            Seller = note.User_Id,
-                            PurchasedPrice = note.Price,
-                            Purchase_Date = DateTime.Now,
-                            Allow_Download = true,
-                            IsAttachment_Downloaded = true,
-                            AttachmentDownload_Date = DateTime.Now
-                        });
+                            create.Add(new Purchase_Details
+                            {
+                                Downloader = user.UserId,
+                                Note_Id = noteid,
+                                Seller = note.User_Id,
+                                PurchasedPrice = note.Price,
+                                Purchase_Date = DateTime.Now,
+                                Allow_Download = true,
+                                IsAttachment_Downloaded = true,
+                                AttachmentDownload_Date = DateTime.Now
+                            });
 
-                        _Context.SaveChanges();
+                            _Context.SaveChanges();
 
-                        var attachment = _Context.NotesAttachments.FirstOrDefault(m => m.NoteId == noteid);
+                            var attachment = _Context.NotesAttachments.FirstOrDefault(m => m.NoteId == noteid);
 
-                        // download file direct
-                        string filePath = Server.MapPath("../Members/"+note.User_Id.ToString()+"/"+noteid.ToString()+"/Attachment/"+attachment.FileName);
-                        byte[] filebyte = GetFile(filePath);
+                            // download file direct
+                            string filePath = Server.MapPath("../Members/" + note.User_Id.ToString() + "/" + noteid.ToString() + "/Attachment/" + attachment.FileName);
+                            byte[] filebyte = GetFile(filePath);
 
-                        return File(filebyte, System.Net.Mime.MediaTypeNames.Application.Octet, attachment.FileName );
-                    }
-                    else
-                    {
-                        // send download request to seller
-                        create.Add(new Purchase_Details
+                            return File(filebyte, System.Net.Mime.MediaTypeNames.Application.Octet, attachment.FileName);
+                        }
+                        else
                         {
-                            Downloader = user.UserId,
-                            Note_Id = noteid,
-                            Seller = note.User_Id,
-                            PurchasedPrice = note.Price,
-                            Purchase_Date = DateTime.Now
-                        });
-                        _Context.SaveChanges();
+                            // send download request to seller
+                            create.Add(new Purchase_Details
+                            {
+                                Downloader = user.UserId,
+                                Note_Id = noteid,
+                                Seller = note.User_Id,
+                                PurchasedPrice = note.Price,
+                                Purchase_Date = DateTime.Now
+                            });
+                            _Context.SaveChanges();
 
-                        // seller email
-                        var seller = _Context.Users.FirstOrDefault(m => m.UserId == note.User_Id);
+                            // seller email
+                            var seller = _Context.Users.FirstOrDefault(m => m.UserId == note.User_Id);
 
-                        // send mail to seller
-                        string subject = user.First_Name + " wants to purchase your notes";
-                        string body = "Hello " + seller.First_Name + "\\n"
-                            + "We would like to inform you that, " + user.First_Name + " wants to purchase your notes. Please see Buyer Requests tab and allow download access to Buyer if you have received the payment from him";
-                        body += "\\nRegards,\\nNotes MarketPlace";
+                            // send mail to seller
+                            string subject = user.First_Name + " wants to purchase your notes";
+                            string body = "Hello " + seller.First_Name + "\\n"
+                                + "We would like to inform you that, " + user.First_Name + " wants to purchase your notes. Please see Buyer Requests tab and allow download access to Buyer if you have received the payment from him";
+                            body += "\\nRegards,\\nNotes MarketPlace";
 
-                        bool isSend = SendEmail.EmailSend(seller.Email,subject,body,false); 
+                            bool isSend = SendEmail.EmailSend(seller.Email, subject, body, false);
 
 
-                        TempData["UserName"] = user.First_Name;
+                            TempData["UserName"] = user.First_Name;
 
-                        // show modal
-                        TempData["ShowModal"] = 1;
-                        return RedirectToAction("Note_Details", new { id = noteId });
+                            // show modal
+                            TempData["ShowModal"] = 1;
+                            return RedirectToAction("Note_Details", new { id = noteId });
+                        }
+
                     }
 
-                }
                 else
                 {
                     return View("Search_Notes");
@@ -451,11 +458,11 @@ namespace NoteMarketPlace.Controllers
             using(var _Context = new ApplicationContext())
             {
                 // get all type
-                var type = _Context.Type_Details.ToList();
+                var type = _Context.Type_Details.Where(x=> x.IsActive == true).ToList();
                 // get all category
-                var category = _Context.Category_Details.ToList();
+                var category = _Context.Category_Details.Where(x => x.IsActive == true).ToList();
                 // get all country
-                var country = _Context.Country_Details.ToList();
+                var country = _Context.Country_Details.Where(x => x.IsActive == true).ToList();
 
                 ViewBag.TypeList = type;
                 ViewBag.CategotyList = category;
@@ -527,6 +534,39 @@ namespace NoteMarketPlace.Controllers
                     var Attachment = _Context.NotesAttachments.SingleOrDefault(m => m.NoteId == id);
 
                     note.MaptoModel(note_details, Attachment);
+
+                    // note image
+                    if(note.DisplayPicture == null)
+                    {
+                        note_details.Image = note_details.Image;
+                    }
+                    else
+                    {
+                        note_details.Image = "../Members/"+currentUser+"/"+id+"/"+note.DisplayPicture;
+                    }
+
+                    // preview
+                    if (note.NotePreview == null)
+                    {
+                        note_details.Note_Preview = note_details.Note_Preview;
+                    }
+                    else
+                    {
+                        note_details.Note_Preview = "../Members/" + currentUser + "/" + id + "/" + note.NotePreview;
+                    }
+
+                    // attachment
+                    if (note.UploadNotes == null)
+                    {
+                        Attachment.FileName = Attachment.FileName;
+                    }
+                    else
+                    {
+                        Attachment.FileName = note.UploadNotes;
+                        Attachment.FilePath = "../Members/" + currentUser + "/" + id + "/Attachment/";
+                    }
+
+
                     note_details.Edited_Date = DateTime.Now;
                     Attachment.Modified_Date = DateTime.Now;
                     _Context.SaveChanges();
@@ -542,7 +582,7 @@ namespace NoteMarketPlace.Controllers
                     {
                         Title = note.Title,
                         Category_Id = note.Category,
-                        Image = note.DisplayPicture == null ? DefaultImg : note.DisplayPicture,
+                        Image = note.DisplayPicture,
                         Type_Id = note.Type,
                         Pages = note.Pages,
                         Description = note.Description,
@@ -561,15 +601,32 @@ namespace NoteMarketPlace.Controllers
 
                     _Context.SaveChanges();
 
-                    var createdNote = note_details.FirstOrDefault(m => m.User_Id == currentUser && m.Title == note.Title).Id;
+                    var createdNote = note_details.FirstOrDefault(m => m.User_Id == currentUser && m.Title == note.Title);
+
+                    // set image
+                    if(createdNote.Image == null)
+                    {
+                        createdNote.Image = DefaultImg;
+                    }
+                    else
+                    {
+                        createdNote.Image = "../Members/" + currentUser + "/" + createdNote.Id + "/" + createdNote.Image;
+                    }
+
+                    // set preview
+                    if (createdNote.Image != null)
+                    {
+                        createdNote.Note_Preview = "../Members/" + currentUser + "/" + createdNote.Id + "/" + createdNote.Note_Preview;
+                    }
+
 
                     // create folder
-                    string path = CreateDirectory(currentUser, createdNote);
+                    string path = CreateDirectory(currentUser, createdNote.Id);
 
                     var attachments = _Context.NotesAttachments;
                     attachments.Add(new NotesAttachment
                     {
-                        NoteId = createdNote,
+                        NoteId = createdNote.Id,
                         FileName = note.UploadNotes,
                         FilePath = path,
                         Create_Date = DateTime.Now,
@@ -602,7 +659,7 @@ namespace NoteMarketPlace.Controllers
             {
                 
                 // current user
-                var currentUser = _Context.Users.FirstOrDefault(m => m.Email == User.Identity.Name).UserId;
+                var currentUser = _Context.Users.FirstOrDefault(m => m.Email == User.Identity.Name);
 
                 //default book image
                 string DefaultImg = _Context.System_Config.FirstOrDefault(m => m.Name == "DefaultBookImage").Value;
@@ -615,11 +672,57 @@ namespace NoteMarketPlace.Controllers
                     var draftAttachent = _Context.NotesAttachments.FirstOrDefault(m => m.NoteId == id);
                     note.MaptoModel(draftNote, draftAttachent);
 
+                    // note image
+                    if (note.DisplayPicture == null)
+                    {
+                        draftNote.Image = draftNote.Image;
+                    }
+                    else
+                    {
+                        draftNote.Image = "../Members/" + currentUser.UserId + "/" + id + "/" + note.DisplayPicture;
+                    }
+
+                    // preview
+                    if (note.NotePreview == null)
+                    {
+                        draftNote.Note_Preview = draftNote.Note_Preview;
+                    }
+                    else
+                    {
+                        draftNote.Note_Preview = "../Members/" + currentUser.UserId + "/" + id + "/" + note.NotePreview;
+                    }
+
+                    // attachment
+                    if (note.UploadNotes == null)
+                    {
+                        draftAttachent.FileName = draftAttachent.FileName;
+                    }
+                    else
+                    {
+                        draftAttachent.FileName = note.UploadNotes;
+                        draftAttachent.FilePath = "../Members/" + currentUser.UserId + "/" + id + "/Attachment/";
+                    }
+
                     draftNote.Status = 4;
                     draftNote.Edited_Date = DateTime.Now;
                     draftAttachent.Modified_Date = DateTime.Now;
 
                     _Context.SaveChanges();
+
+
+                    // email addressed
+                    var emails = _Context.System_Config.Where(m => m.Name == "EmailAddresses").First().Value;
+
+
+                    // send mail to admins
+                    string subject = currentUser.First_Name+" "+currentUser.Last_Name+ " sent his note for review";
+                    string body = "Hello Admins, \\n"
+                        + "We want to inform you that, "+ currentUser.First_Name + " " + currentUser.Last_Name + " sent his note"
+                        + note.Title +" for review.Please look at the notes and take required actions.";
+                    body += "\\nRegards,\\nNotes Marketplace";
+
+                    bool isSend = SendEmail.EmailSend(emails, subject, body, false);
+
 
                     return RedirectToAction("Dashboard","User");
                 }
@@ -632,7 +735,7 @@ namespace NoteMarketPlace.Controllers
                     {
                         Title = note.Title,
                         Category_Id = note.Category,
-                        Image = note.DisplayPicture == null ? DefaultImg : note.DisplayPicture,
+                        Image = note.DisplayPicture,
                         Type_Id = note.Type,
                         Pages = note.Pages,
                         Description = note.Description,
@@ -645,26 +748,57 @@ namespace NoteMarketPlace.Controllers
                         Note_Preview = note.NotePreview,
                         Status = 4,
                         Added_Date = DateTime.Now,
-                        User_Id = currentUser,
+                        User_Id = currentUser.UserId,
                         IsActive = true
                     });
 
                     _Context.SaveChanges();
 
-                    var createdNote = note_details.FirstOrDefault(m => m.User_Id == currentUser && m.Title == note.Title).Id;
+                    var createdNote = note_details.FirstOrDefault(m => m.User_Id == currentUser.UserId && m.Title == note.Title);
 
-                    string path = CreateDirectory(currentUser, createdNote);
+                    // set image
+                    if (createdNote.Image == null)
+                    {
+                        createdNote.Image = DefaultImg;
+                    }
+                    else
+                    {
+                        createdNote.Image = "../Members/" + currentUser.UserId + "/" + createdNote.Id + "/Attachment/" + createdNote.Image;
+                    }
+
+                    // set preview
+                    if(createdNote.Note_Preview != null)
+                    {
+                        createdNote.Note_Preview = "../Members/" + currentUser.UserId + "/" + createdNote.Id + createdNote.Note_Preview;
+                    }
+
+
+                    string path = CreateDirectory(currentUser.UserId, createdNote.Id);
 
                     var attachments = _Context.NotesAttachments;
                     attachments.Add(new NotesAttachment
                     {
-                        NoteId = createdNote,
+                        NoteId = createdNote.Id,
                         FileName = note.UploadNotes,
                         FilePath = path,
                         Create_Date = DateTime.Now,
                         IsActive = true
                     });
                     _Context.SaveChanges();
+
+
+                    // email addressed
+                    var emails = _Context.System_Config.Where(m => m.Name == "EmailAddresses").First().Value;
+
+
+                    // send mail to admins
+                    string subject = currentUser.First_Name + " " + currentUser.Last_Name + " sent his note for review";
+                    string body = "Hello Admins, \\n"
+                        + "We want to inform you that, " + currentUser.First_Name + " " + currentUser.Last_Name + " sent his note"
+                        + note.Title + " for review.Please look at the notes and take required actions.";
+                    body += "\\nRegards,\\nNotes Marketplace";
+
+                    bool isSend = SendEmail.EmailSend(emails, subject, body, false);
 
 
                     return RedirectToAction("Dashboard", "User");
@@ -797,6 +931,7 @@ namespace NoteMarketPlace.Controllers
         }
 
 
+
         // get my Profile
         [Route("User/MyProfile")]
         public ActionResult MyProfile()
@@ -846,6 +981,8 @@ namespace NoteMarketPlace.Controllers
                                        College = Detail.College
                                    }).FirstOrDefault<UserProfileModel>();
 
+                    UserProfile.ProfilePicture = "DP.png";
+
                     UserProfile.genderModel = gender.Select(x => new GenderModel { Gender_Id = x.Id, Gender_Val = x.Value }).ToList();
                     UserProfile.countryModel = country.Select(x => new CountryModel { Country_Id = x.Country_Id, Country_Val = x.Country_Name }).ToList();
                     UserProfile.CountryCodeModel = country.Select(x => new CountryModel { Country_Code = x.Country_Code }).ToList();
@@ -878,7 +1015,7 @@ namespace NoteMarketPlace.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return View();
+                return RedirectToAction("MyProfile");
             }
 
             using(var _Context = new ApplicationContext())
@@ -897,6 +1034,14 @@ namespace NoteMarketPlace.Controllers
                     var detailsUpdate = _Context.User_Details.FirstOrDefault(m=> m.UserId == currentuser);
 
                     user.MaptoModel(userUpdate, detailsUpdate);
+                    if(user.ProfilePicture == null)
+                    {
+                        detailsUpdate.Profile_Img = detailsUpdate.Profile_Img;
+                    }
+                    else
+                    {
+                        detailsUpdate.Profile_Img = "../Members/"+currentuser+"/"+user.ProfilePicture;
+                    }
                     userUpdate.Modified_Date = DateTime.Now;
                     detailsUpdate.Modified_date = DateTime.Now;
 
@@ -915,7 +1060,7 @@ namespace NoteMarketPlace.Controllers
                         Gender = user.Gender,
                         Phone_No_Country_Code = user.CountryCode,
                         Phone_No = user.Phone,
-                        Profile_Img = user.ProfilePicture,
+                        Profile_Img = "../Members/"+currentuser+"/"+user.ProfilePicture,
                         Address_Line1 = user.Address1,
                         Address_Line2 = user.Address2,
                         City = user.City,
@@ -1023,21 +1168,38 @@ namespace NoteMarketPlace.Controllers
         {
             using (var _Context = new ApplicationContext())
             {
-                var currentuser = _Context.Users.FirstOrDefault(m => m.Email == User.Identity.Name).UserId;
+                var currentuser = _Context.Users.FirstOrDefault(m => m.Email == User.Identity.Name);
 
-                var purchase = _Context.Purchase_Details.FirstOrDefault(m => m.Purchase_Id == Id && m.Downloader == currentuser);
+                var purchase = _Context.Purchase_Details.FirstOrDefault(m => m.Purchase_Id == Id && m.Downloader == currentuser.UserId);
+
+                var note = _Context.Note_Details.First(m => m.Id == purchase.Note_Id);
+
+                var seller = _Context.Users.First(m => m.UserId == note.User_Id);
 
                 var review = _Context.Spam_Notes;
                 review.Add(new Spam_Notes
                 {
                     NoteId = purchase.Note_Id,
-                    UserId = currentuser,
+                    UserId = currentuser.UserId,
                     Purchase_Id = Id,
                     Remarks = UserRemarks,
                     Reported_Date = DateTime.Now
                 });
 
                 _Context.SaveChanges();
+
+                // email addresse(es) for event
+                var Adminemails = _Context.System_Config.Where(m => m.Name == "EmailAddresses").First().Value;
+
+                // send mail to admin
+                string subject = currentuser.First_Name + " " + currentuser.Last_Name + "  Reported an issue for "+ note.Title  ;
+                string body = "Hello Admins, \\n" 
+                    + "We want to inform you that, "+ currentuser.First_Name + " " + currentuser.Last_Name + " Reported an issue for "+ seller.First_Name+" "+ seller.Last_Name  +"’s Note with"
+                    + "title "+ note.Title +".Please look at the notes and take required actions.";
+                body += "\\nRegards,\\nNotes Marketplace";
+
+                bool isSend = SendEmail.EmailSend(Adminemails, subject, body, false);
+
 
                 return RedirectToAction("MyDownloads");
             }
@@ -1153,14 +1315,21 @@ namespace NoteMarketPlace.Controllers
                 _Context.SaveChanges();
 
                 // get created note Id
-                var newnoteId = _Context.Note_Details.FirstOrDefault(m => m.Status == 3 && m.Title == oldnote.Note.Title && m.User_Id == currentuser).Id;
+                var newnote = _Context.Note_Details.FirstOrDefault(m => m.Status == 3 && m.Title == oldnote.Note.Title && m.User_Id == currentuser);
 
-                string path = CreateDirectory(currentuser, newnoteId);
+                //set preview
+                if(oldnote.Note.Note_Preview != null)
+                {
+                    newnote.Note_Preview = "../Members/"+ currentuser + "/" + newnote.Id + "/" + oldnote.Note.Note_Preview ;
+                }
+
+
+                string path = CreateDirectory(currentuser, newnote.Id);
 
                 // create attachments
                 var cloneattachment = _Context.NotesAttachments;
                 cloneattachment.Add(new NotesAttachment {
-                    NoteId = newnoteId,
+                    NoteId = newnote.Id,
                     FileName = oldnote.Attachment.FileName,
                     FilePath = path,
                     Create_Date = DateTime.Now,
@@ -1241,7 +1410,8 @@ namespace NoteMarketPlace.Controllers
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Login", "Login");
+
+            return RedirectToAction("Index", "Home");
         }
 
 

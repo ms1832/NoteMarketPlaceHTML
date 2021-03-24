@@ -12,9 +12,11 @@
         {
             Layout = "~/Views/Shared/_UserNav.cshtml";
         }
-        else
+        if (User.IsInRole("Admin") || User.IsInRole("Super_Admin"))
         {
-            Layout = "~/Views/Shared/_Nav.cshtml";
+            Layout = "~/Views/Shared/_AdminNav.cshtml";
+            <!-- CUSTOM CSS -->
+            <link rel="stylesheet" href="~/Content/index.css">
         }
     }
 }
@@ -163,9 +165,10 @@
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-7">
                                     <div class="more-info-right">
-                                        <h5>@book.ApprovedDate</h5>
+                                        <h5>@(book.ApproveDate)</h5>
                                     </div>
                                 </div>
+
 
                                 <div class="col-md-6 col-sm-6 col-xs-4">
                                     <div class="more-info-left">
@@ -375,7 +378,7 @@
 
 
     $('#purchase_btn').click(function () {
-     
+
         if (confirm("Are you sure you want to download this note. Please confirm."))
         {
             var noteId = $('#purchase_btn').attr('noteId');

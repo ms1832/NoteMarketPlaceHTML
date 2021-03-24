@@ -12,7 +12,7 @@ namespace NoteMarketPlace.Controllers
     public class ChangePasswordController : Controller
     {
         
-        [Route("User/ChangePassword")]
+        [Route("ChangePassword")]
         public ActionResult ChangePassword()
         {
             return View();
@@ -21,7 +21,7 @@ namespace NoteMarketPlace.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("User/ChangePassword")]
+        [Route("ChangePassword")]
         public ActionResult ChangePassword(ChangePassword model)
         {
 

@@ -11,13 +11,12 @@ namespace NoteMarketPlace.Models.AdminModel
 
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="* Required Field")]
         public string First_Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "* Required Field")]
         public string Last_Name { get; set; }
 
-        [Required]
         public string Email { get; set; }
 
         public string SecondaryEmail { get; set; }
@@ -26,13 +25,23 @@ namespace NoteMarketPlace.Models.AdminModel
 
         public decimal Phone { get; set; }
 
-        [Required]
         public string ProfileImage { get; set; }
+
 
 
         public List<CountryModel> PhoneCodeModel { get; set; }
 
 
+
+        public void MAptoModel(User user, User_Details details)
+        {
+            user.First_Name = First_Name;
+            user.Last_Name = Last_Name;
+            details.Secondary_Email = SecondaryEmail;
+            //details.Profile_Img = ProfileImage;
+            details.Phone_No = Phone;
+            details.Phone_No_Country_Code = Phonecode;
+        }
 
     }
 

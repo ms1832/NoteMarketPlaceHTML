@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace NoteMarketPlace.Models
 {
@@ -20,7 +21,10 @@ namespace NoteMarketPlace.Models
         public string CourseCode { get; set; }
         public string Professor { get; set; }
         public decimal Pages { get; set; }
+        
         public DateTime? ApprovedDate { get; set; }
+        public string ApproveDate { get; set; }
+
         public string NotePreview { get; set; }
         public string Seller { get; set; }
 

@@ -54,7 +54,7 @@ namespace NoteMarketPlace.Models
         {
             note.Title = Title;
             note.Category_Id = Category;
-            note.Image = DisplayPicture;
+            //note.Image = DisplayPicture;
             note.Type_Id = Type;
             note.Pages = Pages;
             note.Description = Description;
@@ -64,8 +64,8 @@ namespace NoteMarketPlace.Models
             note.Course_Code = CourseCode;
             note.Professor = Professor;
             note.Price = Price;
-            note.Note_Preview = NotePreview;
-            attachment.FileName = UploadNotes;
+            //note.Note_Preview = NotePreview;
+            //attachment.FileName = UploadNotes;
         }
 
 

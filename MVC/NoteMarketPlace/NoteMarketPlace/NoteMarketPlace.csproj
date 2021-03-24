@@ -204,11 +204,23 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AddNoteModel.cs" />
+    <Compile Include="Models\AdminModel\AddAdmin.cs" />
+    <Compile Include="Models\AdminModel\AddCategoryModel.cs" />
+    <Compile Include="Models\AdminModel\AddCountryModel.cs" />
+    <Compile Include="Models\AdminModel\AddTypeModel.cs" />
     <Compile Include="Models\AdminModel\DownloadedNotes.cs" />
+    <Compile Include="Models\AdminModel\ManageAdminModel.cs" />
+    <Compile Include="Models\AdminModel\ManageCategory.cs" />
+    <Compile Include="Models\AdminModel\ManageCountry.cs" />
+    <Compile Include="Models\AdminModel\ManageType.cs" />
+    <Compile Include="Models\AdminModel\MembersModel.cs" />
     <Compile Include="Models\AdminModel\MyProfile.cs" />
     <Compile Include="Models\AdminModel\NotesUnderReviewModel.cs" />
     <Compile Include="Models\AdminModel\DashboardModel.cs" />
     <Compile Include="Models\AdminModel\PublishedNoteModel.cs" />
+    <Compile Include="Models\AdminModel\RejectedNotesModel.cs" />
+    <Compile Include="Models\AdminModel\SpamNotesModel.cs" />
+    <Compile Include="Models\AdminModel\SystemConfig.cs" />
     <Compile Include="Models\BuyerRequestModel.cs" />
     <Compile Include="Models\ContactUsModal.cs" />
     <Compile Include="Models\ForgotPassword.cs" />
@@ -294,6 +306,17 @@
     <Content Include="Views\Admin\DownloadedNotes.cshtml" />
     <Content Include="Views\SuperAdmin\ManageAdmin.cshtml" />
     <Content Include="Views\SuperAdmin\AddAdmin.cshtml" />
+    <Content Include="Views\Admin\RejectedNotes.cshtml" />
+    <Content Include="Views\Admin\Members.cshtml" />
+    <Content Include="Views\Admin\MemberDetails.cshtml" />
+    <Content Include="Views\Admin\ManageCategory.cshtml" />
+    <Content Include="Views\Admin\ManageType.cshtml" />
+    <Content Include="Views\Admin\ManageCountry.cshtml" />
+    <Content Include="Views\Admin\AddCategory.cshtml" />
+    <Content Include="Views\Admin\AddType.cshtml" />
+    <Content Include="Views\Admin\AddCountry.cshtml" />
+    <Content Include="Views\Admin\SpamReports.cshtml" />
+    <Content Include="Views\SuperAdmin\SystemConfig.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

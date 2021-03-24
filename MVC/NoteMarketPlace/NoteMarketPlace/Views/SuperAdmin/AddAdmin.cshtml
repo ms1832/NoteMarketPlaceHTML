@@ -4,5 +4,77 @@
     Layout = "~/Views/Shared/_AdminNav.cshtml";
 }
 
-<h2>AddAdmin</h2>
+@model NoteMarketPlace.Models.AdminModel.AddAdmin
 
+
+<div id="add-admin">
+    <div class="content-box-lg">
+
+        <div class="contact-text">
+            <h4>Add Administrator</h4>
+        </div>
+
+        @using (Html.BeginForm(FormMethod.Post))
+        {
+
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <div class="contact-inputs-02">
+                            <label for="fullname">First Name <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter your first name">*@
+                            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "Enter your first name", required="required" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs-02">
+                            <label for="fullname">Last Name <span>*</span> </label>
+                            @*<input type="text" class="form-control" id="fullname" placeholder="Enter your last name">*@
+                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Enter your last name", required = "required" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs-02">
+                            <label for="fullname">Email <span>*</span> </label>
+                            @*<input type="email" class="form-control" id="fullname" placeholder="Enter your email address">*@
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Enter your email address", type = "email", required = "required" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <div class="contact-inputs-02">
+                            <label for="subject">Phone Number*</label>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-4 col-xs-4">
+                                    @Html.DropDownListFor(model => model.CountryCode, new SelectList(ViewBag.PhoneCode, "Country_Code", "Country_Code"), new { @class = "form-control", required = "required" })
+                                    @*@Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })*@
+                                </div>
+                                <div class="col-md-9 col-sm-8 col-xs-8">
+                                    @*<input type="number" class="form-control" id="subject" placeholder="Enter your phone number">*@
+                                    @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", placeholder = "Enter your phone number", type = "number", required = "required" })
+                                    @*@Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-submit-btn">
+                        <button class="btn" type="submit" formaction="@(ViewBag.Edit == true ? "AddAdmin?id="+Model.Id : "AddAdmin" )">SUBMIT</button>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+
+
+    </div>
+</div>

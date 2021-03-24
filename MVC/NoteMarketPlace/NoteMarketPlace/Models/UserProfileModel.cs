@@ -17,6 +17,8 @@ namespace NoteMarketPlace.Models
         [Required]
         public string Email { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> DOB { get; set; }
 
         public Nullable<int> Gender { get; set; }
@@ -69,7 +71,7 @@ namespace NoteMarketPlace.Models
             details.Gender = Gender;
             details.Phone_No_Country_Code = CountryCode;
             details.Phone_No = Phone;
-            details.Profile_Img = ProfilePicture;
+            //details.Profile_Img = ProfilePicture;
             details.Address_Line1 = Address1;
             details.Address_Line2 = Address2;
             details.City = City;

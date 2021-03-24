@@ -30,11 +30,11 @@
                         <div class="col-md-9 col-sm-9 col-xs-8">
                             <div class="search">
                                 <img src="~/img/icons/search-icon.png">
-                                <input type="search" placeholder="search" class="form-control">
+                                <input type="search" placeholder="search" class="form-control" id="noteunderreview-search-input">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-4">
-                            <button class="btn btn-search">SEARCH</button>
+                            <button class="btn btn-search" id="noteunderreview-search-click">SEARCH</button>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
 
         <div class="table-responsive dashboard-table">
 
-            <table class="table">
+            <table class="table" id="noteunderreview-table">
 
                 <thead>
                     <tr>
@@ -76,21 +76,21 @@
                                 count++;
                                 <tr>
                                     <td scope="row">@count</td>
-                                    <td>@data.Title</td>
+                                    <td style="cursor:pointer" onclick="NoteDetail(@data.NoteId)">@data.Title</td>
                                     <td>@data.Category</td>
                                     <td>
                                         @data.Seller
                                         <div class="table-actions-view">
-                                            <img src="~/img/icons/eye.png" alt="view">
+                                            <img src="~/img/icons/eye.png" alt="view" onclick="SellerDetail(@data.SellerId)">
                                         </div>
                                     </td>
                                     <td>@data.DateAdded.ToString("dd-MM-yyyy, HH:mm")</td>
                                     <td>@data.status</td>
                                     <td>
                                         <div class="table-actions-status">
-                                            <button class="btn btn-success">Approve</button>
-                                            <button class="btn" data-toggle="modal" data-target="#rejectModal">Reject</button>
-                                            <button class="btn">InReview</button>
+                                            <button class="btn btn-success" onclick="Approve(@data.NoteId)">Approve</button>
+                                            <button class="btn" data-toggle="modal" data-target="#rejectModal" onclick="setdata('@data.NoteId', '@data.Title', '@data.Category')" >Reject</button>
+                                            <button class="btn" onclick="InReview(@data.NoteId)">InReview</button>
                                         </div>
                                     </td>
                                     <td>
@@ -99,8 +99,8 @@
                                                 <img id="more-dropeddown" src="~/img/icons/dots.png" alt="more"
                                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
-                                                    <a class="dropdown-item" href="#">View More Details</a>
-                                                    <a class="dropdown-item" href="#">Download Notes</a>
+                                                    <a class="dropdown-item" onclick="NoteDetail(@data.NoteId)">View More Details</a>
+                                                    <a class="dropdown-item" href="/Admin/DownloadFile?noteid=@data.NoteId">Download Notes</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -127,19 +127,26 @@
         <div class="modal-dialog vertical-align-center">
             <div class="modal-content">
                 <div class="modal-header">
-                    <img src="../img/icons/close.png" alt="close" class="close" data-dismiss="modal">
+                    <img src="~/img/icons/close.png" alt="close" class="close" data-dismiss="modal">
                 </div>
                 <div class="modal-body">
 
                     <div class="reject-popup">
 
-                        <h4>Human Body - Science</h4>
+                        <h4 id="rejectmodal-note-title"></h4>
 
-                        <label>Remarks</label>
-                        <textarea placeholder="Write remarks"></textarea>
+                        @using (Html.BeginForm(FormMethod.Post))
+                        {
+                            @Html.Hidden("noteId");
 
-                        <button class="btn btn-cancel pull-right" data-dismiss="modal">Cancel</button>
-                        <button class="btn btn-reject pull-right">Reject</button>
+                            <label>Remarks*</label>
+                            @*<textarea placeholder="Write remarks"></textarea>*@
+                            @Html.TextArea("Reject", new { @placeholder = "Write remarks", required = "required" })
+
+                            <button class="btn btn-cancel pull-right" data-dismiss="modal">Cancel</button>
+                            <button class="btn btn-reject pull-right" formaction="RejectNote">Reject</button>
+
+                        }
 
                     </div>
 
@@ -150,11 +157,76 @@
 </div>
 
 
-
+<script src="~/Scripts/jquery.min.js"></script>
 <script>
 
     function FilterSeller(obj) {
-        location.href = "NotesUnderReview?sellerId=" + obj.value;
+        
+        $.ajax({
+            method: 'GET',
+            url: 'NotesUnderReview',
+            data: { sellerId: obj.value },
+            success: function (data) {
+                document.body.innerHTML = data;
+            },
+            error: function () {
+                alert("Try Again");
+            }
+        });
     }
+
+    function NoteDetail(id) {
+        location.href = "../Note_Details/" + id +"?ReadOnly=true";
+    }
+
+    function SellerDetail(id) {
+        location.href = "MemberDetails?id=" + id;
+    }
+
+    function InReview(id) {
+
+        if (confirm("Via marking the note In Review – System will let user know that review process has been initiated.Please press yes to continue."))
+        {
+            $.ajax({
+                method: 'POST',
+                url: 'NoteStatusUpdate',
+                data: { noteid: id, status: "InReview" },
+                success: function () {
+                    location.reload();
+                },
+                error: function () {
+                    alert("Try Again");
+                }
+            });
+        }
+    }
+
+    function Approve(id) {
+
+        if (confirm("If you approve the notes – System will publish the notes over portal. Please press yes to continue."))
+        {
+            $.ajax({
+                method: 'POST',
+                url: 'NoteStatusUpdate',
+                data: { noteid: id, status: "Approve" },
+                success: function () {
+                    location.reload();
+                },
+                error: function () {
+                    alert("Try Again");
+                }
+            });
+        }
+    }
+
+    function setdata(id, title, category) {
+        $("#rejectModal input[type='hidden']").attr('value', id);
+        $('#rejectModal #rejectmodal-note-title').text(title + " - " + category);
+    }
+
+    $('#rejectModal form').on('submit', function () {
+        return confirm('Are you sure you want to reject seller request?');
+    });
+
 
 </script>

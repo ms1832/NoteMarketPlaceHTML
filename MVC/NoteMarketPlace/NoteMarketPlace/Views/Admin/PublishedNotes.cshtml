@@ -28,11 +28,11 @@
                         <div class="col-md-9 col-sm-9 col-xs-8">
                             <div class="search">
                                 <img src="~/img/icons/search-icon.png">
-                                <input type="search" placeholder="search" class="form-control">
+                                <input type="search" placeholder="search" class="form-control" id="publishednotes-search-input">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-4">
-                            <button class="btn btn-search">SEARCH</button>
+                            <button class="btn btn-search" id="publishednotes-search-click">SEARCH</button>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
 
         <div class="table-responsive dashboard-table">
 
-            <table class="table">
+            <table class="table" id="publishednotes-table">
 
                 <thead>
                     <tr>
@@ -74,28 +74,28 @@
                                 count++;
                                 <tr>
                                     <td scope="row">@count</td>
-                                    <td>@data.Title</td>
+                                    <td onclick="NoteDetail('@data.NoteId')">@data.Title</td>
                                     <td>@data.Category</td>
                                     <td>@(data.Price == 0 ? "Free" : "Paid" )</td>
                                     <td>$@data.Price</td>
                                     <td>
                                         @data.Seller
                                         <div class="table-actions-view">
-                                            <img src="~/img/icons/eye.png" alt="view">
+                                            <img src="~/img/icons/eye.png" alt="view" onclick="Member('@data.SellerId')">
                                         </div>
                                     </td>
                                     <td>@data.PublishDate.ToString("dd-MM-yyyy, HH:mm")</td>
                                     <td>@data.ApprovedBy</td>
-                                    <td>@data.TotalDownloads</td>
+                                    <td style="cursor:pointer;" onclick="Downloads('@data.NoteId')">@data.TotalDownloads</td>
                                     <td>
                                         <div class="table-actions-view">
                                             <div class="dropdown">
                                                 <img id="more-dropeddown" src="~/img/icons/dots.png" alt="more"
                                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
-                                                    <a class="dropdown-item" href="#">Download Notes</a>
-                                                    <a class="dropdown-item" href="#">View More Details</a>
-                                                    <a class="dropdown-item" href="#">Unpublish</a>
+                                                    <a class="dropdown-item" href="/Admin/DownloadFile?noteid=@data.NoteId">Download Notes</a>
+                                                    <a class="dropdown-item" onclick="NoteDetail('@data.NoteId')">View More Details</a>
+                                                    <a class="dropdown-item" data-toggle="modal" data-target="#rejectModal" onclick="Unpunlish('@data.NoteId', '@data.Title')">Unpublish</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,6 +115,42 @@
 </div>
 
 
+<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="~/img/icons/close.png" alt="close" class="close" data-dismiss="modal">
+                </div>
+                <div class="modal-body">
+
+                    <div class="reject-popup">
+
+                        <h4></h4>
+
+                        @using (Html.BeginForm(FormMethod.Post))
+                        {
+                            @Html.Hidden("noteid")
+
+                            <label>Remarks*</label>
+                            @*<textarea placeholder="Write remarks"></textarea>*@
+                            @Html.TextArea("Remarks", new { @placeholder = "Write remarks", required = "required" })
+
+                            <button class="btn btn-cancel pull-right" data-dismiss="modal">Cancel</button>
+                            <button class="btn btn-reject pull-right" formaction="Unpublishnote">Unpublish</button>
+
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="~/Scripts/jquery.min.js"></script>
 <script>
 
@@ -130,6 +166,27 @@
                 alert("Try Again");
             }
         });
+    }
+
+    function NoteDetail(id) {
+        location.href = "../Note_Details/" + id;
+    }
+
+    function Unpunlish(id, title) {
+        $("#rejectModal input[type='hidden']").attr('value', id);
+        $('.reject-popup>h4').text(title);
+    }
+
+    $('#rejectModal form').on('submit', function () {
+        return confirm('Are you sure you want to Unpublish this note?');
+    });
+
+    function Member(id) {
+        location.href = "MemberDetails?id=" + id;
+    }
+
+    function Downloads(id) {
+        location.href = "DownloadedNotes?noteId=" + id;
     }
 
 </script>

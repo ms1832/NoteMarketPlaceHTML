@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "Members";
+    Layout = "~/Views/Shared/_AdminNav.cshtml";
+}
+
+@model List<NoteMarketPlace.Models.AdminModel.MembersModel>
+
+
+
+<!--  Members -->
+<div id="members">
+    <div class="content-box-lg">
+
+        <div class="table-heading">
+            <div class="row">
+                <div class="col-md-6 col-sm-4 col-xs-12">
+                    <div class="contact-text-02">
+                        <h4>Members</h4>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-8 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-9 col-sm-6 col-xs-8">
+                            <div class="search">
+                                <img src="~/img/icons/search-icon.png">
+                                <input type="search" placeholder="search" class="form-control" id="members-search-input">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-4">
+                            <button class="btn btn-search" id="members-search-click">SEARCH</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="table-responsive dashboard-table">
+
+            <table class="table" id="members-table">
+
+                <thead>
+                    <tr>
+                        <th scope="col">SR NO.</th>
+                        <th scope="col">FIRST NAME</th>
+                        <th scope="col">LAST NAME</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">JOINING DATE</th>
+                        <th scope="col">UNDER REVIEW NOTES</th>
+                        <th scope="col">PUBLISHED NOTES</th>
+                        <th scope="col">DOWNLOADED NOTES</th>
+                        <th scope="col">TOTAL EXPENSE</th>
+                        <th scope="col">TOTAL EARNINGS</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        if (Model.Count == 0)
+                        {
+                            <tr>
+                                <td colspan="11" style="text-align:center;">No Record found</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            int count = 0;
+                            foreach (var data in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <td scope="row">@count</td>
+                                    <td>@data.FirstName</td>
+                                    <td>@data.LastName</td>
+                                    <td>@data.Email</td>
+                                    <td>@data.JoinDate.ToString("dd-MM-yyyy, HH:mm")</td>
+                                    <td style="cursor:pointer" onclick="UnderReview('@data.Id')" >@data.UnderReviewNotes</td>
+                                    <td style="cursor:pointer" onclick="Published('@data.Id')" >@data.PublishedNotes</td>
+                                    <td style="cursor:pointer" onclick="Downloaded('@data.Id')" >@data.DownloadedNotes</td>
+                                    <td style="cursor:pointer" onclick="Downloaded('@data.Id')" >$@(data.TotalExpense == null ? 0 : data.TotalExpense )</td>
+                                    <td>$@(data.TotalEarning == null ? 0 : data.TotalEarning )</td>
+                                    <td>
+                                        <div class="table-actions-view">
+                                            <div class="dropdown">
+                                                <img id="more-dropeddown" src="~/img/icons/dots.png" alt="more"
+                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                                    <a class="dropdown-item" href="/Admin/MemberDetails?id=@data.Id">View More Details</a>
+                                                    <a class="dropdown-item" onclick="Deactivate('@data.Id')" >Deactivate</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+<!--  Members Ends -->
+
+<script>
+
+    function UnderReview(id) {
+        location.href = "NotesUnderReview?sellerId=" + id;
+    }
+
+    function Published(id) {
+        location.href = "PublishedNotes?sellerId=" + id;
+    }
+
+    function Downloaded(id) {
+        location.href = "DownloadedNotes?buyerId=" + id;
+    }
+
+    function Deactivate(id) {
+
+        if (confirm("Are you sure you want to make this member inactive?"))
+        {
+            $.ajax({
+                method: 'POST',
+                url: 'DeactivateUser',
+                data: { userId: id },
+                success: function () {
+                    location.reload();
+                },
+                error: function () {
+                    alert("Try Again");
+                }
+            });
+        }
+
+    }
+
+</script>

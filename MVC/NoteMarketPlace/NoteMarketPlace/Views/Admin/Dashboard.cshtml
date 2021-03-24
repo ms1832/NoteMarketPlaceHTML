@@ -20,21 +20,21 @@
 
             <div class="col-md-4">
                 <div class="dashboard-statics">
-                    <h4>@ViewBag.InReview</h4>
+                    <h4 style="cursor:pointer" onclick="return location.href='NotesUnderReview'">@ViewBag.InReview</h4>
                     <h6>Number of Notes in Review for Publish</h6>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="dashboard-statics">
-                    <h4>@ViewBag.Downloads</h4>
+                    <h4 style="cursor:pointer" onclick="return location.href='DownloadedNotes'">@ViewBag.Downloads</h4>
                     <h6>Number of New Notes Downloaded <br>(Last 7 Days) </h6>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="dashboard-statics">
-                    <h4>@ViewBag.Registration</h4>
+                    <h4 style="cursor:pointer" onclick="return location.href='Members'">@ViewBag.Registration</h4>
                     <h6>Number of New Registration <br>(Last 7 Days)</h6>
                 </div>
             </div>
@@ -55,19 +55,13 @@
                         <div class="col-md-6 col-sm-6 col-xs-8">
                             <div class="search">
                                 <img src="~/img/icons/search-icon.png">
-                                <input type="search" placeholder="search" class="form-control">
+                                <input type="search" placeholder="search" class="form-control" id="dashboard-search-input">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-4">
-                            <button class="btn btn-search">SEARCH</button>
+                            <button class="btn btn-search" id="dashboard-search-click">SEARCH</button>
                         </div>
                         <div class="col-md-3 col-sm-3">
-                            @*<select>
-                                <option>Select month</option>
-                                <option>January</option>
-                                <option>January</option>
-                                <option>January</option>
-                            </select>*@
                             @Html.DropDownList("Month" , new SelectList(ViewBag.MonthList,"digit","Month"), new {@onchange="MonthFilter(this)" })
                         </div>
                     </div>
@@ -78,7 +72,7 @@
 
         <div class="table-responsive dashboard-table">
 
-            <table class="table">
+            <table class="table" id="dashboard-table">
 
                 <thead>
                     <tr>
@@ -111,7 +105,7 @@
                                 count++;
                                 <tr>
                                     <td scope="row">@count</td>
-                                    <td>@data.Title</td>
+                                    <td onclick="NoteDetail(@data.Id)">@data.Title</td>
                                     <td>@data.Category</td>
                                     <td>@data.AttachmentSize KB</td>
                                     <td>@(data.Price == 0 ? "Free" : "Paid" )</td>
@@ -125,9 +119,9 @@
                                                 <img id="more-dropeddown" src="~/img/icons/dots.png" alt="more"
                                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
-                                                    <a class="dropdown-item" href="#">Download Notes</a>
-                                                    <a class="dropdown-item" href="#">View More Details</a>
-                                                    <a class="dropdown-item" href="#">Unpublish</a>
+                                                    <a class="dropdown-item" href="/Admin/DownloadFile?noteid=@data.Id">Download Notes</a>
+                                                    <a class="dropdown-item" onclick="NoteDetail(@data.Id)">View More Details</a>
+                                                    <a class="dropdown-item" data-toggle="modal" data-target="#rejectModal" onclick="setNoteId('@data.Id', '@data.Title')">Unpublish</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,13 +136,48 @@
             </table>
         </div>
 
-
-
     </div>
 
 </div>
 
-<!-- Dashboard Ensd -->
+
+<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="~/img/icons/close.png" alt="close" class="close" data-dismiss="modal">
+                </div>
+                <div class="modal-body">
+
+                    <div class="reject-popup">
+
+                        <h4>Note Title</h4>
+
+                        @using (Html.BeginForm(FormMethod.Post))
+                        {
+                            @Html.Hidden("noteid")
+
+                            <label>Remarks*</label>
+                            @*<textarea placeholder="Write remarks"></textarea>*@
+                            @Html.TextArea("Remarks", new { @placeholder = "Write remarks", required = "required" })
+
+                            <button class="btn btn-cancel pull-right" data-dismiss="modal">Cancel</button>
+                            <button class="btn btn-reject pull-right" formaction="Unpublishnote">Unpublish</button>
+
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Dashboard Ends -->
 
 
 <script>
@@ -156,5 +185,18 @@
     function MonthFilter(obj) {
         location.href = "Dashboard?month=" + obj.value;
     }
+
+    function NoteDetail(id) {
+        location.href = '../Note_Details/' + id;
+    }
+
+    function setNoteId(id,title) {
+        $("#rejectModal input[type='hidden']").attr('value', id);
+        $('.reject-popup>h4').text(title);
+    }
+
+    $('#rejectModal form').on('submit', function () {
+        return confirm('Are you sure you want to Unpublish this note?');
+    });
 
 </script>

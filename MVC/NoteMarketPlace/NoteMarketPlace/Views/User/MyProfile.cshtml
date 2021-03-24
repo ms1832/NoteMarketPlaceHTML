@@ -31,7 +31,7 @@
                         <div class="contact-inputs">
                             <label for="fullname">First Name <span>*</span> </label>
                             @*<input type="text" class="form-control" id="fullname" placeholder="Enter your first name">*@
-                            @Html.TextBoxFor(model=> model.FirstName, new { @class = "form-control", placeholder = "Enter your first name", required="required" })
+                            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "Enter your first name", required = "required" })
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@
                     <div class="form-group">
                         <div class="contact-inputs">
                             <label for="Gender">Gender</label>
-                            @Html.DropDownListFor(model=> model.Gender, new SelectList(Model.genderModel, "Gender_Id", "Gender_Val"), "Select your Gender" , new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.Gender, new SelectList(Model.genderModel, "Gender_Id", "Gender_Val"), "Select your Gender", new { @class = "form-control" })
                         </div>
                     </div>
 
@@ -55,7 +55,7 @@
                             <label for="subject">Profile Picture </label>
                             <div class="input-upload">
                                 @*<input type="file" class="form-control" id="image" accept="image/*">*@
-                                @Html.TextBoxFor(model=> model.ProfilePicture,new { @class = "form-control", type = "file", accept = "image/*" })
+                                @Html.TextBoxFor(model => model.ProfilePicture, new { @class = "form-control", type = "file", accept = "image/*" })
                                 <div class="upload-img" id="upload_profile_img_click">
                                     <img src="~/img/icons/upload-file.png" alt="upload">
                                     <p>Upload a picture</p>
@@ -63,7 +63,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-md-6 col-sm-6">
@@ -72,7 +71,7 @@
                         <div class="contact-inputs">
                             <label for="subject">Last Name <span>*</span> </label>
                             @*<input type="text" class="form-control" id="subject" placeholder="Enter your last name">*@
-                            @Html.TextBoxFor(model=> model.LastName, new { @class = "form-control", placeholder = "Enter your last name", required = "reduired" })
+                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Enter your last name", required = "reduired" })
                         </div>
                     </div>
 
@@ -81,8 +80,8 @@
                             <label for="subject">Date of Birth</label>
                             <div class="input-date">
                                 @*<input type="text" class="form-control" id="dob" placeholder="Enter your date of birth">*@
-                                @Html.TextBoxFor(model=> model.DOB, new { @class = "form-control", placeholder = "Enter your date of birth" })
-                                <img src="~/img/icons/date.png" alt="calendar" id="cal">
+                                @Html.TextBoxFor(model => model.DOB, "{0:yyyy-MM-dd}" ,new { @class = "form-control", placeholder = "Enter your date of birth", type = "date" })
+                                @*<img src="~/img/icons/date.png" alt="calendar" id="cal">*@
                             </div>
                         </div>
                     </div>
@@ -92,11 +91,11 @@
                             <label for="subject">Phone Number</label>
                             <div class="row">
                                 <div class="col-md-3 col-sm-4 col-xs-4">
-                                    @Html.DropDownListFor(model=> model.CountryCode, new SelectList(Model.CountryCodeModel, "Country_Code", "Country_Code"), new { @class = "form-control" })
+                                    @Html.DropDownListFor(model => model.CountryCode, new SelectList(Model.CountryCodeModel, "Country_Code", "Country_Code"), new { @class = "form-control" })
                                 </div>
                                 <div class="col-md-9 col-sm-8 col-xs-8">
                                     @*<input class="form-control" id="subject" placeholder="Enter your phone number">*@
-                                    @Html.TextBoxFor(model=> model.Phone, new { @class = "form-control", placeholder = "Enter your phone number" })
+                                    @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", placeholder = "Enter your phone number" })
                                 </div>
                             </div>
 
@@ -119,7 +118,7 @@
                         <div class="contact-inputs">
                             <label for="fullname">Address Line 1 <span>*</span> </label>
                             @*<input type="text" class="form-control" id="fullname" placeholder="Enter your address">*@
-                            @Html.TextBoxFor(model=> model.Address1, new { @class = "form-control", placeholder = "Enter your address", required="required" })
+                            @Html.TextBoxFor(model => model.Address1, new { @class = "form-control", placeholder = "Enter your address", required = "required" })
                         </div>
                     </div>
 
@@ -127,7 +126,7 @@
                         <div class="contact-inputs">
                             <label for="fullname">City <span>*</span> </label>
                             @*<input type="text" class="form-control" id="fullname" placeholder="Enter your city">*@
-                            @Html.TextBoxFor(model=> model.City, new { @class = "form-control", placeholder = "Enter your city", required="required" })
+                            @Html.TextBoxFor(model => model.City, new { @class = "form-control", placeholder = "Enter your city", required = "required" })
 
                         </div>
                     </div>
@@ -136,7 +135,7 @@
                         <div class="contact-inputs">
                             <label for="fullname">ZipCode <span>*</span> </label>
                             @*<input type="text" class="form-control" id="fullname" placeholder="Enter your ZipCode">*@
-                            @Html.TextBoxFor(model=> model.Zipcode, new { @class = "form-control" , placeholder = "Enter your ZipCode", required = "required" })
+                            @Html.TextBoxFor(model => model.Zipcode, new { @class = "form-control", placeholder = "Enter your ZipCode", required = "required" })
                         </div>
                     </div>
 
@@ -148,7 +147,7 @@
                         <div class="contact-inputs">
                             <label for="fullname">Address Line 2 <span>*</span> </label>
                             @*<input type="text" class="form-control" id="fullname" placeholder="Enter your address">*@
-                            @Html.TextBoxFor(model=> model.Address2, new { @class = "form-control", placeholder = "Enter your address", required = "required" })
+                            @Html.TextBoxFor(model => model.Address2, new { @class = "form-control", placeholder = "Enter your address", required = "required" })
                         </div>
                     </div>
 
@@ -163,7 +162,7 @@
                     <div class="form-group">
                         <div class="contact-inputs">
                             <label>Country <span>*</span> </label>
-                            @Html.DropDownListFor(model=> model.Country, new SelectList(Model.countryModel, "Country_Id","Country_Val"), new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.Country, new SelectList(Model.countryModel, "Country_Id", "Country_Val"), new { @class = "form-control", required="required" })
                         </div>
                     </div>
 
@@ -184,7 +183,7 @@
                         <div class="contact-inputs">
                             <label for="fullname">University <span>*</span> </label>
                             @*<input type="text" class="form-control" id="fullname" placeholder="Enter your university">*@
-                            @Html.TextBoxFor(model=> model.University, new { @class = "form-control", placeholder = "Enter your university", required="required" })
+                            @Html.TextBoxFor(model => model.University, new { @class = "form-control", placeholder = "Enter your university", required = "required" })
                         </div>
                     </div>
 
@@ -206,7 +205,7 @@
 
 
             <div class="contact-submit-btn">
-                <button class="btn" type="submit">SUBMIT</button>
+                <button class="btn" type="submit" onclick="myfunc()">SUBMIT</button>
             </div>
 
         }

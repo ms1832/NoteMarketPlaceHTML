@@ -1,57 +1,40 @@
 ﻿
 @{
-    ViewBag.Title = "DownloadedNotes";
+    ViewBag.Title = "RejectedNotes";
     Layout = "~/Views/Shared/_AdminNav.cshtml";
 }
 
-@model List<NoteMarketPlace.Models.AdminModel.DownloadedNotes>
+@model List<NoteMarketPlace.Models.AdminModel.RejectedNotesModel>
 
 
-<div id="downloaded-notes">
+
+<div id="rejected-notes">
     <div class="content-box-lg">
 
         <div class="contact-text">
-            <h4>Downloaded Notes</h4>
+            <h4>Rejected Notes</h4>
         </div>
+
+
+        <h6 class="seller-tag">Seller</h6>
 
         <div class="table-heading">
             <div class="row">
-
-                <div class="col-md-6 col-sm-12 col-xs-12">
-
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4">
-                            <div class="details-choose">
-                                <h5>Note</h5>
-                                @Html.DropDownList("NoteId", new SelectList(ViewBag.NoteList, "NoteId", "NoteTitle"),"Select Note", new {@onchange="Filter(this)" })
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4">
-                            <div class="details-choose">
-                                <h5>Seller</h5>
-                                @Html.DropDownList("SellerId", new SelectList(ViewBag.SellerList, "SellerId", "SellerName" ), "Select Seller", new { @onchange = "Filter(this)" })
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4">
-                            <div class="details-choose">
-                                <h5>Buyer</h5>
-                                @Html.DropDownList("BuyerId", new SelectList(ViewBag.BuyerList, "BuyerId", "BuyerName"), "Select Buyer", new { @onchange = "Filter(this)" })
-                            </div>
-                        </div>
+                <div class="col-md-6 col-sm-4 col-xs-12">
+                    <div class="seller-choose">
+                        @Html.DropDownList("SellerId", new SelectList(ViewBag.SellerList,"SellerId","SellerName"), "Select Seller", new {@onchange="Filter(obj)" })
                     </div>
-
                 </div>
-
-                <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="col-md-6 col-sm-8 col-xs-12">
                     <div class="row">
                         <div class="col-md-9 col-sm-9 col-xs-8">
                             <div class="search">
-                                <img src="../img/icons/search-icon.png">
-                                <input type="search" placeholder="search" class="form-control" id="downloadednotes-search-input">
+                                <img src="~/img/icons/search-icon.png">
+                                <input type="search" placeholder="search" class="form-control" id="rejectednotes-search-input">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-4">
-                            <button class="btn btn-search" id="downloadednotes-search-click">SEARCH</button>
+                            <button class="btn btn-search" id="rejectednotes-search-click">SEARCH</button>
                         </div>
                     </div>
                 </div>
@@ -60,18 +43,17 @@
 
         <div class="table-responsive dashboard-table">
 
-            <table class="table" id="downloadednotes-table">
+            <table class="table" id="rejectednotes-table">
 
                 <thead>
                     <tr>
                         <th scope="col">SR NO.</th>
                         <th scope="col">NOTE TITLE</th>
                         <th scope="col">CATEGORY</th>
-                        <th scope="col">BUYER</th>
                         <th scope="col">SELLER</th>
-                        <th scope="col">SELL TYPE</th>
-                        <th scope="col">PRICE</th>
-                        <th scope="col">DOWNLOADED DATE/TIME</th>
+                        <th scope="col">DATE ADDED</th>
+                        <th scope="col">REJECTED BY</th>
+                        <th scope="col">REMARK</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -86,36 +68,30 @@
                         }
                         else
                         {
-
                             int count = 0;
                             foreach (var data in Model)
                             {
                                 count++;
                                 <tr>
                                     <td scope="row">@count</td>
-                                    <td style="cursor:pointer" onclick="NoteDetail('@data.NoteId')">@data.Title</td>
+                                    <td onclick="NoteDetail('@data.NoteId')">@data.Title</td>
                                     <td>@data.Category</td>
-                                    <td>
-                                        @data.BuyerName
-                                        <div class="table-actions-view">
-                                            <img src="~/img/icons/eye.png" alt="view" onclick="Member('@data.BuyerId')">
-                                        </div>
-                                    </td>
                                     <td>
                                         @data.SellerName
                                         <div class="table-actions-view">
                                             <img src="~/img/icons/eye.png" alt="view" onclick="Member('@data.SellerId')">
                                         </div>
                                     </td>
-                                    <td>@(data.Price == 0 ? "Free" : "Paid")</td>
-                                    <td>$@data.Price</td>
-                                    <td>@data.DownloadedDate.ToString("dd-MM-yyyy, HH:mm")</td>
+                                    <td>@data.DateEdited.ToString("dd-MM-yyyy, HH:mm")</td>
+                                    <td>@data.RejectedBy</td>
+                                    <td>@data.Remarks</td>
                                     <td>
                                         <div class="table-actions-view">
                                             <div class="dropdown">
                                                 <img id="more-dropeddown" src="~/img/icons/dots.png" alt="more"
                                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <div class="dropdown-menu more-dropdown-menu" aria-labelledby="more-dropeddown">
+                                                    <a class="dropdown-item" onclick="Approve('@data.NoteId')">Approve</a>
                                                     <a class="dropdown-item" href="/Admin/DownloadFile?noteid=@data.NoteId">Download Notes</a>
                                                     <a class="dropdown-item" onclick="NoteDetail('@data.NoteId')">View More Details</a>
                                                 </div>
@@ -123,13 +99,12 @@
                                         </div>
                                     </td>
                                 </tr>
-
                             }
 
                         }
 
                     }
-                   
+                    
                 </tbody>
             </table>
         </div>
@@ -140,39 +115,11 @@
 
 <script>
 
-    var sellerId, noteId, buyerId;
-    
     function Filter(obj) {
-
-        var data = {};
-
-        if (obj.id == "NoteId") {
-            noteId = obj.value;
-        }
-        if (obj.id == "SellerId") {
-            sellerId = obj.value;
-        }
-        if (obj.id == "BuyerId") {
-            buyerId = obj.value;
-        }
-
-
-        if (sellerId != null) {
-            data.sellerId = sellerId;
-        }
-        if (noteId != null) {
-            data.noteId = noteId;
-        }
-        if (buyerId != null) {
-            data.buyerId = buyerId;
-        }
-
-        console.log(data);
-
         $.ajax({
             method: 'GET',
-            url: 'DownloadedNotes',
-            data: data,
+            url: 'RejectedNotes',
+            data: { sellerId: obj.value },
             success: function (data) {
                 document.body.innerHTML = data;
             },
@@ -182,14 +129,28 @@
         });
     }
 
+    function Approve(id) {
+
+        $.ajax({
+            method: 'POST',
+            url: 'NoteStatusUpdate',
+            data: { noteid: id, status: 'Approve' },
+            success: function () {
+                location.reload();
+            },
+            error: function () {
+                alert("Try Again");
+            }
+        });
+
+    }
 
     function NoteDetail(id) {
-        location.href = "../Note_Details/" + id;
+        location.href = '../Note_Details/' + id + "?ReadOnly=true";
     }
 
     function Member(id) {
-        location.href = "MemberDetails?id=" + id;
+        location.href = 'MemberDetails?id=' + id;
     }
-
 
 </script>
