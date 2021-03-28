@@ -1350,18 +1350,36 @@ namespace NoteMarketPlace.Controllers
                 // get created note Id
                 var newnote = _Context.Note_Details.FirstOrDefault(m => m.Status == 3 && m.Title == oldnote.Note.Title && m.User_Id == currentuser);
 
-                //set preview
-                if(oldnote.Note.Note_Preview != null)
+                string path = CreateDirectory(currentuser, newnote.Id);
+
+
+                //set image
+                if (!oldnote.Note.Image.Equals("../Members/Default_book.jpg"))
                 {
-                    newnote.Note_Preview = "../Members/"+ currentuser + "/" + newnote.Id + "/" + oldnote.Note.Note_Preview ;
+                    newnote.Image = "../Members/" + currentuser + "/" + newnote.Id + "/" + Path.GetFileName(oldnote.Note.Image);
+
+                    string imgpath = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentuser + "/" + noteId), Path.GetFileName(oldnote.Note.Image));
+                    string newimgpath = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentuser + "/" + newnote.Id), Path.GetFileName(oldnote.Note.Image));
+                    byte[] imgfilebyte = GetFile(imgpath);
+                    System.IO.File.WriteAllBytes(newimgpath, imgfilebyte);
+                }
+
+                // set preview
+                if (oldnote.Note.Note_Preview != null )
+                {
+                    newnote.Note_Preview = "../Members/" + currentuser + "/" + newnote.Id + "/" + Path.GetFileName(oldnote.Note.Note_Preview);
+
+                    string imgpath = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentuser + "/" + noteId ), Path.GetFileName(oldnote.Note.Note_Preview));
+                    string newimgpath = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentuser + "/" + newnote.Id ), Path.GetFileName(oldnote.Note.Note_Preview));
+                    byte[] imgfilebyte = GetFile(imgpath);
+                    System.IO.File.WriteAllBytes(newimgpath, imgfilebyte);
                 }
 
 
-                string path = CreateDirectory(currentuser, newnote.Id);
-
                 // create attachments
                 var cloneattachment = _Context.NotesAttachments;
-                cloneattachment.Add(new NotesAttachment {
+                cloneattachment.Add(new NotesAttachment
+                {
                     NoteId = newnote.Id,
                     FileName = oldnote.Attachment.FileName,
                     FilePath = path,
@@ -1370,6 +1388,18 @@ namespace NoteMarketPlace.Controllers
                 });
 
                 _Context.SaveChanges();
+
+                var newAttachment = cloneattachment.Where(m => m.NoteId == newnote.Id).FirstOrDefault();
+
+                // set attachments
+                newAttachment.FilePath = "../Members/" + currentuser + "/" + newnote.Id + "/Attachment/";
+                newAttachment.FileName = Path.GetFileName(oldnote.Attachment.FileName);
+
+                string filepath = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentuser + "/" + noteId + "/Attachment"), oldnote.Attachment.FileName);
+                string filenewpath = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentuser + "/" + newnote.Id + "/Attachment"), oldnote.Attachment.FileName);
+                byte[] filebyte = GetFile(filepath);
+                System.IO.File.WriteAllBytes(filenewpath, filebyte);
+
             }
 
             return RedirectToAction("Dashboard");
