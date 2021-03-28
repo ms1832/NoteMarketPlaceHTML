@@ -519,7 +519,7 @@ namespace NoteMarketPlace.Controllers
                 return RedirectToAction("Sell_Note");
             }
 
-            using(var _Context = new ApplicationContext())
+            using (var _Context = new ApplicationContext())
             {
                 // current user
                 var currentUser = _Context.Users.FirstOrDefault(m => m.Email == User.Identity.Name).UserId;
@@ -536,34 +536,36 @@ namespace NoteMarketPlace.Controllers
                     note.MaptoModel(note_details, Attachment);
 
                     // note image
-                    if(note.DisplayPicture == null)
+                    if (note.Picture == null)
                     {
                         note_details.Image = note_details.Image;
                     }
                     else
                     {
-                        note_details.Image = "../Members/"+currentUser+"/"+id+"/"+note.DisplayPicture;
+                        note_details.Image = "../Members/" + currentUser + "/" + id + "/" + note.DisplayPicture;
+                        string _path = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentUser + "/" + id), note.DisplayPicture);
+                        note.Picture.SaveAs(_path);
                     }
 
                     // preview
-                    if (note.NotePreview == null)
+                    if (note.Preview == null)
                     {
                         note_details.Note_Preview = note_details.Note_Preview;
                     }
                     else
                     {
                         note_details.Note_Preview = "../Members/" + currentUser + "/" + id + "/" + note.NotePreview;
+                        string _path = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentUser + "/" + id), note.NotePreview);
+                        note.Preview.SaveAs(_path);
                     }
 
                     // attachment
-                    if (note.UploadNotes == null)
-                    {
-                        Attachment.FileName = Attachment.FileName;
-                    }
-                    else
+                    if (note.Notefile != null)
                     {
                         Attachment.FileName = note.UploadNotes;
                         Attachment.FilePath = "../Members/" + currentUser + "/" + id + "/Attachment/";
+                        string _path = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentUser + "/" + id + "/Attachment"), note.UploadNotes);
+                        note.Notefile.SaveAs(_path);
                     }
 
 
@@ -603,25 +605,29 @@ namespace NoteMarketPlace.Controllers
 
                     var createdNote = note_details.FirstOrDefault(m => m.User_Id == currentUser && m.Title == note.Title);
 
+                    // create folder
+                    string path = CreateDirectory(currentUser, createdNote.Id);
+
                     // set image
-                    if(createdNote.Image == null)
+                    if (createdNote.Image == null)
                     {
                         createdNote.Image = DefaultImg;
                     }
                     else
                     {
                         createdNote.Image = "../Members/" + currentUser + "/" + createdNote.Id + "/" + createdNote.Image;
+                        string fullpath = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentUser + "/" + createdNote.Id), note.DisplayPicture);
+                        note.Picture.SaveAs(fullpath);
                     }
 
                     // set preview
-                    if (createdNote.Image != null)
+                    if (createdNote.Note_Preview != null)
                     {
                         createdNote.Note_Preview = "../Members/" + currentUser + "/" + createdNote.Id + "/" + createdNote.Note_Preview;
+                        string fullpath = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentUser + "/" + createdNote.Id), note.NotePreview);
+                        note.Preview.SaveAs(fullpath);
                     }
 
-
-                    // create folder
-                    string path = CreateDirectory(currentUser, createdNote.Id);
 
                     var attachments = _Context.NotesAttachments;
                     attachments.Add(new NotesAttachment
@@ -633,6 +639,10 @@ namespace NoteMarketPlace.Controllers
                         IsActive = true
                     });
                     _Context.SaveChanges();
+
+                    string _path = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentUser + "/" + createdNote.Id + "/Attachment"), note.UploadNotes);
+                    note.Notefile.SaveAs(_path);
+
 
                     return RedirectToAction("Dashboard", "User");
 
@@ -657,7 +667,7 @@ namespace NoteMarketPlace.Controllers
 
             using (var _Context = new ApplicationContext())
             {
-                
+
                 // current user
                 var currentUser = _Context.Users.FirstOrDefault(m => m.Email == User.Identity.Name);
 
@@ -673,35 +683,38 @@ namespace NoteMarketPlace.Controllers
                     note.MaptoModel(draftNote, draftAttachent);
 
                     // note image
-                    if (note.DisplayPicture == null)
+                    if (note.Picture == null)
                     {
                         draftNote.Image = draftNote.Image;
                     }
                     else
                     {
                         draftNote.Image = "../Members/" + currentUser.UserId + "/" + id + "/" + note.DisplayPicture;
+                        string _path = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentUser.UserId + "/" + id), note.DisplayPicture);
+                        note.Picture.SaveAs(_path);
                     }
 
                     // preview
-                    if (note.NotePreview == null)
+                    if (note.Preview == null)
                     {
                         draftNote.Note_Preview = draftNote.Note_Preview;
                     }
                     else
                     {
                         draftNote.Note_Preview = "../Members/" + currentUser.UserId + "/" + id + "/" + note.NotePreview;
+                        string _path = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentUser.UserId + "/" + id), note.NotePreview);
+                        note.Preview.SaveAs(_path);
                     }
 
                     // attachment
-                    if (note.UploadNotes == null)
-                    {
-                        draftAttachent.FileName = draftAttachent.FileName;
-                    }
-                    else
+                    if (note.Notefile != null)
                     {
                         draftAttachent.FileName = note.UploadNotes;
-                        draftAttachent.FilePath = "../Members/" + currentUser.UserId + "/" + id + "/Attachment/";
+                        draftAttachent.FilePath = "../Members/" + currentUser + "/" + id + "/Attachment/";
+                        string _path = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentUser.UserId + "/" + id + "/Attachment"), note.UploadNotes);
+                        note.Notefile.SaveAs(_path);
                     }
+
 
                     draftNote.Status = 4;
                     draftNote.Edited_Date = DateTime.Now;
@@ -715,16 +728,16 @@ namespace NoteMarketPlace.Controllers
 
 
                     // send mail to admins
-                    string subject = currentUser.First_Name+" "+currentUser.Last_Name+ " sent his note for review";
+                    string subject = currentUser.First_Name + " " + currentUser.Last_Name + " sent his note for review";
                     string body = "Hello Admins, \\n"
-                        + "We want to inform you that, "+ currentUser.First_Name + " " + currentUser.Last_Name + " sent his note"
-                        + note.Title +" for review.Please look at the notes and take required actions.";
+                        + "We want to inform you that, " + currentUser.First_Name + " " + currentUser.Last_Name + " sent his note"
+                        + note.Title + " for review.Please look at the notes and take required actions.";
                     body += "\\nRegards,\\nNotes Marketplace";
 
                     bool isSend = SendEmail.EmailSend(emails, subject, body, false);
 
 
-                    return RedirectToAction("Dashboard","User");
+                    return RedirectToAction("Dashboard", "User");
                 }
                 // create note as publish
                 else
@@ -756,6 +769,9 @@ namespace NoteMarketPlace.Controllers
 
                     var createdNote = note_details.FirstOrDefault(m => m.User_Id == currentUser.UserId && m.Title == note.Title);
 
+                    string path = CreateDirectory(currentUser.UserId, createdNote.Id);
+
+
                     // set image
                     if (createdNote.Image == null)
                     {
@@ -763,17 +779,20 @@ namespace NoteMarketPlace.Controllers
                     }
                     else
                     {
-                        createdNote.Image = "../Members/" + currentUser.UserId + "/" + createdNote.Id + "/Attachment/" + createdNote.Image;
+                        createdNote.Image = "../Members/" + currentUser.UserId + "/" + createdNote.Id + "/" + createdNote.Image;
+                        string fullpath = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentUser.UserId + "/" + createdNote.Id), note.DisplayPicture);
+                        note.Picture.SaveAs(fullpath);
                     }
+
 
                     // set preview
-                    if(createdNote.Note_Preview != null)
+                    if (createdNote.Note_Preview != null)
                     {
-                        createdNote.Note_Preview = "../Members/" + currentUser.UserId + "/" + createdNote.Id + createdNote.Note_Preview;
+                        createdNote.Note_Preview = "../Members/" + currentUser.UserId + "/" + createdNote.Id +"/"+ createdNote.Note_Preview;
+                        string fullpath = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentUser.UserId + "/" + createdNote.Id), note.NotePreview);
+                        note.Preview.SaveAs(fullpath);
                     }
 
-
-                    string path = CreateDirectory(currentUser.UserId, createdNote.Id);
 
                     var attachments = _Context.NotesAttachments;
                     attachments.Add(new NotesAttachment
@@ -785,6 +804,10 @@ namespace NoteMarketPlace.Controllers
                         IsActive = true
                     });
                     _Context.SaveChanges();
+
+                    // attachment
+                    string _path = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentUser.UserId + "/" + createdNote.Id + "/Attachment"), note.UploadNotes);
+                    note.Notefile.SaveAs(_path);
 
 
                     // email addressed
@@ -1034,13 +1057,16 @@ namespace NoteMarketPlace.Controllers
                     var detailsUpdate = _Context.User_Details.FirstOrDefault(m=> m.UserId == currentuser);
 
                     user.MaptoModel(userUpdate, detailsUpdate);
-                    if(user.ProfilePicture == null)
+
+                    if(user.Image == null)
                     {
                         detailsUpdate.Profile_Img = detailsUpdate.Profile_Img;
                     }
                     else
                     {
                         detailsUpdate.Profile_Img = "../Members/"+currentuser+"/"+user.ProfilePicture;
+                        string _path = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentuser), user.ProfilePicture);
+                        user.Image.SaveAs(_path);
                     }
                     userUpdate.Modified_Date = DateTime.Now;
                     detailsUpdate.Modified_date = DateTime.Now;
@@ -1060,7 +1086,7 @@ namespace NoteMarketPlace.Controllers
                         Gender = user.Gender,
                         Phone_No_Country_Code = user.CountryCode,
                         Phone_No = user.Phone,
-                        Profile_Img = "../Members/"+currentuser+"/"+user.ProfilePicture,
+                        Profile_Img = user.ProfilePicture == null ? null : "../Members/"+currentuser+"/"+user.ProfilePicture,
                         Address_Line1 = user.Address1,
                         Address_Line2 = user.Address2,
                         City = user.City,
@@ -1075,6 +1101,13 @@ namespace NoteMarketPlace.Controllers
                     _Context.SaveChanges();
 
                     CreateDirectory(create.FirstOrDefault(m => m.UserId == currentuser).UserId);
+
+                    if(user.Image != null)
+                    {
+                        string _path = System.IO.Path.Combine(Server.MapPath("~/Members/" + currentuser), user.ProfilePicture);
+                        user.Image.SaveAs(_path);
+                    }
+
                     return RedirectToAction("MyProfile");
 
                 }

@@ -1066,14 +1066,16 @@ namespace NoteMarketPlace.Controllers
                 var details = _Context.User_Details.Single(x => x.UserId == user.UserId);
 
                 profile.MAptoModel(user,details);
-                
-                if(profile.ProfileImage == null)
+
+                if (profile.Image == null)
                 {
                     details.Profile_Img = details.Profile_Img;
                 }
                 else
                 {
                     details.Profile_Img = "../Members/" + user.UserId + "/" + profile.ProfileImage;
+                    string _path = System.IO.Path.Combine(Server.MapPath("~/Members/" + user.UserId), profile.ProfileImage);
+                    profile.Image.SaveAs(_path);
                 }
 
                 user.Modified_By = user.UserId;

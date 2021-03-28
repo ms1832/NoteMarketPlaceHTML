@@ -31,6 +31,8 @@ namespace NoteMarketPlace.Models
 
         public string ProfilePicture { get; set; }
 
+        public HttpPostedFileBase Image { get; set; }
+
         [Required]
         public string Address1 { get; set; }
 

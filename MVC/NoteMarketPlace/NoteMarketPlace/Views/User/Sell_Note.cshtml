@@ -19,7 +19,7 @@
 
     <div class="content-box-lg">
 
-        @using (Html.BeginForm(FormMethod.Post))
+        @using (Html.BeginForm("Save","User",FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
 
             @Html.AntiForgeryToken()
@@ -46,7 +46,7 @@
                             <label class="label-1">Display Picture</label>
                             <div class="input-upload">
                                 <!--<input type="file" class="form-control image-opacity-0" id="image">-->
-                                @Html.TextBoxFor(model => model.DisplayPicture, new { @class = "form-control image-opacity-0", type = "file", accept = "image/jpeg, image/jpg, image/png" })
+                                @Html.TextBoxFor(model => model.DisplayPicture, new { @class = "form-control image-opacity-0" })
                                 <div class="upload-img" id="upload_dp_click">
                                     <img src="~/img/icons/upload-file.png" alt="upload">
                                     <p>Upload a picture</p>
@@ -59,8 +59,8 @@
                         <div class="contact-inputs">
                             <label class="label-1">Type*</label>
                             <!--<select class="form-control">
-                                    <option>Select your Note Type</option>
-                                </select>-->
+                            <option>Select your Note Type</option>
+                        </select>-->
                             @Html.DropDownListFor(model => model.Type, new SelectList(ViewBag.TypeList, dataValueField: "Type_Id", dataTextField: "Type_Name"), "Select your Note Type", new { @class = "form-control", required = "required" })
                         </div>
                     </div>
@@ -72,9 +72,6 @@
                     <div class="form-group">
                         <div class="contact-inputs">
                             <label class="label-1">Category <span>*</span> </label>
-                            <!--<select class="form-control">
-                                    <option>Select Your Categoty</option>
-                                </select>-->
                             @Html.DropDownListFor(model => model.Category, new SelectList(ViewBag.CategotyList, "Category_Id", "Category_Name"), "Select Your Categoty", new { @class = "form-control", required = "required" })
                         </div>
                     </div>
@@ -84,7 +81,7 @@
                             <label class="label-1">Upload Notes <span>*</span> </label>
                             <div class="input-upload">
                                 <!--<input type="file" class="form-control image-opacity-0" id="image">-->
-                                @Html.TextBoxFor(model => model.UploadNotes, new { @class = "form-control image-opacity-0", type = "file", accept = "application/pdf", required = "required" })
+                                @Html.TextBoxFor(model => model.UploadNotes, new { @class = "form-control image-opacity-0", required="required" })
                                 <div class="upload-img" id="upload_note_click">
                                     <img src="~/img/icons/upload-note.png" alt="upload">
                                     <p>Upload your notes</p>
@@ -133,8 +130,8 @@
                         <div class="contact-inputs">
                             <label class="label-1">Country</label>
                             <!--<select class="form-control">
-                                    <option>Select your country</option>
-                                </select>-->
+                            <option>Select your country</option>
+                        </select>-->
                             @Html.DropDownListFor(model => model.Country, new SelectList(ViewBag.CountryList, "Country_Id", "Country_Name"), "Select your country", new { @class = "form-control" })
                         </div>
                     </div>
@@ -236,7 +233,7 @@
                             <label for="subject" class="label-1">Note Preview</label>
                             <div class="input-upload">
                                 <!--<input type="file" class="form-control image-opacity-0" id="image">-->
-                                @Html.TextBoxFor(model => model.NotePreview, new { @class = "form-control image-opacity-0", type = "file", accept = "application/pdf" })
+                                @Html.TextBoxFor(model => model.NotePreview, new { @class = "form-control image-opacity-0" })
                                 <div class="upload-img" id="upload_preview_click">
                                     <img src="~/img/icons/upload-file.png" alt="upload">
                                     <p>Upload a file</p>
@@ -250,10 +247,13 @@
 
             </div>
 
+            @(Html.TextBoxFor(model => model.Picture, new { type = "file",accept="image/*" ,style = "display: none;" }))
+            @(Html.TextBoxFor(model => model.Notefile, new { type = "file", accept = "application/pdf", style = "display: none;" }))
+            @Html.TextBoxFor(model => model.Preview, new { type = "file", accept = "application/pdf", style = "display: none;" })
 
             <div class="contact-submit-btn">
                 <button class="btn" formaction="@(ViewBag.Edit == true ? "Save?id=" + Model.ID : "Save")">SAVE</button>
-                <button class="btn" formaction="@(ViewBag.Edit == true ? "Publish?id=" + Model.ID : "Publish")" >PUBLISH</button>
+                <button class="btn" formaction="@(ViewBag.Edit == true ? "Publish?id=" + Model.ID : "Publish")">PUBLISH</button>
             </div>
 
         }
@@ -261,3 +261,37 @@
     </div>
 
 </div>
+<script src="~/Scripts/jquery.min.js"></script>
+
+<script>
+
+    $('#upload_dp_click').click(function () {
+        $('#Picture').click();
+    });
+
+    $('#upload_preview_click').click(function () {
+        $('#Preview').click();
+    });
+
+    $('#upload_note_click').click(function () {
+        $('#Notefile').click();
+    });
+
+
+    document.getElementById('Picture').onchange = function () {
+        var name = this.files.item(0).name;
+        $('#DisplayPicture').val(name);
+    };
+
+
+    document.getElementById('Preview').onchange = function () {
+        var name = this.files.item(0).name;
+        $('#NotePreview').val(name);
+    };
+
+    document.getElementById('Notefile').onchange = function () {
+        var n = this.files.item(0).name;
+        $('#UploadNotes').val(n);
+    };
+
+</script>

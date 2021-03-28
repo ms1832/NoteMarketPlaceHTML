@@ -97,15 +97,15 @@ $(function () {
 
 
 // add notes file opens
-$("#upload_dp_click").click(function () {
-    $("#DisplayPicture").click();
-});
-$("#upload_note_click").click(function () {
-    $("#UploadNotes").click();
-});
-$("#upload_preview_click").click(function () {
-    $("#NotePreview").click();
-});
+//$("#upload_dp_click").click(function () {
+//    $("#DisplayPicture").click();
+//});
+//$("#upload_note_click").click(function () {
+//    $("#UploadNotes").click();
+//});
+//$("#upload_preview_click").click(function () {
+//    $("#NotePreview").click();
+//});
 
 
 

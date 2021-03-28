@@ -14,7 +14,7 @@
             <h4>My Profile</h4>
         </div>
 
-        @using (Html.BeginForm(FormMethod.Post))
+        @using (Html.BeginForm("MyProfile", "Admin",FormMethod.Post, new {enctype = "multipart/form-data" }))
         {
 
             <div class="row">
@@ -43,7 +43,7 @@
                         <div class="contact-inputs">
                             <label for="fullname">Email <span>*</span> </label>
                             @*<input type="email" class="form-control" id="fullname" placeholder="Enter your email address">*@
-                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Enter your email address", @readonly="readonly"})
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Enter your email address", @readonly = "readonly" })
                         </div>
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                     </div>
@@ -71,13 +71,11 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
                         <div class="contact-inputs">
                             <label for="subject">Profile Picture</label>
                             <div class="input-upload">
-                                @*<input type="file" class="form-control" id="image">*@
-                                @Html.TextBoxFor(model => model.ProfileImage, new { @class = "form-control", type = "file", accept = "image/*" })
+                                @Html.TextBoxFor(model => model.ProfileImage, new { @class = "form-control" })
                                 <div class="upload-img" id="upload_profile_img_click">
                                     <img src="~/img/icons/upload-file.png" alt="upload">
                                     <p>Upload a picture</p>
@@ -90,6 +88,9 @@
                         <button class="btn" type="submit">SUBMIT</button>
                     </div>
 
+                    @Html.TextBoxFor(model => model.Image, new {type="file", accept = "image/*" , style="display: none;" })
+
+
                 </div>
 
             </div>
@@ -100,3 +101,19 @@
     </div>
 </div>
 
+<script src="~/Scripts/jquery.min.js"></script>
+
+<script>
+
+    $('#upload_profile_img_click').click(function () {
+        $('#Image').click();
+    });
+
+    document.getElementById('Image').onchange = function () {
+        //alert(this.files.item(0).name);
+        var name = this.files.item(0).name;
+        $('#ProfileImage').val(name);
+        //alert($('#ProfileImage').val());
+    };
+
+</script>

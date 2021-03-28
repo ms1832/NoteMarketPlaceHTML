@@ -1,6 +1,7 @@
 ﻿using NoteMarketPlace.Models.AdminModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -107,8 +108,7 @@ namespace NoteMarketPlace.Controllers
                 {
                     var countryCode = _Context.Country_Details.Where(m => m.IsActive == true).ToList();
                     ViewBag.PhoneCode = countryCode;
-                    AddAdmin model = new AddAdmin();
-                    //model.CountryModel = countryCode.Select(x => new Models.CountryModel { Country_Code = x.Country_Code }).ToList();
+                    
 
 
                     ViewBag.Edit = false;
@@ -162,13 +162,18 @@ namespace NoteMarketPlace.Controllers
                 //add new Admin
                 else
                 {
+                    var random = new Random();
+                    int pwd = random.Next(100000,999999);
+
                     var create = _Context.Users;
                     create.Add(new User
                     {
                         First_Name = model.FirstName,
                         Last_Name = model.LastName,
                         Email = model.Email,
-                        Password = "",
+                        Password = pwd.ToString(),
+                        RoleId = 2,
+                        IsActive = true,
                         Create_Date = DateTime.Now
                     });
 
@@ -179,6 +184,7 @@ namespace NoteMarketPlace.Controllers
                     var details = _Context.User_Details;
                     details.Add(new User_Details
                     {
+                        UserId = newAdmin.UserId,
                         Phone_No_Country_Code = model.CountryCode,
                         Phone_No = model.Phone,
                         Address_Line1 = "",
@@ -190,6 +196,19 @@ namespace NoteMarketPlace.Controllers
 
                     _Context.SaveChanges();
 
+                    // send email to admin
+                    string subject = "Welcome to Note - MarketPlace";
+                    string body = "Hello "+ model.FirstName + " " + model.LastName + "\\n\\n";
+                    body += "You were added as a Admin in Note - MarketPlace \\n" ;
+                    body += "Your Credentials are, \\n";
+                    body += "Email: " + model.Email;
+                    body += "Password: " + newAdmin.Password;
+
+                    bool isSend = SendEmail.EmailSend(model.Email, subject, body);
+
+                    //create directory
+                    CreateDirectory(newAdmin.UserId);
+
 
                     return RedirectToAction("ManageAdmin");
                 }
@@ -198,6 +217,22 @@ namespace NoteMarketPlace.Controllers
             }
 
 
+        }
+
+
+        public string CreateDirectory(int userid)
+        {
+
+            string path = @"C:\Users\Lenovo\Desktop\projects\NoteMarketPlace\NoteMarketPlace\Members\" + userid;
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+                return path;
+            }
+            else
+            {
+                return null;
+            }
         }
 
 

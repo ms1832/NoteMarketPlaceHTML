@@ -27,6 +27,9 @@ namespace NoteMarketPlace.Models.AdminModel
 
         public string ProfileImage { get; set; }
 
+        public HttpPostedFileBase Image { get; set; }
+
+
 
 
         public List<CountryModel> PhoneCodeModel { get; set; }

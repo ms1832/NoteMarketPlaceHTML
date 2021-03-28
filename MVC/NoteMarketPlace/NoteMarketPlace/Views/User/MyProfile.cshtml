@@ -17,7 +17,7 @@
 
     <div class="content-box-lg">
 
-        @using (Html.BeginForm("MyProfile", "User", FormMethod.Post))
+        @using (Html.BeginForm("MyProfile", "User", FormMethod.Post,new {enctype = "multipart/form-data" }))
         {
 
             <div class="text-1">
@@ -55,7 +55,7 @@
                             <label for="subject">Profile Picture </label>
                             <div class="input-upload">
                                 @*<input type="file" class="form-control" id="image" accept="image/*">*@
-                                @Html.TextBoxFor(model => model.ProfilePicture, new { @class = "form-control", type = "file", accept = "image/*" })
+                                @Html.TextBoxFor(model => model.ProfilePicture, new { @class = "form-control" })
                                 <div class="upload-img" id="upload_profile_img_click">
                                     <img src="~/img/icons/upload-file.png" alt="upload">
                                     <p>Upload a picture</p>
@@ -80,7 +80,7 @@
                             <label for="subject">Date of Birth</label>
                             <div class="input-date">
                                 @*<input type="text" class="form-control" id="dob" placeholder="Enter your date of birth">*@
-                                @Html.TextBoxFor(model => model.DOB, "{0:yyyy-MM-dd}" ,new { @class = "form-control", placeholder = "Enter your date of birth", type = "date" })
+                                @Html.TextBoxFor(model => model.DOB, "{0:yyyy-MM-dd}", new { @class = "form-control", placeholder = "Enter your date of birth", type = "date" })
                                 @*<img src="~/img/icons/date.png" alt="calendar" id="cal">*@
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                     <div class="form-group">
                         <div class="contact-inputs">
                             <label>Country <span>*</span> </label>
-                            @Html.DropDownListFor(model => model.Country, new SelectList(Model.countryModel, "Country_Id", "Country_Val"), new { @class = "form-control", required="required" })
+                            @Html.DropDownListFor(model => model.Country, new SelectList(Model.countryModel, "Country_Id", "Country_Val"), new { @class = "form-control", required = "required" })
                         </div>
                     </div>
 
@@ -208,10 +208,30 @@
                 <button class="btn" type="submit" onclick="myfunc()">SUBMIT</button>
             </div>
 
+            @Html.TextBoxFor(model => model.Image, new { type = "file", accept="image/*" ,style = "display: none;" })
+
         }
 
     </div>
 
 
 </div>
-<!-- Contact Us Ends -->
+<!-- Profile Ends -->
+
+
+<script src="~/Scripts/jquery.min.js"></script>
+
+<script>
+
+    $('#upload_profile_img_click').click(function () {
+        $('#Image').click();
+    });
+
+    document.getElementById('Image').onchange = function () {
+        //alert(this.files.item(0).name);
+        var name = this.files.item(0).name;
+        $('#ProfileImage').val(name);
+        //alert($('#ProfileImage').val());
+    };
+
+</script>

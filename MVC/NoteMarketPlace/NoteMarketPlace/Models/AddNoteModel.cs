@@ -19,8 +19,14 @@ namespace NoteMarketPlace.Models
 
         public string DisplayPicture { get; set; }
 
+        public HttpPostedFileBase Picture { get; set; }
+
+
         [Required]
         public string UploadNotes { get; set; }
+
+        public HttpPostedFileBase Notefile { get; set; }
+
 
         [Required]
         public int Type { get; set; }
@@ -47,6 +53,8 @@ namespace NoteMarketPlace.Models
         public decimal Price { get; set; }
 
         public string NotePreview { get; set; }
+
+        public HttpPostedFileBase Preview { get; set; }
 
 
 
