@@ -155,17 +155,7 @@
 <script>
 
     function Filter(obj) {
-        $.ajax({
-            method: 'GET',
-            url: 'PublishedNotes',
-            data: { sellerId: obj.value },
-            success: function (data) {
-                document.body.innerHTML = data;
-            },
-            error: function () {
-                alert("Try Again");
-            }
-        });
+        location.href = "PublishedNotes?sellerId=" + obj.value;
     }
 
     function NoteDetail(id) {

@@ -116,17 +116,7 @@
 <script>
 
     function Filter(obj) {
-        $.ajax({
-            method: 'GET',
-            url: 'RejectedNotes',
-            data: { sellerId: obj.value },
-            success: function (data) {
-                document.body.innerHTML = data;
-            },
-            error: function () {
-                alert("Try Again");
-            }
-        });
+        location.href = "RejectedNotes?sellerId=" + obj.value;
     }
 
     function Approve(id) {

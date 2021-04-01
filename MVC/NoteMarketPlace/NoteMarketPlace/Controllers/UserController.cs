@@ -159,15 +159,15 @@ namespace NoteMarketPlace.Controllers
             using (var _Context = new ApplicationContext())
             {
                 // get all types
-                var type = _Context.Type_Details.ToList();
+                var type = _Context.Type_Details.Where(m=> m.IsActive == true).ToList();
                 // get all category
-                var category = _Context.Category_Details.ToList();
+                var category = _Context.Category_Details.Where(m => m.IsActive == true).ToList();
                 // get distinct university
                 var university = _Context.Note_Details.Where(m => m.University != null).Select(x => x.University).Distinct().ToList();
                 // get distinct courses
                 var course = _Context.Note_Details.Where(m => m.Course != null).Select(x => x.Course).Distinct().ToList();
                 // get all countries
-                var country = _Context.Country_Details.ToList();
+                var country = _Context.Country_Details.Where(m => m.IsActive == true).ToList();
 
                 // get all book details
                 var notes = (from Notes in _Context.Note_Details

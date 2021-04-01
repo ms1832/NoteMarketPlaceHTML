@@ -216,6 +216,18 @@
 
 <script>
 
+    // pagination (9 items per page)
+    $('.search-result').paginga({
+        itemsPerPage: 9,
+        itemsContainer: ".row",
+        item: "> div",
+        pager: ".paging",
+        nextPage: ".nextPage",
+        previousPage: ".previousPage",
+        pageNumbers: ".page_num"
+    });
+        
+
     var type, category, university, course, country, rating;
 
     function myFunc(obj) {
@@ -283,20 +295,10 @@
     });
 
 
-    // pagination (6 items per page)
-    $('.search-result').paginga({
-        itemsPerPage: 6,
-        itemsContainer: ".row",
-        item: "> div",
-        pager: ".paging",
-        nextPage: ".nextPage",
-        previousPage: ".previousPage",
-        pageNumbers: ".page_num"
-    });
-
-
     $('.details>h4').click(function () {
         location.href = "Note_Details/" + $(this).attr('noteId');
     });
+
+
 
 </script>

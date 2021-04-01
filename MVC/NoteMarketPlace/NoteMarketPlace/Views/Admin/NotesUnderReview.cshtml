@@ -161,18 +161,7 @@
 <script>
 
     function FilterSeller(obj) {
-        
-        $.ajax({
-            method: 'GET',
-            url: 'NotesUnderReview',
-            data: { sellerId: obj.value },
-            success: function (data) {
-                document.body.innerHTML = data;
-            },
-            error: function () {
-                alert("Try Again");
-            }
-        });
+        location.href = "NotesUnderReview?sellerId=" + obj.value;
     }
 
     function NoteDetail(id) {

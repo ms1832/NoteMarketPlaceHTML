@@ -62,7 +62,7 @@
                                             <a class="dropdown-item" href="../User/MySoldNotes">My Sold Notes</a>
                                             <a class="dropdown-item" href="../User/MyRejectedNotes">My Rejected Notes</a>
                                             <a class="dropdown-item" href="../ChangePassword">Change Password</a>
-                                            <a class="dropdown-item" href="../User/LogOut">LOGOUT</a>
+                                            <a class="dropdown-item" onclick="LogOut()">LOGOUT</a>
                                         </div>
                                     </div>
                                 </li>
@@ -90,7 +90,7 @@
                                             <li><a href="../User/MySoldNotes">My Sold Notes</a></li>
                                             <li><a href="../User/MyRejectedNotes">My Rejected Notes</a></li>
                                             <li><a href="../ChangePassword">Change Password</a></li>
-                                            <li><a href="../User/LogOut">Logout</a></li>
+                                            <li><a onclick="LogOut()">Logout</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -144,7 +144,10 @@
     <script>
 
         function LogOut() {
-            location.href = "../User/LogOut";
+
+            if (confirm("Are you sure want to logout?")) {
+                location.href = "../User/LogOut";
+            }
         }
 
     </script>

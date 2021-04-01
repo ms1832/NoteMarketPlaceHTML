@@ -109,12 +109,6 @@ $(function () {
 
 
 
-
-
-
-
-
-
 /*   Registered Users   */
 
 // Buyer Request

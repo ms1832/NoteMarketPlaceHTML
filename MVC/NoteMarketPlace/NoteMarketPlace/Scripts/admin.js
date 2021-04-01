@@ -294,3 +294,24 @@ $(function () {
     });
 
 });
+
+
+
+function applyDataTable() {
+
+    var table = $('#downloaded-notes #downloadednotes-table').DataTable({
+        'pageLength': 5,
+        'dom': '<t><"paging"p>',
+        'language': {
+            'paginate': {
+                'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
+                'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
+            }
+        }
+    });
+
+    $('#downloaded-notes #downloadednotes-search-click').click(function () {
+        table.search($('#downloaded-notes #downloadednotes-search-input').val()).draw();
+    });
+
+}
