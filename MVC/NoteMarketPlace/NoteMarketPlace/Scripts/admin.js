@@ -48,7 +48,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#dashboard #dashboard-search-click').click(function () {
@@ -70,7 +73,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#notes-under-review #noteunderreview-search-click').click(function () {
@@ -92,7 +98,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#downloaded-notes #downloadednotes-search-click').click(function () {
@@ -114,7 +123,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#manage-category #managecategory-search-click').click(function () {
@@ -136,7 +148,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#manage-country #managecountry-search-click').click(function () {
@@ -158,7 +173,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#manage-type #managetype-search-click').click(function () {
@@ -180,7 +198,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="/img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="/img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
 });
@@ -198,7 +219,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#members #members-search-click').click(function () {
@@ -220,7 +244,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#published-notes #publishednotes-search-click').click(function () {
@@ -242,7 +269,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#rejected-notes #rejectednotes-search-click').click(function () {
@@ -264,7 +294,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#spam-reports #spamnotereports-search-click').click(function () {
@@ -286,7 +319,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#manage-admin #manageadmin-search-click').click(function () {
@@ -307,7 +343,10 @@ function applyDataTable() {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#downloaded-notes #downloadednotes-search-click').click(function () {

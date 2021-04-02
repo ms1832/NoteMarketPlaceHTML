@@ -123,7 +123,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#buyer-request .btn-search').click(function () {
@@ -157,7 +160,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#published-notes-search').click(function () {
@@ -173,7 +179,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#progress-notes-search').click(function () {
@@ -194,7 +203,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#mydownload_search').click(function () {
@@ -215,7 +227,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#mysoldnote_search').click(function () {
@@ -236,7 +251,10 @@ $(function () {
                 'previous': '<span aria-hidden="true"> <img src="../img/icons/left-arrow.png" alt="previous"> </span>',
                 'next': '<span aria-hidden="true"> <img src="../img/icons/right-arrow.png" alt="next"> </span>'
             }
-        }
+        },
+        'columnDefs': [
+            { orderable: false, targets: ['nosort'] }
+        ]
     });
 
     $('#rejectednote_search').click(function () {

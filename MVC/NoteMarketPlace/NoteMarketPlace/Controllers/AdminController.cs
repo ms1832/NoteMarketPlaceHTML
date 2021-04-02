@@ -274,6 +274,7 @@ namespace NoteMarketPlace.Controllers
                         break;
                     case "Approve":
                         note.Status = 6;
+                        note.Published_Date = DateTime.Now;
                         break;
                 }
 
