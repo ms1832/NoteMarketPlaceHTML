@@ -190,10 +190,10 @@ namespace NoteMarketPlace.Controllers
 
                 // send mail to admins
                 string subject = "Sorry! We need to remove your notes from our portal.";
-                string body = "Hello " + seller.First_Name+" "+seller.Last_Name + ",\\n"
-                    + "We want to inform you that, your note <Note Title> has been removed from the portal. Please find our remarks as below -\\n";
+                string body = "Hello " + seller.First_Name+" "+seller.Last_Name + ",\n"
+                    + "We want to inform you that, your note <Note Title> has been removed from the portal. Please find our remarks as below -\n";
                 body += Remarks;
-                body += "\\nRegards,\\nNotes Marketplace";
+                body += "\nRegards,\nNotes Marketplace";
 
                 bool isSend = SendEmail.EmailSend(seller.Email, subject, body, false);
 
@@ -630,8 +630,8 @@ namespace NoteMarketPlace.Controllers
                              where Note.User_Id == id
                              join Status in _Context.Status on Note.Status equals Status.Id
                              join Category in _Context.Category_Details on Note.Category_Id equals Category.Category_Id
-                             let downloadedNotes = (_Context.Purchase_Details.Where(m => m.Downloader == id && m.IsAttachment_Downloaded == true).Count())
-                             let earning = (_Context.Purchase_Details.Where(m => m.Seller == id).Sum(x => x.PurchasedPrice))
+                             let downloadedNotes = (_Context.Purchase_Details.Where(m => m.Note_Id == Note.Id && m.Seller == id && m.IsAttachment_Downloaded == true).Count())
+                             let earning = (_Context.Purchase_Details.Where(m => m.Note_Id == Note.Id && m.Seller == id).Sum(x => x.PurchasedPrice))
                              select new MemberNoteModel
                              {
                                  NoteId = Note.Id,

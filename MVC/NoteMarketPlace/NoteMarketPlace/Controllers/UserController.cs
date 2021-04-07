@@ -410,9 +410,9 @@ namespace NoteMarketPlace.Controllers
 
                             // send mail to seller
                             string subject = user.First_Name + " wants to purchase your notes";
-                            string body = "Hello " + seller.First_Name + "\\n"
+                            string body = "Hello " + seller.First_Name + "\n"
                                 + "We would like to inform you that, " + user.First_Name + " wants to purchase your notes. Please see Buyer Requests tab and allow download access to Buyer if you have received the payment from him";
-                            body += "\\nRegards,\\nNotes MarketPlace";
+                            body += "\nRegards,\nNotes MarketPlace";
 
                             bool isSend = SendEmail.EmailSend(seller.Email, subject, body, false);
 
@@ -729,10 +729,10 @@ namespace NoteMarketPlace.Controllers
 
                     // send mail to admins
                     string subject = currentUser.First_Name + " " + currentUser.Last_Name + " sent his note for review";
-                    string body = "Hello Admins, \\n"
+                    string body = "Hello Admins, \n"
                         + "We want to inform you that, " + currentUser.First_Name + " " + currentUser.Last_Name + " sent his note"
                         + note.Title + " for review.Please look at the notes and take required actions.";
-                    body += "\\nRegards,\\nNotes Marketplace";
+                    body += "\nRegards,\nNotes Marketplace";
 
                     bool isSend = SendEmail.EmailSend(emails, subject, body, false);
 
@@ -816,10 +816,10 @@ namespace NoteMarketPlace.Controllers
 
                     // send mail to admins
                     string subject = currentUser.First_Name + " " + currentUser.Last_Name + " sent his note for review";
-                    string body = "Hello Admins, \\n"
+                    string body = "Hello Admins, \n"
                         + "We want to inform you that, " + currentUser.First_Name + " " + currentUser.Last_Name + " sent his note"
                         + note.Title + " for review.Please look at the notes and take required actions.";
-                    body += "\\nRegards,\\nNotes Marketplace";
+                    body += "\nRegards,\nNotes Marketplace";
 
                     bool isSend = SendEmail.EmailSend(emails, subject, body, false);
 
@@ -936,9 +936,9 @@ namespace NoteMarketPlace.Controllers
 
                     // send mail to buyer
                     string subject = seller.First_Name + " Allows you to download a note";
-                    string body = "Hello " + downloader.First_Name + "\\n"
+                    string body = "Hello " + downloader.First_Name + "\n"
                         + "We would like to inform you that, "+ seller.First_Name +" Allows you to download a note. Please login and see My Download tabs to download particular note.";
-                    body += "\\nRegards,\\nNotes MarketPlace";
+                    body += "\nRegards,\nNotes MarketPlace";
 
                     bool isSend = SendEmail.EmailSend(downloader.Email, subject, body, false);
 
@@ -1226,10 +1226,10 @@ namespace NoteMarketPlace.Controllers
 
                 // send mail to admin
                 string subject = currentuser.First_Name + " " + currentuser.Last_Name + "  Reported an issue for "+ note.Title  ;
-                string body = "Hello Admins, \\n" 
+                string body = "Hello Admins, \n" 
                     + "We want to inform you that, "+ currentuser.First_Name + " " + currentuser.Last_Name + " Reported an issue for "+ seller.First_Name+" "+ seller.Last_Name  +"’s Note with"
                     + "title "+ note.Title +".Please look at the notes and take required actions.";
-                body += "\\nRegards,\\nNotes Marketplace";
+                body += "\nRegards,\nNotes Marketplace";
 
                 bool isSend = SendEmail.EmailSend(Adminemails, subject, body, false);
 
